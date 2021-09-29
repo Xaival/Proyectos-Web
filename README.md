@@ -3,7 +3,7 @@ Páginas básicas y avanzadas en HTML, CSS y JavaScript.
 
 
 ## Acciones sobre texto
-  ### [Combinaciones de una lista](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
+  ### [Combinación de una lista](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
   Todas las combinaciones posibles de una lista de palabras.
 
 
@@ -28,21 +28,21 @@ Páginas básicas y avanzadas en HTML, CSS y JavaScript.
   Ruleta Twister web.
 
 
-  ### [Ruleta Twister + Comandos de voz](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
+  ### [Ruleta Twister con comandos de voz](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
   Ruleta Twister web con activación por comandos de voz.
 
 
 ## Estilo canal de YouTube
-  ### [Estilo canal de YT](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
+  ### [Estilo canal de YouTube](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
   Estilo parecido a la página de un canal en youtube. Sin java.
 
 
-  ### [Estilo canal de YT + Playlist](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
+  ### [Estilo canal de YouTube más playlist](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
   Estilo parecido a la página de un canal en youtube.
   Con listas de reproducción.
 
 
-## [Plantilla RRSS simple](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
+## [Enlaces a RRSS](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
 Estilo simple para mostrar en redes sociales.
 
 
