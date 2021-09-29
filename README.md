@@ -1,55 +1,58 @@
 # Proyectos Web
-Paginas básicas y avanzadas en HTML, CSS y JavaScript.
+Páginas básicas y avanzadas en HTML, CSS y JavaScript.
 
 
-## [Cambiar estilo imagen](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
-Cambiar estilo de imagen subida con javascript.
+## Acciones sobre texto
+  ### [Combinaciones de una lista](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
+  Todas las combinaciones posibles de una lista de palabras.
 
 
-## [Combinaciones de una lista](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
-Todas las conbinaciones posibles de una lista de palabras.
+  ### [Conversión de texto](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
+  Cambiar texto sin caracteres especiales, reemplazar, mayúsculas o minúsculas.
 
 
-## [Conversión de texto](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
-Cambiar texto sin caracteres especiales, remplazar, mayúsculas o minúsculas.
+  ### [Eliminar duplicados](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
+  Eliminar duplicados de la lista.
 
 
-## [Eliminar duplicados](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
-Eliminar duplicados de la lista.
+  ### [Secuencia de texto](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
+  Secuencia de texto con numeración alfabética y numérica.
 
 
-## [Estilo canal de YT](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
-Estilo parecido a la pagina de canal en youtube. Sin java.
+  ### [Separar por condición](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
+  Separar por condición y si no se repite.
 
 
-## [Estilo canal de YT + Playlist](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
-Estilo parecido a la pagina de canal en youtube.
-Con listas de reproducción.
+## Twister
+  ### [Ruleta Twister](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
+  Ruleta Twister web.
+
+
+  ### [Ruleta Twister + Comandos de voz](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
+  Ruleta Twister web con activación por comandos de voz.
+
+
+## Estilo canal de YouTube
+  ### [Estilo canal de YT](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
+  Estilo parecido a la página de un canal en youtube. Sin java.
+
+
+  ### [Estilo canal de YT + Playlist](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
+  Estilo parecido a la página de un canal en youtube.
+  Con listas de reproducción.
 
 
 ## [Plantilla RRSS simple](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
-Estilo simple para mostrar redes sociales.
+Estilo simple para mostrar en redes sociales.
+
+
+## [Cambiar estilo de imagen](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
+Cambiar estilo de imagen subida con javascript.
 
 
 ## [Regla de 3](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
-Hacer conversión de regla de 3 inversa o directa automatica con JavaSscript.
-
-
-## [Ruleta Twister](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
-Ruleta Twister web.
-
-
-## [Ruleta Twister + Comandos de voz](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
-Ruleta Twister web con activación por comandos de voz.
-
-
-## [Secuencia de texto](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
-Secuencia de texto con numeración alfabética y numérica.
-
-
-## [Separar por condición](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
-Separar por condición y si no se repite.
+Hacer conversión de regla de 3 inversa o directa automática con JavaScript.
 
 
 ## [Temporizador](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
-Temporizador programable con circulo animado acompañando.
+Temporizador programable con círculo animado acompañando.
