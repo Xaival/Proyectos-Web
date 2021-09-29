@@ -2,7 +2,7 @@
 Paginas básicas y avanzadas en HTML, CSS y JavaScript.
 
 
-## [Cambiar estilo imagen JS](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
+## [Cambiar estilo imagen](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
 Cambiar estilo de imagen subida con javascript.
 
 
@@ -31,7 +31,7 @@ Con listas de reproducción.
 Estilo simple para mostrar redes sociales.
 
 
-## [Regla de 3 con JS](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
+## [Regla de 3](https://xaival.github.io/WebGL-A-frame/Sistema%20solar/)
 Hacer conversión de regla de 3 inversa o directa automatica con JavaSscript.
 
 
