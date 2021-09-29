@@ -1,2 +1,2 @@
 # Proyectos Web
-Paginas básicas y avanzadas con HTML, CSS y JavaScript
+Paginas básicas y avanzadas en HTML, CSS y JavaScript.
