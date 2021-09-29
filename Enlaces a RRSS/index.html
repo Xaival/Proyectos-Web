@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es" >
+<head>
+<meta charset="UTF-8">
+<title>Plantilla RRSS simple</title>
+<style>
+	*{margin:0;pading:0}
+	:root{
+	  --fondo: #181818;
+	  --titulo: #212121;
+	  --boton: #303030;
+	  --texto-boton: #909090;
+	}
+	body{
+	  background-color: var(--fondo);
+	  font-family: roboto;
+	  color: #FFFFFF;
+	}
+
+	.encabezado{
+	  background-color: var(--titulo);
+	  width: 100%;
+	  height: 45px;
+	  display: flex;
+	  margin: 20px 0px 10px 0px;
+	  
+	  font-size: min(30px, max(10vw, 15px));
+	  font-weight: bold;
+	  
+	  text-align: center;
+	  align-items: center;
+	  justify-content: center;
+	}
+
+	ul{
+	  display: flex;
+	  padding: 0px;
+	  
+	  flex-wrap: wrap;
+	  list-style: none;
+	  justify-content: space-around;
+	}
+	li{
+	  background-color: var(--boton);
+	  
+	  display: block;
+	  width: min(140px, 31vw);
+	  height: min(140px, 31vw);
+	  margin: min(10px, max(calc(2vw - 10px), 0px));
+	  
+	  background-size: cover;
+	  background-position: center;
+	  background-repeat: no-repeat;
+	  
+	  transition: opacity 0.10s linear;
+	}
+	li:hover{opacity: 50%;}
+	li:active{opacity: 75%;}
+
+	li a{
+	  width: 100%;
+	  height: 100%;
+	  display: block; 
+	}
+
+	#youtube {
+	  background-color: #ff0000;
+	  background-image: url("https://i.ibb.co/vZn1gXr/Youtube.webp");
+	}
+	#twitch {
+	  background-color: #9146ff;
+	  background-image: url("https://i.ibb.co/hmLS95b/Twitch.webp");
+	}
+	#tumblr {
+	  background-color: #36465D;
+	  background-image: url("https://i.ibb.co/CMbKsqp/Tumblr.webp");
+	}
+	#discord {
+	  background-color: #7289DA;
+	  background-image: url("https://i.ibb.co/syb9QdQ/Discord.webp");
+	}
+	#instagram {
+	  background-color: #C13584;
+	  background-image: url("https://i.ibb.co/YBJ4HXz/Instagram.webp");
+	}
+	#steam {
+	  background-color: #042430;
+	  background-image: url("https://i.ibb.co/0cHVfVz/Steam.webp");
+	}
+	#rockstar {
+	  background-color: #FFA500;
+	  background-image: url("https://i.ibb.co/jT4r1wr/Rockstar.webp");
+	}
+	#tiswagos {
+	  background-image: url("https://i.ibb.co/gryQZ1D/Tiswagos-Liri.webp");
+	}
+	#github {
+	  background-color: #062738;
+	  background-image: url("https://i.ibb.co/FxMmP5H/GitHub.png");
+	}
+	#codepen {
+	  background-color: #FFFFFF;
+	  background-image: url("https://i.ibb.co/rdMRBd8/CodePen.png");
+	}
+</style>
+</head>
+<body>
+	<div class="encabezado" style="margin:0px 0px 10px 0px;">Xaival</div>
+	<ul>
+		<li id="youtube"><a href="https://xaival.page.link/Youtube"></a></li>
+		<li id="twitch"><a href="https://xaival.page.link/Twitch"></a></li>
+		<li id="tumblr"><a href="https://xaival.page.link/Tumblr"></a></li>
+		<li id="discord"><a href="https://xaival.page.link/Discord"></a></li>
+		<li id="instagram"><a href="https://xaival.page.link/Insta"></a></li>
+		<li id="steam"><a href="https://xaival.page.link/Steam"></a></li>
+		<li id="steam"><a href="https://xaival.page.link/Steam2"></a></li>
+		<li id="rockstar"><a href="https://xaival.page.link/Rockstar"></a></li>
+		<li id="rockstar"><a href="https://xaival.page.link/Rockstar2"></a></li>
+	</ul>
+
+	<div class="encabezado">Xaival Photo</div>
+	<ul>
+		<li id="youtube"><a href="https://xaival.page.link/Youtube-Photo"></a></li>
+		<li id="tumblr"><a href="https://xaival.page.link/TumblrPhoto"></a></li>
+		<li id="instagram"><a href="https://xaival.page.link/Insta-Photo"></a></li>
+	</ul>
+
+	<div class="encabezado">Xaival CO</div>
+	<ul>
+		<li id="youtube"><a href="https://xaival.page.link/Youtube-CO"></a></li>
+		<li id="discord"><a href="https://xaival.page.link/Discord-CO"></a></li>
+		<li id="tiswagos"><a href="https://xaival.page.link/Tiswagos-Liri"></a></li>
+		<li id="github"><a href="https://xaival.page.link/GitHub"></a></li>
+		<li id="codepen"><a href="https://xaival.page.link/CodePen"></a></li>
+	</ul>
+</body>
+</html>

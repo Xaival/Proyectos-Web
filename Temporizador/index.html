@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es" >
+<head>
+<meta charset="UTF-8">
+<title>Temporizador</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Teko:wght@300&display=swap" rel="stylesheet">
+<style>
+	* {margin:0; padding:0; box-sizing:border-box;}
+	body{
+		background-color: #101010;
+		color: white;
+		font-weight: bold;
+		font-family: Roboto;
+		font-size: min(25px, max(4.16vw, 13px));
+
+		text-align:center;
+		margin-top: min(25px, 4.16vw);
+	}
+
+	div{
+		max-width: min(330px, 55vw);
+		max-height: min(330px, 55vw);
+
+		position:relative;
+		left: 50%;
+		margin-left: max(-165px, -27.5vw);
+		margin-bottom: 30px;
+	}
+	svg {max-height: 500%;}
+
+	/* stroke-width Ancho*/
+	path {fill: none; stroke-width: 0.5;}
+	#Circulo-bg {stroke: #1f1f1f;}
+	#Circulo {
+		stroke: #00FFFF;
+		stroke-dasharray: 100, 100;
+		stroke-linecap: round;
+		transition-delay: 3s;
+	}
+
+	#CuentaRegresiva {
+		position: absolute;
+		top: calc(50% - 0.65em);
+		width: 100%;
+		text-align: center;
+		font-size: 3em;
+		font-family: 'Teko', sans-serif;
+	}
+
+	input, button{
+		font-size: min(30px, max(5vw, 13px));
+		text-align:center;
+	}
+
+	button{
+		background-color: #101010;
+		box-shadow: 0 -1px 0 black, 0 0px 10px cyan, 0 0px 5px cyan;
+		margin-top: 50px;
+
+		cursor:pointer;
+		color: white;
+		border-radius: 20px;
+		padding: min(15px, 2.5vw) min(30px, 5vw);
+	}
+</style>
+</head>
+<body>
+	<div>
+		<svg viewBox="0 0 36 36"><path id="Circulo-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/><path id="Circulo" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/></svg>
+		<p id="CuentaRegresiva">00 : 00 : 00</p>
+	</div>
+
+	<input type="number" id="PlusHoras" value="0" min="0" max="99"> :
+	<input type="number" id="PlusMinutos" value="0" min="0" max="60" onchange="CambiosM()"> :
+	<input type="number" id="PlusSegundos" value="0" min="0" max="60" onchange="CambiosS()">
+	<br>
+	<button onclick="Comenzar()">Comenzar</button>
+<script>
+	var timerA, timerB,
+	PlusHoras = document.getElementById("PlusHoras"),
+	PlusMinutos = document.getElementById("PlusMinutos"),
+	PlusSegundos = document.getElementById("PlusSegundos"),
+	Circulo = document.getElementById("Circulo"),
+	CuentaRegresiva = document.getElementById("CuentaRegresiva");
+
+
+	function CambiosS() {
+		if(PlusSegundos.value >= 60){
+			PlusMinutos.value = parseInt(PlusMinutos.value, 10) + 1;
+			PlusSegundos.value = parseInt(PlusSegundos.value, 10) - 60;
+		}
+		if(PlusSegundos.value >= 60){CambiosS();}
+	}
+	function CambiosM() {
+		if(PlusMinutos.value >= 60){
+			PlusHoras.value = parseInt(PlusHoras.value, 10) + 1;
+			PlusMinutos.value = parseInt(PlusMinutos.value, 10) - 60;
+		}
+		if(PlusMinutos.value >= 60){CambiosM();}
+	}
+
+	function Comenzar() {
+		Segundos = parseInt(PlusSegundos.value, 10);
+		Minutos = parseInt(PlusMinutos.value, 10);
+		Horas = parseInt(PlusHoras.value, 10);
+
+		// Evitar que se duplique las funciones
+		if(timerA!==null){clearTimeout(timerA);}
+		if(timerB!==null){clearTimeout(timerB);}
+
+		// Circulo
+		Duracion = parseInt(PlusSegundos.value, 10)+parseInt(PlusMinutos.value, 10)*60+parseInt(PlusHoras.value, 10) * 3600;
+
+		Circulo.animate([
+			{strokeDasharray: "100, 100"},
+			{strokeDasharray: "0, 100"}],
+			{duration: Duracion*1000});
+
+		// Previo al bucle para evitar delay
+		// Añadir 0 delante si es menor que 10
+		if(Segundos < 10){PrindSegundos = "0"+Segundos;} else {PrindSegundos = Segundos;}
+		if(Minutos < 10){PrindMinutos = "0"+Minutos;} else {PrindMinutos = Minutos;}
+		if(Horas < 10){PrindHoras = "0"+Horas;} else {PrindHoras = Horas;}
+
+		// Imprimir
+		CuentaRegresiva.innerHTML = PrindHoras+" : "+PrindMinutos+" : "+PrindSegundos;
+
+		// Bucle que va restando
+		timerB=setInterval(function(){
+			// Restar
+			Segundos--;
+			if(Segundos <= 0 && Minutos >= 1){
+				Segundos = Segundos + 60;
+				Minutos = Minutos - 1;
+				if(Minutos <= 0 && Horas >= 1){
+					Minutos = Minutos + 60;
+					Horas = Horas - 1;
+				}
+			}
+
+			// Añadir 0 delante si es menor que 10
+			if(Segundos < 10){PrindSegundos = "0"+Segundos;} else {PrindSegundos = Segundos;}
+			if(Minutos < 10){PrindMinutos = "0"+Minutos;} else {PrindMinutos = Minutos;}
+			if(Horas < 10){PrindHoras = "0"+Horas;} else {PrindHoras = Horas;}
+
+			// Imprimir
+			CuentaRegresiva.innerHTML = PrindHoras+" : "+PrindMinutos+" : "+PrindSegundos;
+
+			//Terminar bucle
+			if(Horas<=0 && Minutos<=0 && Segundos<=0){finish.playclip();clearTimeout(timerB);}
+		},1000);
+	}
+
+
+
+	// Definir lista de extensiones y el tipo de fichero de audio asociado
+	var html5_audiotypes={
+		"mp3": "audio/mpeg",
+		"mp4": "audio/mp4",
+		"ogg": "audio/ogg",
+		"wav": "audio/wav"
+	}
+
+	//Elegir sonido
+	var finish = createsoundbite('https://sfx.freeaudiolibrary.com/es/module/pp_api/streaming?id_product=35424');
+
+	//Inicializar sonidos
+	function createsoundbite(sound){
+		var html5audio=document.createElement('audio')
+		if (html5audio.canPlayType){ //Comprobar soporte para audio HTML5
+			for (var i=0; i<arguments.length; i++){
+				var sourceel=document.createElement('source')
+				sourceel.setAttribute('src', arguments[i])
+				if (arguments[i].match(/.(w+)$/i))
+				sourceel.setAttribute('type', html5_audiotypes[RegExp.$1])
+				html5audio.appendChild(sourceel)
+			}
+			html5audio.load()
+			html5audio.playclip=function(){
+				html5audio.pause()
+				html5audio.currentTime=0
+				html5audio.play()
+			}
+			return html5audio
+		} else {alert("Su navegador no soporta audio HTML5");}
+	}
+</script>
+</body>
+</html>
