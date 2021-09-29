@@ -3,10 +3,6 @@ Páginas básicas y avanzadas en HTML, CSS y JavaScript.
 
 
 ## Acciones sobre texto
-  ### [Combinación de una lista](https://xaival.github.io/Proyectos-Web/Acciones%20sobre%20texto/Combinación%20de%20una%20lista/)
-  Todas las combinaciones posibles de una lista de palabras.
-
-
   ### [Conversión de texto](https://xaival.github.io/Proyectos-Web/Acciones%20sobre%20texto/Conversión%20de%20texto/)
   Cambiar texto sin caracteres especiales, reemplazar, mayúsculas o minúsculas.
 
@@ -15,6 +11,10 @@ Páginas básicas y avanzadas en HTML, CSS y JavaScript.
   Eliminar duplicados de la lista.
 
 
+  ### [Combinación de una lista](https://xaival.github.io/Proyectos-Web/Acciones%20sobre%20texto/Combinación%20de%20una%20lista/)
+  Todas las combinaciones posibles de una lista de palabras.
+
+  
   ### [Secuencia de texto](https://xaival.github.io/Proyectos-Web/Acciones%20sobre%20texto/Secuencia%20de%20texto/)
   Secuencia de texto con numeración alfabética y numérica.
 
