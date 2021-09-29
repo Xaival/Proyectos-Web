@@ -3,7 +3,7 @@ Páginas básicas y avanzadas en HTML, CSS y JavaScript.
 
 
 ## Acciones sobre texto
-  ### [Conversión de texto](https://xaival.github.io/Proyectos-Web/Acciones%20sobre%20texto/Conversión%20de%20texto/)
+  ### [Modificación de texto](https://xaival.github.io/Proyectos-Web/Acciones%20sobre%20texto/Conversión%20de%20texto/)
   Cambiar texto sin caracteres especiales, reemplazar, mayúsculas o minúsculas.
   ![image](https://user-images.githubusercontent.com/54257745/135284845-fd0c2be4-3d70-4c65-adab-ce5a59d635c1.png)
 
