@@ -25,29 +25,48 @@
 
 		position:relative;
 		left: 50%;
+		cursor:pointer;
+		border-radius: 50%;
 		margin-left: max(-165px, -27.5vw);
 		margin-bottom: 30px;
 	}
-	svg {max-height: 500%;}
+	div:hover{
+		background-color: #1e1e1e;
+		color: #afafaf;
+	}
+
+	#Circle {max-height: 500%;}
 
 	/* stroke-width Ancho*/
-	path {fill: none; stroke-width: 0.5;}
-	#Circulo-bg {stroke: #1f1f1f;}
-	#Circulo {
+	#Circle path {fill: none; stroke-width: 0.5;}
+	#Circle #Circulo-bg {stroke: #1f1f1f;}
+	#Circle #Circulo {
 		stroke: #00FFFF;
 		stroke-dasharray: 100, 100;
 		stroke-linecap: round;
 		transition-delay: 3s;
 	}
 
+
 	#CuentaRegresiva {
 		position: absolute;
 		top: calc(50% - 0.65em);
 		width: 100%;
-		text-align: center;
 		font-size: 3em;
+		text-align: center;
 		font-family: 'Teko', sans-serif;
 	}
+
+	/* Pausa */
+	#PausaReplay{
+		width:60%;
+		height:60%;
+		position: absolute;
+		top: 20%;
+		left: 20%;
+		display: none;
+	}
+	div:hover #PausaReplay{display: block;}
 
 	input, button{
 		font-size: min(30px, max(5vw, 13px));
@@ -68,8 +87,9 @@
 </head>
 <body>
 	<div>
-		<svg viewBox="0 0 36 36"><path id="Circulo-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/><path id="Circulo" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/></svg>
+		<svg id="Circle" viewBox="1.75 1.75 32.5 32.5"><path id="Circulo-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/><path id="Circulo" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/></svg>
 		<p id="CuentaRegresiva">00 : 00 : 00</p>
+		<svg id="PausaReplay" viewBox="-7 -7 83 83" fill="#FFF" onclick="PauseReplay()"><path d="M33.511,71.013c15.487,0,28.551-10.563,32.375-24.859h9.113L61.055,22L47.111,46.151h8.006   c-3.44,8.563-11.826,14.628-21.605,14.628c-12.837,0-23.28-10.443-23.28-23.28c0-12.836,10.443-23.28,23.28-23.28   c6.604,0,12.566,2.768,16.809,7.196l5.258-9.108c-5.898-5.176-13.619-8.32-22.065-8.32C15.034,3.987,0,19.019,0,37.5   C-0.002,55.981,15.03,71.013,33.511,71.013z"/></svg>
 	</div>
 
 	<input type="number" id="PlusHoras" value="0" min="0" max="99"> :
@@ -83,7 +103,8 @@
 	PlusMinutos = document.getElementById("PlusMinutos"),
 	PlusSegundos = document.getElementById("PlusSegundos"),
 	Circulo = document.getElementById("Circulo"),
-	CuentaRegresiva = document.getElementById("CuentaRegresiva");
+	CuentaRegresiva = document.getElementById("CuentaRegresiva"),
+	PausaReplay = document.getElementById("PausaReplay");
 
 
 	function CambiosS() {
@@ -101,6 +122,16 @@
 		if(PlusMinutos.value >= 60){CambiosM();}
 	}
 
+	function PauseReplay() {
+		/* Si se esta ejecutando */
+		timerA.pause();
+		clearTimeout(timerB);
+		PausaReplay.innerHTML = `<path d="M33.511,71.013c15.487,0,28.551-10.563,32.375-24.859h9.113L61.055,22L47.111,46.151h8.006   c-3.44,8.563-11.826,14.628-21.605,14.628c-12.837,0-23.28-10.443-23.28-23.28c0-12.836,10.443-23.28,23.28-23.28   c6.604,0,12.566,2.768,16.809,7.196l5.258-9.108c-5.898-5.176-13.619-8.32-22.065-8.32C15.034,3.987,0,19.019,0,37.5   C-0.002,55.981,15.03,71.013,33.511,71.013z"/>`;
+
+		/* Si se esta parado */
+		PausaReplay.innerHTML = `<rect x="47" width="21" height="70"/><rect x="2" width="21" height="70"/>`;
+	}
+
 	function Comenzar() {
 		Segundos = parseInt(PlusSegundos.value, 10);
 		Minutos = parseInt(PlusMinutos.value, 10);
@@ -113,10 +144,10 @@
 		// Circulo
 		Duracion = parseInt(PlusSegundos.value, 10)+parseInt(PlusMinutos.value, 10)*60+parseInt(PlusHoras.value, 10) * 3600;
 
-		Circulo.animate([
-			{strokeDasharray: "100, 100"},
-			{strokeDasharray: "0, 100"}],
-			{duration: Duracion*1000});
+		timerA=Circulo.animate([
+		{strokeDasharray: "100, 100"},
+		{strokeDasharray: "0, 100"}],
+		{duration: Duracion*1000});
 
 		// Previo al bucle para evitar delay
 		// Añadir 0 delante si es menor que 10
@@ -134,11 +165,14 @@
 			if(Segundos <= 0 && Minutos >= 1){
 				Segundos = Segundos + 60;
 				Minutos = Minutos - 1;
-				if(Minutos <= 0 && Horas >= 1){
-					Minutos = Minutos + 60;
-					Horas = Horas - 1;
-				}
+			} else if(Segundos <= 0 && Minutos <= 0 && Horas >= 1){
+				Horas = Horas - 1;
+				Minutos = Minutos + 59;
+				Segundos = Segundos + 60;
 			}
+
+			//Terminar bucle
+			if(Horas<=0 && Minutos<=0 && Segundos<=0){finish.playclip();clearTimeout(timerB);}
 
 			// Añadir 0 delante si es menor que 10
 			if(Segundos < 10){PrindSegundos = "0"+Segundos;} else {PrindSegundos = Segundos;}
@@ -146,10 +180,7 @@
 			if(Horas < 10){PrindHoras = "0"+Horas;} else {PrindHoras = Horas;}
 
 			// Imprimir
-			CuentaRegresiva.innerHTML = PrindHoras+" : "+PrindMinutos+" : "+PrindSegundos;
-
-			//Terminar bucle
-			if(Horas<=0 && Minutos<=0 && Segundos<=0){finish.playclip();clearTimeout(timerB);}
+			if(Segundos>=0) {CuentaRegresiva.innerHTML = PrindHoras+" : "+PrindMinutos+" : "+PrindSegundos;}
 		},1000);
 	}
 
