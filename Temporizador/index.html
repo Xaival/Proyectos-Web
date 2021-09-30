@@ -98,7 +98,7 @@
 	<br>
 	<button onclick="Comenzar()">Comenzar</button>
 <script>
-	var timerA, timerB,
+	var timerA, timerB, PauseReplayBool=true,
 	PlusHoras = document.getElementById("PlusHoras"),
 	PlusMinutos = document.getElementById("PlusMinutos"),
 	PlusSegundos = document.getElementById("PlusSegundos"),
@@ -123,16 +123,24 @@
 	}
 
 	function PauseReplay() {
-		/* Si se esta ejecutando */
-		timerA.pause();
-		clearTimeout(timerB);
-		PausaReplay.innerHTML = `<path d="M33.511,71.013c15.487,0,28.551-10.563,32.375-24.859h9.113L61.055,22L47.111,46.151h8.006   c-3.44,8.563-11.826,14.628-21.605,14.628c-12.837,0-23.28-10.443-23.28-23.28c0-12.836,10.443-23.28,23.28-23.28   c6.604,0,12.566,2.768,16.809,7.196l5.258-9.108c-5.898-5.176-13.619-8.32-22.065-8.32C15.034,3.987,0,19.019,0,37.5   C-0.002,55.981,15.03,71.013,33.511,71.013z"/>`;
-
 		/* Si se esta parado */
-		PausaReplay.innerHTML = `<rect x="47" width="21" height="70"/><rect x="2" width="21" height="70"/>`;
+		if(PauseReplayBool){Comenzar();}
+		else{
+			timerA.pause();
+			clearTimeout(timerB);
+			PausaReplay.innerHTML = `<path d="M33.511,71.013c15.487,0,28.551-10.563,32.375-24.859h9.113L61.055,22L47.111,46.151h8.006   c-3.44,8.563-11.826,14.628-21.605,14.628c-12.837,0-23.28-10.443-23.28-23.28c0-12.836,10.443-23.28,23.28-23.28   c6.604,0,12.566,2.768,16.809,7.196l5.258-9.108c-5.898-5.176-13.619-8.32-22.065-8.32C15.034,3.987,0,19.019,0,37.5   C-0.002,55.981,15.03,71.013,33.511,71.013z"/>`;
+			PauseReplayBool=true;
+		}
 	}
 
 	function Comenzar() {
+		// Cambios de boton
+		PauseReplayBool=false;
+		PausaReplay.innerHTML = `
+			<rect x="43" y="2" width="20" height="70"/>
+			<rect x="7" y="2" width="20" height="70"/>`;
+
+		// Importar valores
 		Segundos = parseInt(PlusSegundos.value, 10);
 		Minutos = parseInt(PlusMinutos.value, 10);
 		Horas = parseInt(PlusHoras.value, 10);
@@ -145,9 +153,9 @@
 		Duracion = parseInt(PlusSegundos.value, 10)+parseInt(PlusMinutos.value, 10)*60+parseInt(PlusHoras.value, 10) * 3600;
 
 		timerA=Circulo.animate([
-		{strokeDasharray: "100, 100"},
-		{strokeDasharray: "0, 100"}],
-		{duration: Duracion*1000});
+			{strokeDasharray: "100, 100"},
+			{strokeDasharray: "0, 100"}],
+			{duration: Duracion*1000});
 
 		// Previo al bucle para evitar delay
 		// Añadir 0 delante si es menor que 10
@@ -172,7 +180,12 @@
 			}
 
 			//Terminar bucle
-			if(Horas<=0 && Minutos<=0 && Segundos<=0){finish.playclip();clearTimeout(timerB);}
+			if(Horas<=0 && Minutos<=0 && Segundos<=0){
+				finish.playclip();
+				clearTimeout(timerB);
+				PausaReplay.innerHTML = `<path d="M33.511,71.013c15.487,0,28.551-10.563,32.375-24.859h9.113L61.055,22L47.111,46.151h8.006   c-3.44,8.563-11.826,14.628-21.605,14.628c-12.837,0-23.28-10.443-23.28-23.28c0-12.836,10.443-23.28,23.28-23.28   c6.604,0,12.566,2.768,16.809,7.196l5.258-9.108c-5.898-5.176-13.619-8.32-22.065-8.32C15.034,3.987,0,19.019,0,37.5   C-0.002,55.981,15.03,71.013,33.511,71.013z"/>`;
+				PauseReplayBool=true;
+			}
 
 			// Añadir 0 delante si es menor que 10
 			if(Segundos < 10){PrindSegundos = "0"+Segundos;} else {PrindSegundos = Segundos;}
