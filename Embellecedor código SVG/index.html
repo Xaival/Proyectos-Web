@@ -136,6 +136,9 @@
 
 				if(ComienzoElimnar>0){EntradaTexto = EntradaTexto.replaceAll(TextoEliminar,"");}
 			}
+		} else {
+			// Saltos de linea
+			EntradaTexto = EntradaTexto.replaceAll(">",">\n");
 		}
 
 		// Bucle limpiar espacios
