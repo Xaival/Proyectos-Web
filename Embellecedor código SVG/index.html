@@ -102,8 +102,7 @@
 			}]
 		});
 		let fileData = await fileHandle.getFile();
-		let text = await fileData.text();
-		EntradaTexto.innerText = text;
+		EntradaTexto.innerText = await fileData.text();
 		CambiosSalida();
 	}
 
