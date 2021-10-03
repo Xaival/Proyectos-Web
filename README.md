@@ -48,7 +48,7 @@ Estilo simple para mostrar en redes sociales.
 
 ## [Embellecedor código SVG](https://xaival.github.io/Proyectos-Web/Embellecedor%20código%20SVG/)
 Embellece el código de SVG.
-
+![image](https://user-images.githubusercontent.com/54257745/135768375-1fc19f49-55c4-40ba-a9b0-bf9683ac774b.png)
 
 ## [Cambiar estilo de imagen](https://xaival.github.io/Proyectos-Web/Cambiar%20estilo%20de%20imagen/)
 Cambiar estilo de imagen subida con javascript.
