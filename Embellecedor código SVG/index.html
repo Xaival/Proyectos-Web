@@ -94,6 +94,7 @@
 	async function Abrir(){
 		let [fileHandle] = await window.showOpenFilePicker({
 			excludeAcceptAllOption: true,
+			startIn: 'downloads',
 			multiple: false,
 			types:[{
 				description: 'Images (*.svg)',
