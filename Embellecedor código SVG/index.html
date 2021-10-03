@@ -101,7 +101,8 @@
 			}]
 		});
 		let fileData = await fileHandle.getFile();
-		document.getElementById("EntradaTexto").innerText = await fileData.text();
+		let text = await fileData.text();
+		EntradaTexto.innerText = text;
 	}
 
 
