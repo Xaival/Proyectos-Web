@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es" >
+<head>
+<meta charset="UTF-8">
+<title>Embellecedor código SVG</title>
+<style>
+	* {margin:0; padding:0; box-sizing:border-box;}
+	body{
+		background-color: #101010;
+
+		display: flex;
+		flex-wrap: wrap;
+		justify-content:space-evenly;
+		overflow-y: hidden;
+
+		color: white;
+		font-family: Roboto;
+		font-size: min(18px, max(5vw, 13px));
+	}
+	body > *{
+		width:33%;
+		height:100vh;
+
+		resize: none;
+		padding: 8px;
+		padding-top: 20px;
+		font-size:min(14px, max(5vw, 13px));
+	}
+	#SalidaTexto{overflow-x: hidden; overflow-y: auto;}
+
+	@media screen and (max-width: 750px) {
+		body > *{width:100vw; height:33vh;}
+		#SalidaPreview{display: none;}
+		#SalidaTexto{overflow-y: visible;}
+	}
+
+	/* Texto de entrada */
+	textarea{
+		background-color: #101010;
+		color: white;
+		border-width: 0px;
+		outline:0;
+	}
+
+	/* Formulario */
+	form {
+		background-color: #1f1f1f;
+		display: flex;
+		flex-direction: column;
+		line-height: 15px;
+	}
+	h2 {text-align:center; line-height: 20px;}
+	input {
+		margin-top: 5px;
+		border-width: 0px;
+		outline:0;
+	}
+	input[type="checkbox"]{margin-right: 5px;}
+	input[type="text"]{height:1.5em;}
+	select,
+	button{height: 1.8em;}
+
+	#SalidaPreview{
+		background-color: #191919;
+		width: 100%;
+		min-height: 200px;
+	}
+	#SalidaPreview svg{fill: #FFF;width: 100%;}
+</style>
+</head>
+<body>
+	<! –– Texto de entrada ––>
+	<textarea id="EntradaTexto" placeholder="Introduce el texto aquí..." onkeyup="CambiosSalida()"></textarea>
+
+	<! –– Formulario ––>
+	<form>
+		<h2>Embellecedor código SVG</h2>
+		<br>
+		<select id="HTML_CSS" onchange="CambiosSalida()">
+			<option>En HTML</option>
+			<option>En CSS</option>
+		</select>
+		<br>
+		<label><input type="checkbox" id="Beautifier" onchange="CambiosSalida()" checked>Quitar texto no esencial</label>
+		<br>
+		<button onclick="Abrir()">Abrir archivo</button>
+		<br>
+		<div id="SalidaPreview"></div>
+	</form>
+
+	<! –– Respuesta ––>
+	<textarea readonly id="SalidaTexto" onclick="CopiarClipboard()"></textarea>
+<script>
+	async function Abrir(){
+		let [fileHandle] = await window.showOpenFilePicker({
+			excludeAcceptAllOption: true,
+			multiple: false,
+			types:[{
+				description: 'Images (*.svg)',
+				accept:{'image/*':['.svg']}
+			}]
+		});
+		let fileData = await fileHandle.getFile();
+		let text = await fileData.text();
+		textarea.innerText = text;
+	}
+
+
+	function CambiosSalida() {
+		let EntradaTexto = document.getElementById("EntradaTexto").value,
+			SalidaTexto = document.getElementById("SalidaTexto"),
+
+			Beautifier = document.getElementById("Beautifier").checked,
+			HTML_CSS = document.getElementById("HTML_CSS").value;
+
+		// Vaciar
+		SalidaTexto.innerHTML = "";
+
+		// Conversión Texto defecto base
+		EntradaTexto = EntradaTexto.replaceAll("  "," ").replaceAll("%3C","<").replaceAll("%3E",">").replaceAll("%23","#").replaceAll("'",'"').replaceAll(" >",">");
+
+		// Extraer codigo solo del SVG
+		let ComienzoSVG = EntradaTexto.indexOf("<svg"),
+			FinSVG = EntradaTexto.indexOf("</svg>")+6;
+			EntradaTexto = EntradaTexto.substr(ComienzoSVG, FinSVG-ComienzoSVG);
+
+		// Embellecer
+		if(Beautifier){
+			// Quitar saltos de linea y eliminar agrupadores
+			EntradaTexto = EntradaTexto.replaceAll("\n","").replaceAll("\t","").replaceAll("<g>","").replaceAll("</g>","");
+
+			// Eliminar atributos
+			ArrayElimnar = ["height=", "width=", "class=", "id=", "focusable=", "focusable=", "xmlns=", "clip-rule=", "version=", "xml:space=", "xmlns:xlink=", "fill-rule=", "enable-background="];
+
+			for (let i = 0; i<ArrayElimnar.length; i++) {
+				let ComienzoElimnar = EntradaTexto.indexOf(ArrayElimnar[i]),
+				FinElimnar = EntradaTexto.indexOf('"',ComienzoElimnar+ArrayElimnar[i].length+1)+1,
+				TextoEliminar = EntradaTexto.substr(ComienzoElimnar, FinElimnar-ComienzoElimnar);
+
+				if(ComienzoElimnar>0){EntradaTexto = EntradaTexto.replaceAll(TextoEliminar,"");}
+			}
+		}
+
+		// Bucle limpiar espacios
+		EntradaTexto = EntradaTexto.replaceAll(/ +/g," ").replaceAll(" >",">").replaceAll(" />","/>").replaceAll(" <","<");
+
+		//Añadir preview
+		document.getElementById("SalidaPreview").innerHTML = EntradaTexto;
+
+		// Conversión Texto
+		if(HTML_CSS=="En CSS"){
+			if(EntradaTexto.indexOf('xmlns="http://www.w3.org/2000/svg"')<0){
+				EntradaTexto = EntradaTexto.replaceAll('<svg','<svg xmlns="http://www.w3.org/2000/svg"')
+			}
+			EntradaTexto = 'url("data:image/svg+xml,'+EntradaTexto.replaceAll("  "," ").replaceAll("<","%3C").replaceAll(">","%3E").replaceAll("#","%23").replaceAll('"',"'")+'")';
+		}
+
+		//Añadir linea
+		SalidaTexto.innerHTML += EntradaTexto;
+	}
+
+
+
+	function CopiarClipboard() {
+		let SalidaTexto = document.getElementById("SalidaTexto");
+		SalidaTexto.select();
+		SalidaTexto.setSelectionRange(0, 99999);
+		navigator.clipboard.writeText(SalidaTexto.value);
+	}
+</script>
+</body>
+</html>
