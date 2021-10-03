@@ -43,7 +43,7 @@
 	}
 
 	/* Formulario */
-	form {
+	#form {
 		background-color: #1f1f1f;
 		display: flex;
 		flex-direction: column;
@@ -73,7 +73,7 @@
 	<textarea id="EntradaTexto" placeholder="Introduce el texto aquí..." onkeyup="CambiosSalida()"></textarea>
 
 	<! –– Formulario ––>
-	<form>
+	<div id="form">
 		<h2>Embellecedor código SVG</h2>
 		<br>
 		<select id="HTML_CSS" onchange="CambiosSalida()">
@@ -86,7 +86,7 @@
 		<button onclick="Abrir()">Abrir archivo</button>
 		<br>
 		<div id="SalidaPreview"></div>
-	</form>
+	</div>
 
 	<! –– Respuesta ––>
 	<textarea readonly id="SalidaTexto" onclick="CopiarClipboard()"></textarea>
