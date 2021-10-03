@@ -46,7 +46,8 @@ Páginas básicas y avanzadas en HTML, CSS y JavaScript.
 Estilo simple para mostrar en redes sociales.
 ![image](https://user-images.githubusercontent.com/54257745/135287520-1e9bddf0-fe99-460c-99e4-18b90ad05d40.png)
 
-## [Embellecedor código SVG](https://xaival.github.io/Proyectos-Web/Enlaces%20a%20RRSS/)
+## [Embellecedor código SVG](https://xaival.github.io/Proyectos-Web/Embellecedor%20código%20SVG/)
+Embellece el código de SVG.
 
 
 ## [Cambiar estilo de imagen](https://xaival.github.io/Proyectos-Web/Cambiar%20estilo%20de%20imagen/)
