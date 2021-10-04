@@ -114,7 +114,7 @@
 		SalidaTexto.innerHTML = "";
 
 		// Conversión Texto defecto base
-		EntradaTexto = EntradaTexto.replaceAll("  "," ").replaceAll("%3C","<").replaceAll("%3E",">").replaceAll("%23","#").replaceAll("'",'"').replaceAll(" >",">");
+		EntradaTexto = EntradaTexto.replaceAll("  "," ").replaceAll("%3C","<").replaceAll("%3E",">").replaceAll(" >",">").replaceAll("%23","#").replaceAll("'",'"');
 
 		// Extraer codigo solo del SVG
 		let ComienzoSVG = EntradaTexto.indexOf("<svg"),
@@ -124,21 +124,31 @@
 		// Embellecer
 		if(Beautifier){
 			// Quitar saltos de linea y eliminar agrupadores
-			EntradaTexto = EntradaTexto.replaceAll("\n","").replaceAll("\t","").replaceAll("<g>","").replaceAll("</g>","");
+			EntradaTexto = EntradaTexto.replaceAll("\n","").replaceAll("\t","");
 
 			// Eliminar atributos
-			ArrayElimnar = ["height=", "width=", "class=", "id=", "focusable=", "focusable=", "xmlns=", "clip-rule=", "version=", "xml:space=", "xmlns:xlink=", "fill-rule=", "enable-background="];
+			let ArrayElimnarAtributos = ["class=", "clip-rule=", "enable-background=", "fill-rule=", "focusable=", "height=", "id=", "inkscape:export-filename=", "inkscape:export-xdpi=", "inkscape:export-ydpi=", "inkscape:output_extension=", "inkscape:version=", "sodipodi:docname=", "version=", "width=", "xmlns:cc=", "xml:space=", "xmlns:", "xmlns:dc=", "xmlns:inkscape=", "xmlns:ns1=", "xmlns:rdf=", "xmlns:sodipodi=", "xmlns:svg=", "xmlns:xlink=", "xmlns="];
+			for (let i = 0; i<ArrayElimnarAtributos.length; i++) {
+				let ComienzoElimnar = EntradaTexto.indexOf(ArrayElimnarAtributos[i]),
+					FinElimnar = EntradaTexto.indexOf('"',EntradaTexto.indexOf('"',ComienzoElimnar)+1)+1,
+					TextoEliminar = EntradaTexto.substr(ComienzoElimnar, FinElimnar-ComienzoElimnar);
 
-			for (let i = 0; i<ArrayElimnar.length; i++) {
-				let ComienzoElimnar = EntradaTexto.indexOf(ArrayElimnar[i]),
-				FinElimnar = EntradaTexto.indexOf('"',ComienzoElimnar+ArrayElimnar[i].length+1)+1,
-				TextoEliminar = EntradaTexto.substr(ComienzoElimnar, FinElimnar-ComienzoElimnar);
+				if(ComienzoElimnar>0){EntradaTexto = EntradaTexto.replaceAll(TextoEliminar,"");}
+			}
+			
+			// Eliminar metadatos
+			let ArrayElimnarMetadatosEntrada = ["<metadata"],
+				ArrayElimnarMetadatosSalida = ["</metadata>"];
+			for (let i = 0; i<ArrayElimnarMetadatosEntrada.length; i++) {
+				let ComienzoElimnar = EntradaTexto.indexOf(ArrayElimnarMetadatosEntrada[i]),
+					FinElimnar = EntradaTexto.indexOf(ArrayElimnarMetadatosSalida[i],ComienzoElimnar)+ArrayElimnarMetadatosSalida[i].length,
+					TextoEliminar = EntradaTexto.substr(ComienzoElimnar, FinElimnar-ComienzoElimnar);
 
 				if(ComienzoElimnar>0){EntradaTexto = EntradaTexto.replaceAll(TextoEliminar,"");}
 			}
 		} else {
 			// Saltos de linea
-			EntradaTexto = EntradaTexto.replaceAll(">",">\n");
+			EntradaTexto = EntradaTexto.replaceAll(">",">\n").replaceAll("\n\n","\n");
 		}
 
 		// Bucle limpiar espacios
@@ -149,7 +159,7 @@
 
 		// Conversión Texto
 		if(HTML_CSS=="En CSS"){
-			if(EntradaTexto.indexOf('xmlns="http://www.w3.org/2000/svg"')<0){
+			if(EntradaTexto.includes('xmlns="http://www.w3.org/2000/svg"')){
 				EntradaTexto = EntradaTexto.replaceAll('<svg','<svg xmlns="http://www.w3.org/2000/svg"')
 			}
 			EntradaTexto = 'url("data:image/svg+xml,'+EntradaTexto.replaceAll("  "," ").replaceAll("<","%3C").replaceAll(">","%3E").replaceAll("#","%23").replaceAll('"',"'")+'")';
