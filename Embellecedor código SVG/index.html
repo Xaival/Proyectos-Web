@@ -162,7 +162,7 @@
 			if(!(EntradaTexto.includes('xmlns="http://www.w3.org/2000/svg"'))){
 				EntradaTexto = EntradaTexto.replaceAll('<svg','<svg xmlns="http://www.w3.org/2000/svg"')
 			}
-			EntradaTexto = 'url("data:image/svg+xml,'+EntradaTexto.replaceAll("  "," ").replaceAll("<","%3C").replaceAll(">","%3E").replaceAll("#","%23").replaceAll('"',"'")+'")';
+			EntradaTexto = 'url("data:image/svg+xml,'+EntradaTexto.replaceAll("  "," ").replaceAll("<","%3C").replaceAll(">","%3E").replaceAll("#","%23").replaceAll('"',"'").replaceAll("\n","").replaceAll("\t","")+'")';
 		}
 
 		//Añadir linea
