@@ -127,7 +127,7 @@
 			EntradaTexto = EntradaTexto.replaceAll("\n","").replaceAll("\t","");
 
 			// Eliminar atributos
-			let ArrayElimnarAtributos = ["class=", "clip-rule=", "enable-background=", "fill-rule=", "focusable=", "height=", "id=", "stroke-linejoin=", "data-name=", "stroke-miterlimit=", "inkscape:export-filename=", "inkscape:export-xdpi=", "inkscape:export-ydpi=", "inkscape:output_extension=", "inkscape:version=", "sodipodi:docname=", "version=", "width=", "xmlns:cc=", "xml:space=", "xmlns:", "xmlns:dc=", "xmlns:inkscape=", "xmlns:ns1=", "xmlns:rdf=", "xmlns:sodipodi=", "xmlns:svg=", "xmlns:xlink=", "xmlns="];
+			let ArrayElimnarAtributos = ["class=", "clip-rule=", "enable-background=", "fill-rule=", "focusable=", "style=", "height=", "x=", "y=", "id=", "stroke-linejoin=", "data-name=", "stroke-miterlimit=", "inkscape:export-filename=", "inkscape:export-xdpi=", "inkscape:export-ydpi=", "inkscape:output_extension=", "inkscape:version=", "sodipodi:docname=", "version=", "width=", "xmlns:cc=", "xml:space=", "xmlns:", "xmlns:dc=", "xmlns:inkscape=", "xmlns:ns1=", "xmlns:rdf=", "xmlns:sodipodi=", "xmlns:svg=", "xmlns:xlink=", "xmlns="];
 			for (let i = 0; i<ArrayElimnarAtributos.length; i++) {
 				let ComienzoElimnar = EntradaTexto.indexOf(ArrayElimnarAtributos[i]),
 					FinElimnar = EntradaTexto.indexOf('"',EntradaTexto.indexOf('"',ComienzoElimnar)+1)+1,
