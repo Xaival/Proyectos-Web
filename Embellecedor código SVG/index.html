@@ -143,7 +143,7 @@
 					FinElimnar = EntradaTexto.indexOf('"',EntradaTexto.indexOf('"',ComienzoElimnar)+1)+1,
 					TextoEliminar = EntradaTexto.substr(ComienzoElimnar, FinElimnar-ComienzoElimnar);
 
-				if(ComienzoElimnar>0){EntradaTexto = EntradaTexto.replaceAll(TextoEliminar,"");}
+				if(ComienzoElimnar>0){EntradaTexto = EntradaTexto.replaceAll(TextoEliminar,""); i--}
 			}
 			
 			// Eliminar metadatos
@@ -154,7 +154,7 @@
 					FinElimnar = EntradaTexto.indexOf(ArrayElimnarMetadatosSalida[i],ComienzoElimnar)+ArrayElimnarMetadatosSalida[i].length,
 					TextoEliminar = EntradaTexto.substr(ComienzoElimnar, FinElimnar-ComienzoElimnar);
 
-				if(ComienzoElimnar>0){EntradaTexto = EntradaTexto.replaceAll(TextoEliminar,"");}
+				if(ComienzoElimnar>0){EntradaTexto = EntradaTexto.replaceAll(TextoEliminar,""); i--}
 			}
 		} else {
 			// Saltos de linea
