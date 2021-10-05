@@ -126,8 +126,18 @@
 			// Quitar saltos de linea y eliminar agrupadores
 			EntradaTexto = EntradaTexto.replaceAll("\n","").replaceAll("\t","");
 
+			// Eliminar atributos de svg
+			let ArrayElimnarAtributosSVG = [" height=", " width="];
+			for (let i = 0; i<ArrayElimnarAtributos.length; i++) {
+				let ComienzoElimnar = EntradaTexto.indexOf(ArrayElimnarAtributos[i]),
+					FinElimnar = EntradaTexto.indexOf('"',EntradaTexto.indexOf('"',ComienzoElimnar)+1)+1,
+					TextoEliminar = EntradaTexto.substr(ComienzoElimnar, FinElimnar-ComienzoElimnar);
+
+				if(ComienzoElimnar>0 && FinElimnar<=EntradaTexto.indexOf(">")){EntradaTexto = EntradaTexto.replace(TextoEliminar,""); i--}
+			}
+			
 			// Eliminar atributos
-			let ArrayElimnarAtributos = ["height=", "width=", " class=", " clip-rule=", " data-name=", " enable-background=", " fill-rule=", " focusable=", " id=", " inkscape:export-filename=", " inkscape:export-xdpi=", " inkscape:export-ydpi=", " inkscape:output_extension=", " inkscape:version=", " sodipodi:docname=", " stroke-linejoin=", " stroke-miterlimit=", " style=", " version=", " x=", " xml:space=", " xmlns:", " xmlns:cc=", " xmlns:dc=", " xmlns:inkscape=", " xmlns:ns1=", " xmlns:rdf=", " xmlns:sodipodi=", " xmlns:svg=", " xmlns:xlink=", " xmlns=", " y="];
+			let ArrayElimnarAtributos = [" class=", " clip-rule=", " data-name=", " enable-background=", " fill-rule=", " focusable=", " id=", " inkscape:export-filename=", " inkscape:export-xdpi=", " inkscape:export-ydpi=", " inkscape:output_extension=", " inkscape:version=", " sodipodi:docname=", " stroke-linejoin=", " stroke-miterlimit=", " style=", " version=", " x=", " xml:space=", " xmlns:", " xmlns:cc=", " xmlns:dc=", " xmlns:inkscape=", " xmlns:ns1=", " xmlns:rdf=", " xmlns:sodipodi=", " xmlns:svg=", " xmlns:xlink=", " xmlns=", " y="];
 			for (let i = 0; i<ArrayElimnarAtributos.length; i++) {
 				let ComienzoElimnar = EntradaTexto.indexOf(ArrayElimnarAtributos[i]),
 					FinElimnar = EntradaTexto.indexOf('"',EntradaTexto.indexOf('"',ComienzoElimnar)+1)+1,
