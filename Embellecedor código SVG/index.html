@@ -58,7 +58,23 @@
 	input[type="checkbox"]{margin-right: 5px;}
 	input[type="text"]{height:1.5em;}
 	select,
-	button{height: 1.8em;}
+	.boton{height: 1.8em;}
+	
+	.boton{
+		background-color: #FFF;
+		padding: 2px 0;
+		
+		color:black;
+		cursor: pointer;
+		text-align: center;
+		
+		border-radius: 3px;
+		border: 2px outset;
+		border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+	}
+	.boton:hover{background-color: #e6e6e6;}
+	.boton:active{background-color: #f2f2f2;}
+	
 
 	#SalidaPreview{width: 100%;min-height: 200px;max-height: 50vh;}
 	#SalidaPreview svg{background-color: #191919;fill: #FFF;width: 100%;height: 100%;}
@@ -79,7 +95,7 @@
 		<br>
 		<label><input type="checkbox" id="Beautifier" onchange="CambiosSalida()" checked>Quitar texto no esencial</label>
 		<br>
-		<button onclick="Abrir()">Abrir archivo</button>
+		<div class="boton" onclick="Abrir()">Abrir archivo</div>
 		<br>
 		<div id="SalidaPreview"></div>
 	</div>
