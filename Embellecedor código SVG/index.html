@@ -158,6 +158,12 @@
 		// Extraer codigo solo del SVG
 		let ComienzoSVG = EntradaTexto.indexOf("<svg"),
 			FinSVG = EntradaTexto.indexOf("</svg>")+6;
+			
+			// Si no encuentra el final añadirlo
+			if(FinSVG==5){
+				EntradaTexto = EntradaTexto+"</svg>";
+				FinSVG=EntradaTexto.length;
+			}
 			EntradaTexto = EntradaTexto.substr(ComienzoSVG, FinSVG-ComienzoSVG);
 
 		
