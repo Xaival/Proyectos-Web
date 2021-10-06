@@ -178,7 +178,7 @@
 		}
 
 		// Bucle limpiar espacios
-		EntradaTexto = EntradaTexto.replaceAll(/ +/g," ").replaceAll(" >",">").replaceAll(" />","/>").replaceAll(" <","<");
+		EntradaTexto = EntradaTexto.replaceAll(" <","<").replaceAll(/ +/g," ").replaceAll(" >",">").replaceAll(" />","/>").replaceAll("<g></g>","");
 
 		//Añadir preview
 		document.getElementById("SalidaPreview").innerHTML = EntradaTexto;
