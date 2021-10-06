@@ -174,11 +174,11 @@
 			}
 		} else {
 			// Saltos de linea
-			EntradaTexto = EntradaTexto.replaceAll(">",">\n").replaceAll("\n\n","\n");
+			EntradaTexto = EntradaTexto.replaceAll(">",">\n").replace(/\n+/g,"\n");
 		}
 
 		// Bucle limpiar espacios
-		EntradaTexto = EntradaTexto.replaceAll(" <","<").replaceAll(/ +/g," ").replaceAll(" >",">").replaceAll(" />","/>").replaceAll("<g></g>","");
+		EntradaTexto = EntradaTexto.replaceAll(" <","<").replace(/ +/g," ").replaceAll(" >",">").replaceAll(" />","/>").replaceAll("<g></g>","");
 
 		//Añadir preview
 		document.getElementById("SalidaPreview").innerHTML = EntradaTexto;
