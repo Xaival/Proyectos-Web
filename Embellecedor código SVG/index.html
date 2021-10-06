@@ -88,12 +88,24 @@
 	<div id="form">
 		<h2>Embellecedor código SVG</h2>
 		<br>
-		<select id="HTML_CSS" onchange="CambiosSalida()">
+		<select id="HTML_CSS" onchange="Compatibilizar('A'); CambiosSalida()">
 			<option>En HTML</option>
 			<option>En CSS</option>
 		</select>
 		<br>
-		<label><input type="checkbox" id="Beautifier" onchange="CambiosSalida()" checked>Quitar texto no esencial</label>
+		<select id="Espacios" onchange="Compatibilizar('B'); CambiosSalida()">
+			<optgroup label="Defecto">
+				<option>Por defecto</option>
+				<option>Mantener solo espacios</option>
+				<option>Mantener solo saltos de línea</option>
+			</optgroup>
+			<optgroup label="Formateado">
+				<option>Sin espacios</option>
+				<option>Saltos de línea</option>
+			</optgroup>
+		</select>
+		<br>
+		<label><input type="checkbox" id="Beautifier" onchange="CambiosSalida()" checked>Quitar atributos</label>
 		<br>
 		<div class="boton" onclick="Abrir()">Abrir archivo</div>
 		<br>
@@ -115,7 +127,17 @@
 		});
 		let fileData = await fileHandle.getFile();
 		EntradaTexto.innerText = await fileData.text();
-		CambiosSalida();
+	}
+
+	function Compatibilizar(Cambiar) {
+		HTML_CSS = document.getElementById("HTML_CSS"),
+		Espacios = document.getElementById("Espacios");
+		
+		if(Cambiar=="A" && HTML_CSS.value=="En CSS"){
+			Espacios.value="Sin espacios";
+		} else if(Cambiar=="B" && Espacios.value!="Sin espacios") {
+			HTML_CSS.value="En HTML";
+		}
 	}
 
 
@@ -123,8 +145,9 @@
 		let EntradaTexto = document.getElementById("EntradaTexto").value,
 			SalidaTexto = document.getElementById("SalidaTexto"),
 
-			Beautifier = document.getElementById("Beautifier").checked,
-			HTML_CSS = document.getElementById("HTML_CSS").value;
+			HTML_CSS = document.getElementById("HTML_CSS").value,
+			Espacios = document.getElementById("Espacios").value,
+			Beautifier = document.getElementById("Beautifier").checked;
 
 		// Vaciar
 		SalidaTexto.innerHTML = "";
@@ -137,13 +160,32 @@
 			FinSVG = EntradaTexto.indexOf("</svg>")+6;
 			EntradaTexto = EntradaTexto.substr(ComienzoSVG, FinSVG-ComienzoSVG);
 
+		
+		// Espacios y saltos de linea
+		switch (true) {
+			// Sin espacios o es para convertirse en CSS
+			case Espacios == "Sin espacios" || HTML_CSS=="En CSS":
+				EntradaTexto = EntradaTexto.replaceAll("\t","").replaceAll(" <","<").replace(/ +/g," ").replaceAll(" >",">").replaceAll(" />","/>").replaceAll("<g></g>","").replaceAll("\n","");
+			break;
+			// Salto de linea reformateado
+			case Espacios == "Saltos de línea":
+				EntradaTexto = EntradaTexto.replace(/\n+/g,"").replaceAll(">",">\n");
+			break;
+			// Mantener solo espacios
+			case Espacios == "Mantener solo espacios":
+				EntradaTexto = EntradaTexto.replaceAll("\n","");
+			break;
+			// Quitar espacios y dejar saltos de linea
+			case Espacios == "Mantener solo saltos de línea":
+				EntradaTexto = EntradaTexto.replaceAll("\t","").replaceAll(" <","<").replace(/ +/g," ").replaceAll(" >",">").replaceAll(" />","/>").replaceAll("<g></g>","");
+			break;
+		}
+
+
 		// Embellecer
 		if(Beautifier){
-			// Quitar saltos de linea y eliminar agrupadores
-			EntradaTexto = EntradaTexto.replaceAll("\n","").replaceAll("\t","");
-
 			// Eliminar atributos
-			let ArrayElimnarAtributos = [" class=", " clip-rule=", " data-name=", " enable-background=", " fill-rule=", " focusable=", " id=", " inkscape:export-filename=", " inkscape:export-xdpi=", " inkscape:export-ydpi=", " inkscape:output_extension=", " inkscape:version=", " sodipodi:docname=", " stroke-linejoin=", " stroke-miterlimit=", " style=", " version=", " xml:space=", " xmlns:", " xmlns:cc=", " xmlns:dc=", " xmlns:inkscape=", " xmlns:ns1=", " xmlns:rdf=", " xmlns:sodipodi=", " xmlns:svg=", " xmlns:xlink=", " xmlns="];
+			let ArrayElimnarAtributos = [" class=", " onclick=",  " clip-rule=", " data-name=", " enable-background=", " fill-rule=", " focusable=", " id=", " inkscape:export-filename=", " inkscape:export-xdpi=", " inkscape:export-ydpi=", " inkscape:output_extension=", " inkscape:version=", " sodipodi:docname=", " stroke-linejoin=", " stroke-miterlimit=", " style=", " version=", " xml:space=", " xmlns:", " xmlns:cc=", " xmlns:dc=", " xmlns:inkscape=", " xmlns:ns1=", " xmlns:rdf=", " xmlns:sodipodi=", " xmlns:svg=", " xmlns:xlink=", " xmlns="];
 			for (let i = 0; i<ArrayElimnarAtributos.length; i++) {
 				let ComienzoElimnar = EntradaTexto.indexOf(ArrayElimnarAtributos[i]),
 					FinElimnar = EntradaTexto.indexOf('"',EntradaTexto.indexOf('"',ComienzoElimnar)+1)+1,
@@ -172,14 +214,8 @@
 
 				if(ComienzoElimnar>0){EntradaTexto = EntradaTexto.replaceAll(TextoEliminar,""); i--}
 			}
-		} else {
-			// Saltos de linea
-			EntradaTexto = EntradaTexto.replaceAll(">",">\n").replace(/\n+/g,"\n");
 		}
-
-		// Bucle limpiar espacios
-		EntradaTexto = EntradaTexto.replaceAll(" <","<").replace(/ +/g," ").replaceAll(" >",">").replaceAll(" />","/>").replaceAll("<g></g>","");
-
+		
 		//Añadir preview
 		document.getElementById("SalidaPreview").innerHTML = EntradaTexto;
 
