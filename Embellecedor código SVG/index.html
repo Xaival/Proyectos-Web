@@ -144,8 +144,8 @@
 
 			// Eliminar atributos de svg
 			let ArrayElimnarAtributosSVG = [" height=", " width="];
-			for (let i = 0; i<ArrayElimnarAtributos.length; i++) {
-				let ComienzoElimnar = EntradaTexto.indexOf(ArrayElimnarAtributos[i]),
+			for (let i = 0; i<ArrayElimnarAtributosSVG.length; i++) {
+				let ComienzoElimnar = EntradaTexto.indexOf(ArrayElimnarAtributosSVG[i]),
 					FinElimnar = EntradaTexto.indexOf('"',EntradaTexto.indexOf('"',ComienzoElimnar)+1)+1,
 					TextoEliminar = EntradaTexto.substr(ComienzoElimnar, FinElimnar-ComienzoElimnar);
 
