@@ -23,6 +23,21 @@ Páginas básicas y avanzadas en HTML, CSS y JavaScript.
   Separar por condición y si no se repite.
   ![image](https://user-images.githubusercontent.com/54257745/135286879-357ee252-b08b-4396-ab04-68432dded667.png)
 
+## [Embellecedor código SVG](https://xaival.github.io/Proyectos-Web/Embellecedor%20código%20SVG/)
+Embellece el código de SVG.
+![image](https://user-images.githubusercontent.com/54257745/135768375-1fc19f49-55c4-40ba-a9b0-bf9683ac774b.png)
+
+## [Regla de 3](https://xaival.github.io/Proyectos-Web/Regla%20de%203/)
+Hacer conversión de regla de 3 inversa o directa automática con JavaScript.
+![image](https://user-images.githubusercontent.com/54257745/135287627-0455462a-caad-4783-9f2e-bad72be1b3e9.png)
+
+## [Creador de pagina de inicio](https://xaival.github.io/Proyectos-Web/Creador%20de%20home/)
+Esta es una paguina que te da la posibilidad de crear un documento html completo de una pagina de inicio.
+La pagina te permite crear, editar, eliminar, explortar, importar y descargar el resultado final.
+![image](https://user-images.githubusercontent.com/54257745/137644102-5fb34c6a-c730-4943-8fd3-3d3e9100a499.png)
+El resultado de usarlo quedaria asi.
+![image](https://user-images.githubusercontent.com/54257745/137644143-c0db1eff-97b2-451f-bbc7-83feb529181a.png)
+
 ## Twister
   ### [Ruleta Twister](https://xaival.github.io/Proyectos-Web/Twister/Ruleta%20Twister)
   Ruleta Twister web.
@@ -30,7 +45,7 @@ Páginas básicas y avanzadas en HTML, CSS y JavaScript.
 
   ### [Ruleta Twister con comandos de voz](https://xaival.github.io/Proyectos-Web/Twister/Ruleta%20Twister%20con%20comandos%20de%20voz/)
   Ruleta Twister web con activación por comandos de voz.
-![image](https://user-images.githubusercontent.com/54257745/135287053-8215fdf8-ec33-46d2-85ce-653b9c3338e1.png) 
+  ![image](https://user-images.githubusercontent.com/54257745/135287053-8215fdf8-ec33-46d2-85ce-653b9c3338e1.png) 
 
 ## Estilo canal de YouTube
   ### [Estilo canal de YouTube](https://xaival.github.io/Proyectos-Web/Estilo%20canal%20de%20YouTube/Estilo%20canal%20de%20YouTube/)
@@ -41,22 +56,13 @@ Páginas básicas y avanzadas en HTML, CSS y JavaScript.
   Estilo parecido a la página de un canal en youtube con listas de reproducción.
   ![image](https://user-images.githubusercontent.com/54257745/135287354-5bfb28c5-0738-480c-bd12-c3e3d2732577.png)
 
-
 ## [Enlaces a RRSS](https://xaival.github.io/Proyectos-Web/Enlaces%20a%20RRSS/)
 Estilo simple para mostrar en redes sociales.
 ![image](https://user-images.githubusercontent.com/54257745/135287520-1e9bddf0-fe99-460c-99e4-18b90ad05d40.png)
 
-## [Embellecedor código SVG](https://xaival.github.io/Proyectos-Web/Embellecedor%20código%20SVG/)
-Embellece el código de SVG.
-![image](https://user-images.githubusercontent.com/54257745/135768375-1fc19f49-55c4-40ba-a9b0-bf9683ac774b.png)
-
 ## [Cambiar estilo de imagen](https://xaival.github.io/Proyectos-Web/Cambiar%20estilo%20de%20imagen/)
 Cambiar estilo de imagen subida con javascript.
 ![image](https://user-images.githubusercontent.com/54257745/135287572-528c7161-9906-408c-82e1-548ad730b552.png)
-
-## [Regla de 3](https://xaival.github.io/Proyectos-Web/Regla%20de%203/)
-Hacer conversión de regla de 3 inversa o directa automática con JavaScript.
-![image](https://user-images.githubusercontent.com/54257745/135287627-0455462a-caad-4783-9f2e-bad72be1b3e9.png)
 
 ## [Temporizador](https://xaival.github.io/Proyectos-Web/Temporizador/)
 Temporizador programable con círculo animado acompañando.
