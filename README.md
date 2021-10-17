@@ -37,6 +37,7 @@ La página te permite crear, editar, eliminar, exportar, importar y descargar el
 ![image](https://user-images.githubusercontent.com/54257745/137644102-5fb34c6a-c730-4943-8fd3-3d3e9100a499.png)
 El resultado final quedaría así.
 ![image](https://user-images.githubusercontent.com/54257745/137644143-c0db1eff-97b2-451f-bbc7-83feb529181a.png)
+Puedes usar la extensión [New Tab Changer](https://chrome.google.com/webstore/detail/new-tab-changer/occbjkhimchkolibngmcefpjlbknggfh) para poner el archivo como página por defecto.
 
 ## Twister
   ### [Ruleta Twister](https://xaival.github.io/Proyectos-Web/Twister/Ruleta%20Twister)
