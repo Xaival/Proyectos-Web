@@ -31,11 +31,11 @@ Embellece el código de SVG.
 Hacer conversión de regla de 3 inversa o directa automática con JavaScript.
 ![image](https://user-images.githubusercontent.com/54257745/135287627-0455462a-caad-4783-9f2e-bad72be1b3e9.png)
 
-## [Creador de pagina de inicio](https://xaival.github.io/Proyectos-Web/Creador%20de%20home/)
-Esta es una paguina que te da la posibilidad de crear un documento html completo de una pagina de inicio.
-La pagina te permite crear, editar, eliminar, explortar, importar y descargar el resultado final.
+## [Creador de página de inicio](https://xaival.github.io/Proyectos-Web/Creador%20de%20home/)
+Esta es una página que te da la posibilidad de crear un documento HTML completo de una página de inicio.
+La página te permite crear, editar, eliminar, exportar, importar y descargar el resultado final.
 ![image](https://user-images.githubusercontent.com/54257745/137644102-5fb34c6a-c730-4943-8fd3-3d3e9100a499.png)
-El resultado de usarlo quedaria asi.
+El resultado final quedaría así.
 ![image](https://user-images.githubusercontent.com/54257745/137644143-c0db1eff-97b2-451f-bbc7-83feb529181a.png)
 
 ## Twister
