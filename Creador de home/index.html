@@ -670,7 +670,7 @@
 			
 			// Mensaje de que se a guardado con exito
 			MessAviso = document.getElementById("MessAviso");
-			MessAviso.value="Se ha agregado con éxito";
+			MessAviso.innerHTML="Se ha agregado con éxito";
 			MessAviso.setAttribute("class", "MessAviso MessAvisoActive")
 			setTimeout(() => {MessAviso.setAttribute("class", "MessAviso")}, 2000)
 		} else {
@@ -819,7 +819,7 @@
 			
 			// Mensaje de que se a guardado con exito
 			MessAviso = document.getElementById("MessAviso");
-			MessAviso.value="Se ha eliminado con éxito";
+			MessAviso.innerHTML="Se ha eliminado con éxito";
 			MessAviso.setAttribute("class", "MessAviso MessAvisoActive")
 			setTimeout(() => {MessAviso.setAttribute("class", "MessAviso")}, 2000)
 		}
@@ -876,7 +876,7 @@
 			
 			// Mensaje de que se a guardado con exito
 			MessAviso = document.getElementById("MessAviso");
-			MessAviso.value="Se ha guardado con éxito";
+			MessAviso.innerHTML="Se ha guardado con éxito";
 			MessAviso.setAttribute("class", "MessAviso MessAvisoActive")
 			setTimeout(() => {MessAviso.setAttribute("class", "MessAviso")}, 2000)
 		} else {
