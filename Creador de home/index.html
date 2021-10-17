@@ -670,7 +670,7 @@
 			
 			// Mensaje de que se a guardado con exito
 			MessAviso = document.getElementById("MessAviso");
-			MessAviso.value="Se ha agregado con exito";
+			MessAviso.value="Se ha agregado con éxito";
 			MessAviso.setAttribute("class", "MessAviso MessAvisoActive")
 			setTimeout(() => {MessAviso.setAttribute("class", "MessAviso")}, 2000)
 		} else {
@@ -816,6 +816,12 @@
 			marcadores.splice(Num, 1);	// Eliminar variable
 			MostrarLista();				// Imprimir listado en pantalla
 			restablecer();				// En el caso que este editando
+			
+			// Mensaje de que se a guardado con exito
+			MessAviso = document.getElementById("MessAviso");
+			MessAviso.value="Se ha eliminado con éxito";
+			MessAviso.setAttribute("class", "MessAviso MessAvisoActive")
+			setTimeout(() => {MessAviso.setAttribute("class", "MessAviso")}, 2000)
 		}
 	}
 
@@ -870,7 +876,7 @@
 			
 			// Mensaje de que se a guardado con exito
 			MessAviso = document.getElementById("MessAviso");
-			MessAviso.value="Se ha guardado con exito";
+			MessAviso.value="Se ha guardado con éxito";
 			MessAviso.setAttribute("class", "MessAviso MessAvisoActive")
 			setTimeout(() => {MessAviso.setAttribute("class", "MessAviso")}, 2000)
 		} else {
