@@ -53,6 +53,26 @@
 	#Guardar, #Cancelar {display: none}
 	#Agregar:focus, #Guardar:focus {box-shadow: 0px 0px 13px #00F;}
 
+	/* Mensaje de aviso guardado */
+	.MessAviso{
+		background-color: #6274b2;
+
+		position: absolute;
+		top: calc(100%);
+		opacity: 0;
+
+		padding: 8px 10px;
+		border-radius: 5px;
+		user-select: none;
+		transition: all 0.5s ease;
+	}
+	.MessAvisoActive{  
+		display: block;
+		top: calc(100% + 10px);
+		opacity: 1;
+	}
+
+	
 	/* Listado */
 	#prind {width: 100%;}
 
@@ -478,6 +498,8 @@
 		<input type="button" id="Agregar" onclick="agregar()" value="Agregar">
 		<input type="button" id="Guardar" value="Guardar">
 		<input type="button" id="Cancelar" onclick="restablecer()" value="Cancelar">
+		
+		<div id="MessAviso" class="MessAviso">Se ha agregado con exito</div>
 	</form>
 
 	<! –– Listado ––>
@@ -644,6 +666,13 @@
 			// Limpiar formulario
 			document.getElementById("Nombre").value = "";
 			document.getElementById("URL").value = "";
+			
+			
+			// Mensaje de que se a guardado con exito
+			MessAviso = document.getElementById("MessAviso");
+			MessAviso.value="Se ha agregado con exito";
+			MessAviso.setAttribute("class", "MessAviso MessAvisoActive")
+			setTimeout(() => {MessAviso.setAttribute("class", "MessAviso")}, 2000)
 		} else {
 			// Avisar de que no se han rellenado todos los campos
 			alert("No has rellenado todos los datos necesarios");
@@ -838,6 +867,12 @@
 
 			MostrarLista();	// Imprimir listado en pantalla
 			restablecer();	// Restablecer formulario
+			
+			// Mensaje de que se a guardado con exito
+			MessAviso = document.getElementById("MessAviso");
+			MessAviso.value="Se ha guardado con exito";
+			MessAviso.setAttribute("class", "MessAviso MessAvisoActive")
+			setTimeout(() => {MessAviso.setAttribute("class", "MessAviso")}, 2000)
 		} else {
 			// Avisar de que no se han rellenado todos los campos
 			alert("No has rellenado todos los datos necesarios");
