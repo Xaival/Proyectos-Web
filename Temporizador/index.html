@@ -196,10 +196,12 @@
 			if(Segundos < 10){PrindSegundos = "0"+Segundos;} else {PrindSegundos = Segundos;}
 			if(Minutos < 10){PrindMinutos = "0"+Minutos;} else {PrindMinutos = Minutos;}
 			if(Horas < 10){PrindHoras = "0"+Horas;} else {PrindHoras = Horas;}
-			document.title = "Temporizador "+Horas+":"+Minutos+":"+Segundos;
 			
-			// Imprimir
-			if(Segundos>=0) {CuentaRegresiva.innerHTML = PrindHoras+" : "+PrindMinutos+" : "+PrindSegundos;}
+			// Imprimir si es mayor o igual a 0
+			if(Segundos>=0) {
+				CuentaRegresiva.innerHTML = PrindHoras+" : "+PrindMinutos+" : "+PrindSegundos;
+				document.title = "Temporizador "+Horas+":"+Minutos+":"+Segundos;
+			}
 		},1000);
 		document.title = "Temporizador";
 	}
