@@ -201,9 +201,8 @@
 			if(Segundos>=0) {
 				CuentaRegresiva.innerHTML = PrindHoras+" : "+PrindMinutos+" : "+PrindSegundos;
 				document.title = "Temporizador "+Horas+":"+Minutos+":"+Segundos;
-			}
+			} else {document.title = "Temporizador";}
 		},1000);
-		document.title = "Temporizador";
 	}
 
 
