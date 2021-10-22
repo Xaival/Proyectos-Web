@@ -170,7 +170,7 @@
 
 		// Imprimir
 		CuentaRegresiva.innerHTML = PrindHoras+" : "+PrindMinutos+" : "+PrindSegundos;
-		document.title = "Temporizador "+Horas+":"+Minutos+":"+Segundos;
+		document.title = "Temporizador "+PrindHoras+":"+PrindMinutos+":"+PrindSegundos;
 		
 		// Bucle que va restando
 		timerB=setInterval(function(){
@@ -201,7 +201,7 @@
 			// Imprimir si es mayor o igual a 0
 			if(Segundos>=0) {
 				CuentaRegresiva.innerHTML = PrindHoras+" : "+PrindMinutos+" : "+PrindSegundos;
-				document.title = "Temporizador "+Horas+":"+Minutos+":"+Segundos;
+				document.title = "Temporizador "+PrindHoras+":"+PrindMinutos+":"+PrindSegundos;
 			} else {document.title = "Temporizador";}
 		},1000);
 	}
