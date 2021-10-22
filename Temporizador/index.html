@@ -170,7 +170,8 @@
 
 		// Imprimir
 		CuentaRegresiva.innerHTML = PrindHoras+" : "+PrindMinutos+" : "+PrindSegundos;
-
+		document.title = "Temporizador "+Horas+":"+Minutos+":"+Segundos;
+		
 		// Bucle que va restando
 		timerB=setInterval(function(){
 			// Restar
