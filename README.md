@@ -48,6 +48,18 @@ Puedes usar la extensión [New Tab Changer](https://chrome.google.com/webstore/d
   Ruleta Twister web con activación por comandos de voz.
   ![image](https://user-images.githubusercontent.com/54257745/135287053-8215fdf8-ec33-46d2-85ce-653b9c3338e1.png) 
 
+## [Cambiar estilo de imagen](https://xaival.github.io/Proyectos-Web/Cambiar%20estilo%20de%20imagen/)
+Cambiar estilo de imagen subida con javascript.
+![image](https://user-images.githubusercontent.com/54257745/135287572-528c7161-9906-408c-82e1-548ad730b552.png)
+
+## [Diagrama de emparejamiento](https://xaival.github.io/Proyectos-Web/Diagrama%20de%20emparejamiento/)
+Crea una estructura en árbol para emparejamientos con ganador y perdedor.
+
+
+## [Temporizador](https://xaival.github.io/Proyectos-Web/Temporizador/)
+Temporizador programable con círculo animado acompañando.
+![image](https://user-images.githubusercontent.com/54257745/135287752-68c1837e-68a4-441c-ab02-9248f457ca9b.png)
+
 ## Estilo canal de YouTube
   ### [Estilo canal de YouTube](https://xaival.github.io/Proyectos-Web/Estilo%20canal%20de%20YouTube/Estilo%20canal%20de%20YouTube/)
   Estilo parecido a la página de un canal en youtube. Sin java.
@@ -60,11 +72,3 @@ Puedes usar la extensión [New Tab Changer](https://chrome.google.com/webstore/d
 ## [Enlaces a RRSS](https://xaival.github.io/Proyectos-Web/Enlaces%20a%20RRSS/)
 Estilo simple para mostrar en redes sociales.
 ![image](https://user-images.githubusercontent.com/54257745/135287520-1e9bddf0-fe99-460c-99e4-18b90ad05d40.png)
-
-## [Cambiar estilo de imagen](https://xaival.github.io/Proyectos-Web/Cambiar%20estilo%20de%20imagen/)
-Cambiar estilo de imagen subida con javascript.
-![image](https://user-images.githubusercontent.com/54257745/135287572-528c7161-9906-408c-82e1-548ad730b552.png)
-
-## [Temporizador](https://xaival.github.io/Proyectos-Web/Temporizador/)
-Temporizador programable con círculo animado acompañando.
-![image](https://user-images.githubusercontent.com/54257745/135287752-68c1837e-68a4-441c-ab02-9248f457ca9b.png)
