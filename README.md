@@ -54,7 +54,7 @@ Cambiar estilo de imagen subida con javascript.
 
 ## [Diagrama de emparejamiento](https://xaival.github.io/Proyectos-Web/Diagrama%20de%20emparejamiento/)
 Crea una estructura en árbol para emparejamientos con ganador y perdedor.
-
+![image](https://user-images.githubusercontent.com/54257745/138579419-d47f0c1e-e86a-4ba0-912a-0a515dcdce32.png)
 
 ## [Temporizador](https://xaival.github.io/Proyectos-Web/Temporizador/)
 Temporizador programable con círculo animado acompañando.
