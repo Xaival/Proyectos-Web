@@ -1,7 +1,7 @@
 # Proyectos Web
 Páginas básicas y avanzadas en HTML, CSS y JavaScript.
 
-
+  
 ## Acciones sobre texto
   ### [Modificación de texto](https://xaival.github.io/Proyectos-Web/Acciones%20sobre%20texto/Modificación%20de%20texto/)
   Cambiar texto sin caracteres especiales, reemplazar, mayúsculas o minúsculas.
