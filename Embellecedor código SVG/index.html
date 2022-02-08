@@ -35,11 +35,13 @@
 	}
 
 	/* Texto de entrada */
-	textarea{
+	textarea, #EntradaTexto{
 		background-color: #101010;
 		color: white;
 		border-width: 0px;
 		outline:0;
+		overflow: hidden;
+		font-family: monospace;
 	}
 
 	/* Formulario */
@@ -111,7 +113,7 @@
 </head>
 <body>
 	<! –– Texto de entrada ––>
-	<textarea id="EntradaTexto" placeholder="Introduce el texto aquí..." onkeyup="CambiosSalida()"></textarea>
+	<div id="EntradaTexto" onkeyup="CambiosSalida()" contenteditable>Introduce el texto aquí...</div>
 
 	<! –– Formulario ––>
 	<div id="form">
@@ -203,7 +205,7 @@
 
 
 	function CambiosSalida() {
-		let EntradaTexto = document.getElementById("EntradaTexto").value,
+		let EntradaTexto = document.getElementById("EntradaTexto").innerText,
 			SalidaTexto = document.getElementById("SalidaTexto"),
 
 			HTML_CSS = document.getElementById("HTML_CSS").value,
