@@ -32,17 +32,17 @@
 		margin-bottom: 30px;
 	}
 	div:hover{
-		background-color: #1e1e1e;
-		color: #afafaf;
+		background-color: rgb(255, 255, 255, .1);
+		color: #d9d9d9;
 	}
 
 	#Circle {max-height: 500%;}
 
 	/* stroke-width Ancho*/
 	#Circle path {fill: none; stroke-width: 0.5;}
-	#Circle #Circulo-bg {stroke: #1f1f1f;}
+	#Circle #Circulo-bg {stroke: rgb(255, 255, 255, .25);}
 	#Circle #Circulo {
-		stroke: #00FFFF;
+		stroke: white;
 		stroke-dasharray: 100, 100;
 		stroke-linecap: round;
 		transition-delay: 3s;
@@ -70,19 +70,21 @@
 	div:hover #PausaReplay{display: block;}
 
 	input, button{
+		background-color: transparent;
 		font-size: min(30px, max(5vw, 13px));
 		text-align:center;
 	}
 
 	button{
-		background-color: #101010;
-		box-shadow: 0 -1px 0 black, 0 0px 10px cyan, 0 0px 5px cyan;
 		margin-top: 50px;
-
-		cursor:pointer;
-		color: white;
-		border-radius: 20px;
-		padding: min(15px, 2.5vw) min(30px, 5vw);
+		cursor: pointer;
+		border-radius: 8px;
+		padding: 15px 30px;
+    		border: 1px solid white;
+	}
+	input {
+		border: 0px;
+		border-bottom: 1px solid white;
 	}
 </style>
 </head>
