@@ -58,7 +58,7 @@ Crea una estructura en árbol para emparejamientos con ganador y perdedor.
 
 ## [Temporizador](https://xaival.github.io/Proyectos-Web/Temporizador/)
 Temporizador programable con círculo animado acompañando.
-![image](https://user-images.githubusercontent.com/54257745/135287752-68c1837e-68a4-441c-ab02-9248f457ca9b.png)
+![image](https://user-images.githubusercontent.com/54257745/164954987-f4340dba-3a2d-49a0-ae9b-373937c05ddb.png)
 
 ## Estilo canal de YouTube
   ### [Estilo canal de YouTube](https://xaival.github.io/Proyectos-Web/Estilo%20canal%20de%20YouTube/Estilo%20canal%20de%20YouTube/)
