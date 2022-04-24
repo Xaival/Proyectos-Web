@@ -156,7 +156,7 @@
 		Horas = parseInt(PlusHoras.value, 10);
 
 		// Evitar que se duplique las funciones
-		if(timerA!==null){timerA.pause();}
+		if(timerA!=null){timerA.finish();}
 		if(timerB!==null){clearTimeout(timerB);}
 
 		// Circulo
