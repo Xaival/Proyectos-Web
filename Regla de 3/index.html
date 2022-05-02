@@ -4,22 +4,38 @@
 <meta charset="UTF-8">
 <title>Regla de 3</title>
 <style>
-	* {box-sizing: border-box;}
-		body {
+	* {box-sizing:border-box;}
+	body {
 		background-color: #0f0f0f;
 
+		min-height: 100vh;
 		display: flex;
-		text-align:center;
-		justify-content: space-around;
+		align-items: center;
+		justify-content: center;
 
 		color: white;
 		font-family: Arial;
 		font-size:min(25px, max(5vw, 5px));
+		
+		margin:0;
 	}
 
 	form{text-align:left;}
-	.titulo{font-size:1.5em;text-align:center;}
-	.titulo #tipo{font-size:min(23px, max(5vw, 5px));}
+	.titulo{
+		font-size:1.5em;
+		display: flex;
+		align-items: center;
+		gap: 15px;
+		justify-content: center;
+	}
+	.titulo #tipo{
+		font-size:min(23px, max(5vw, 5px));
+		background-color: #333333;
+		color: white;
+		height: 1.6em;
+		padding: 0 5px;
+		outline: 0px;
+	}
 
 	input{
 		min-width: 50px;
@@ -27,8 +43,18 @@
 		max-width: 100px;
 		padding-left:5px;
 		font-size:min(23px, max(5vw, 5px));
+		outline: 0px;
+		border: 2px solid white;
+		background: transparent;
+		color: white;
+		text-align: center;
 	}
 	#NumX{
+		min-width: 50px;
+		width: 15vw;
+		max-width: 100px;
+		text-align: center;
+		padding-right: 20px;
 		margin-left:5px;
 		display: inline-block;
 	}
