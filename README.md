@@ -29,7 +29,7 @@ Embellece el código de SVG.
 
 ## [Regla de 3](https://xaival.github.io/Proyectos-Web/Regla%20de%203/)
 Hacer conversión de regla de 3 inversa o directa automática con JavaScript.
-![image](https://user-images.githubusercontent.com/54257745/135287627-0455462a-caad-4783-9f2e-bad72be1b3e9.png)
+![image](https://user-images.githubusercontent.com/54257745/166174879-7a70606d-4a54-461c-ab47-5cb17d5a17d5.png)
 
 ## [Creador de página de inicio](https://xaival.github.io/Proyectos-Web/Creador%20de%20home/)
 Esta es una página que te da la posibilidad de crear un documento HTML completo de una página de inicio.
