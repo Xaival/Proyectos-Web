@@ -1,8 +1,6 @@
 # Proyectos Web
 Páginas básicas y avanzadas en HTML, CSS y JavaScript.
 
-Para usarlo es necesario tener instalado pyinstaller. Puedes usar `pip install pyinstaller` para instalarlo.
-
   
 ## Acciones sobre texto
   ### [Modificación de texto](https://xaival.github.io/Proyectos-Web/Acciones%20sobre%20texto/Modificación%20de%20texto/)
