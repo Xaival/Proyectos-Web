@@ -1,5 +1,6 @@
 # Proyectos Web
 Páginas básicas y avanzadas en HTML, CSS y JavaScript.
+Para usarlo es necesario instalar antes pyinstaller con 
 
   
 ## Acciones sobre texto
