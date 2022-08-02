@@ -1,4 +1,4 @@
-# [Diseño](https://github.com/Xaival/Proyectos-Web/tree/main/Dise%C3%B1o)
+# Diseño
 
 ## [Enlaces a RRSS](https://xaival.github.io/Proyectos-Web/Diseño/Enlaces%20a%20RRSS/)
 Estilo simple para mostrar en redes sociales.
