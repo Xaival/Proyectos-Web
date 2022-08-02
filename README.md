@@ -112,6 +112,7 @@ Estilo simple para mostrar en redes sociales.
 
 ![image](https://user-images.githubusercontent.com/54257745/135287520-1e9bddf0-fe99-460c-99e4-18b90ad05d40.png)
 
+<br>
 
 ### [Creador de página de inicio](https://xaival.github.io/Proyectos-Web/Dise%C3%B1o/Creador%20de%20home/)
 Esta es una página que te da la posibilidad de crear un documento HTML completo de una página de inicio.
@@ -139,5 +140,3 @@ Puedes usar la extensión [New Tab Changer](https://chrome.google.com/webstore/d
   Estilo parecido a la página de un canal en youtube con listas de reproducción.
   
   ![image](https://user-images.githubusercontent.com/54257745/135287354-5bfb28c5-0738-480c-bd12-c3e3d2732577.png)
-
-<br>
