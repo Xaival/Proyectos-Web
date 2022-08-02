@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es" >
+<head>
+<meta charset="UTF-8">
+<title>Modificación de texto</title>
+<style>
+	* {margin:0; padding:0; box-sizing:border-box;}
+	body{
+		background-color: #101010;
+
+		display: flex;
+		flex-wrap: wrap;
+		justify-content:space-evenly;
+		overflow-y: hidden;
+
+		color: white;
+		font-family: Arial;
+		font-size: min(18px, max(5vw, 13px));
+	}
+	body > *{
+		width:33%;
+		height:100vh;
+
+		resize: none;
+		padding: 8px;
+		padding-top: 20px;
+		font-size:min(14px, max(5vw, 13px));
+	}
+	#SalidaTexto{overflow-y: auto;}
+
+	@media screen and (max-width: 750px) {
+		body > *{width:100vw; height:33vh;}
+		#SalidaTexto{overflow-y: visible;}
+	}
+
+	/* Texto de entrada */
+	textarea{
+		background-color: #101010;
+		color: white;
+		border-width: 0px;
+		outline:0;
+	}
+
+	/* Formulario */
+	form {
+		background-color: #1f1f1f;
+		display: flex;
+		flex-direction: column;
+		line-height: 15px;
+	}
+	h2 {text-align:center; line-height: 20px;}
+	input {
+		margin-top: 5px;
+		border-width: 0px;
+		outline:0;
+	}
+	input[type="checkbox"]{margin-right: 5px;}
+	input[type="text"]{height:1.5em;}
+	select{height: 1.8em;}
+</style>
+</head>
+<body>
+	<! –– Texto de entrada ––>
+	<textarea id="EntradaTexto" placeholder="Introduce el texto aquí..." onkeyup="CambiosSalida()"></textarea>
+
+	<! –– Formulario ––>
+	<form>
+		<h2>Modificacion de texto</h2>
+		<br>
+		<label><input type="checkbox" id="CaracterEspecial" onchange="CambiosSalida()">Quitar caracteres especiales</label>
+		<br>
+		<label><input type="checkbox" id="Remplazar" onchange="CambiosSalida()">Remplazar</label>
+		<input type="text" id="RemplazarEsto" onkeyup="CambiosSalida()">
+		<input type="text" id="RemplazarPorEsto" onkeyup="CambiosSalida()">
+		<br>
+		<select id="MayusMinus" onchange="CambiosSalida()">
+			<option>Mayúsculas o minúsculas...</option>
+			<option>Mayúsculas</option>
+			<option>Minúsculas</option>
+			<option>Primera letra mayúscula</option>
+			<option>Primera letra de la frase mayúscula</option>
+		</select>
+		<br>
+		<select id="AñadirEn" onchange="CambiosSalida()">
+			<option>Añadir texto...</option>
+			<option>Añadir delante</option>
+			<option>Añadir atras</option>
+		</select>
+		<input type="text" id="Añadir" onkeyup="CambiosSalida()">
+	</form>
+
+	<! –– Respuesta ––>
+	<div id="SalidaTexto"></div>
+<script>
+	function CambiosSalida() {
+		var EntradaTexto = document.getElementById("EntradaTexto").value.split('\n');
+		var SalidaTexto = document.getElementById("SalidaTexto");
+
+		var CaracterEspecial = document.getElementById("CaracterEspecial").checked;
+
+		var Remplazar = document.getElementById("Remplazar").checked;
+		var RemplazarEsto = document.getElementById("RemplazarEsto").value;
+		var RemplazarPorEsto = document.getElementById("RemplazarPorEsto").value;
+
+		var MayusMinus = document.getElementById("MayusMinus");
+
+		var AñadirEn = document.getElementById("AñadirEn");
+		var Añadir = document.getElementById("Añadir");
+
+
+		// Limipiar
+		SalidaTexto.innerHTML = "";
+
+		// Recorrer todas las lineas
+		for(var i=0; i<EntradaTexto.length; i++){
+			var LineaTexto = EntradaTexto[i];
+
+			// Quitar caracteres especiales
+			if(CaracterEspecial){
+				LineaTexto = LineaTexto.replaceAll("á","a").replaceAll("Á","A").replaceAll("é","e").replaceAll("É","E").replaceAll("í","i").replaceAll("Í","I").replaceAll("ó","o").replaceAll("Ó","O").replaceAll("ú","u").replaceAll("Ú","U").replaceAll("ñ","n").replaceAll("Ñ","N").replace(/[^a-zA-Z0-9]/g, "-")
+			}
+
+			// Remplazar por
+			if(Remplazar){
+				LineaTexto = LineaTexto.replaceAll(RemplazarEsto, RemplazarPorEsto)
+			}
+
+			// Tamaño texto
+			switch (MayusMinus.value) {
+				case 'Mayúsculas':
+				LineaTexto = LineaTexto.toUpperCase();
+				break;
+				case 'Minúsculas':
+				LineaTexto = LineaTexto.toLowerCase();
+				break;
+				case 'Primera letra mayúscula':
+				LineaTexto = LineaTexto.toLowerCase().trim().split(' ').map(v=>v[0].toUpperCase()+v.substr(1) ).join(' ');
+				break;
+				case 'Primera letra de la frase mayúscula':
+				LineaTexto = LineaTexto.charAt(0).toUpperCase()+LineaTexto.slice(1);
+				break;
+			}
+
+			// Añadir texto
+			switch (AñadirEn.value) {
+				case 'Añadir delante':
+				LineaTexto = Añadir.value+LineaTexto;
+				break;
+				case 'Añadir atras':
+				LineaTexto = LineaTexto+Añadir.value;
+				break;
+			}
+
+			//Añadir linea
+			SalidaTexto.innerHTML += "<div>"+LineaTexto+"</div>";
+		}
+	}
+</script>
+</body>
+</html>

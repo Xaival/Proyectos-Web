@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es" >
+<head>
+<meta charset="UTF-8">
+<title>Separar por condición</title>
+<style>
+	* {margin:0; padding:0; box-sizing:border-box;}
+	body{
+		background-color: #101010;
+
+		color: white;
+		font-family: Arial;
+		font-size: min(15px, max(2.5vw, 13px));
+	}
+
+	/* Tabla */
+	table{width: 100vw;height:100vh;}
+	tr > *{width: 16.6vw; min-width: 100px;}
+	th{height:2em;}
+	td{padding:5px;}
+	th input, td > textarea{width: 100%;height:100%;}
+
+
+	/* Texto de entrada */
+	textarea{
+		background-color: #1f1f1f;
+		color: white;
+		border-width: 0px;
+		outline:0;
+		resize: none;
+	}
+</style>
+</head>
+<body>
+	<table>
+		<tr>
+			<th>Entrada</th>
+			<th><input type="text" id="Separador1" onkeyup="CambiosSalida()"></th>
+			<th><input type="text" id="Separador2" onkeyup="CambiosSalida()"></th>
+			<th><input type="text" id="Separador3" onkeyup="CambiosSalida()"></th>
+			<th><input type="text" id="Separador4" onkeyup="CambiosSalida()"></th>
+			<th><input type="text" id="Separador5" onkeyup="CambiosSalida()"></th>
+		</tr>
+		<tr>
+			<td style="padding: 0px;"><textarea id="EntradaTexto" placeholder="Texto" onkeyup="CambiosSalida()"></textarea></td>
+			<td id="SalidaColumna1" valign="top"></td>
+			<td id="SalidaColumna2" valign="top"></td>
+			<td id="SalidaColumna3" valign="top"></td>
+			<td id="SalidaColumna4" valign="top"></td>
+			<td id="SalidaColumna5" valign="top"></td>
+		</tr>
+	</table>
+<script>
+	function CambiosSalida() {
+		var EntradaTexto = document.getElementById("EntradaTexto").value.split('\n');
+		var Separador1 = document.getElementById("Separador1").value;
+		var Separador2 = document.getElementById("Separador2").value;
+		var Separador3 = document.getElementById("Separador3").value;
+		var Separador4 = document.getElementById("Separador4").value;
+		var Separador5 = document.getElementById("Separador5").value;
+
+		var SalidaColumna1 = document.getElementById("SalidaColumna1");
+		var SalidaColumna2 = document.getElementById("SalidaColumna2");
+		var SalidaColumna3 = document.getElementById("SalidaColumna3");
+		var SalidaColumna4 = document.getElementById("SalidaColumna4");
+		var SalidaColumna5 = document.getElementById("SalidaColumna5");
+
+		// Limipiar
+		SalidaColumna1.innerHTML = "";
+		SalidaColumna2.innerHTML = "";
+		SalidaColumna3.innerHTML = "";
+		SalidaColumna4.innerHTML = "";
+		SalidaColumna5.innerHTML = "";
+
+		// Recorrer todas las lineas
+		for(var i=0; i<EntradaTexto.length; i++){
+			var LineaTexto = EntradaTexto[i];
+			var Duplicado = false;
+
+			// Comprobar que no haya uno igual antes
+			for(var y=0; y<i; y++){
+				if(EntradaTexto[i]==EntradaTexto[y]){var Duplicado = true;}
+			}
+			//Añadir linea si no es duplicada
+			if(!Duplicado && LineaTexto.toLowerCase().includes(Separador1.toLowerCase())){
+				SalidaColumna1.innerHTML += "<div>"+LineaTexto+"</div>";
+			}
+			if(!Duplicado && LineaTexto.toLowerCase().includes(Separador2.toLowerCase())){
+				SalidaColumna2.innerHTML += "<div>"+LineaTexto+"</div>";
+			}
+			if(!Duplicado && LineaTexto.toLowerCase().includes(Separador3.toLowerCase())){
+				SalidaColumna3.innerHTML += "<div>"+LineaTexto+"</div>";
+			}
+			if(!Duplicado && LineaTexto.toLowerCase().includes(Separador4.toLowerCase())){
+				SalidaColumna4.innerHTML += "<div>"+LineaTexto+"</div>";
+			}
+			if(!Duplicado && LineaTexto.toLowerCase().includes(Separador5.toLowerCase())){
+				SalidaColumna5.innerHTML += "<div>"+LineaTexto+"</div>";
+			}
+		}
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es" >
+<head>
+<meta charset="UTF-8">
+<title>Embellecedor código SVG</title>
+<style>
+	* {margin:0; padding:0; box-sizing:border-box;}
+	body{
+		background-color: #101010;
+
+		display: flex;
+		flex-wrap: wrap;
+		justify-content:space-evenly;
+		overflow-y: hidden;
+
+		color: white;
+		font-family: Arial;
+		font-size: min(18px, max(5vw, 13px));
+	}
+	body > *{
+		width:33%;
+		height:100vh;
+
+		resize: none;
+		padding: 8px;
+		padding-top: 20px;
+		font-size:min(14px, max(5vw, 13px));
+	}
+	#SalidaTexto{overflow-x: hidden; overflow-y: auto;}
+
+	@media screen and (max-width: 750px) {
+		body > *{width:100vw; height:33vh;}
+		#SalidaPreview{display: none;}
+		#SalidaTexto{overflow-y: visible;}
+	}
+
+	/* Texto de entrada */
+	textarea{
+		background-color: #101010;
+		color: white;
+		border-width: 0px;
+		outline:0;
+	}
+
+	/* Formulario */
+	#form {
+		background-color: #1f1f1f;
+		display: flex;
+		flex-direction: column;
+		line-height: 15px;
+	}
+	h2 {text-align:center; line-height: 20px;}
+	input {
+		margin-top: 5px;
+		border-width: 0px;
+		outline:0;
+	}
+	input[type="checkbox"]{margin-right: 5px;}
+	input[type="text"]{height:1.5em;}
+	select,
+	.boton{height: 1.8em;}
+	
+	.boton{
+		background-color: #FFF;
+		padding: 2px 0;
+		
+		color:black;
+		cursor: pointer;
+		text-align: center;
+		
+		border-radius: 3px;
+		border: 2px outset;
+		border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+	}
+	.boton:hover{background-color: #e6e6e6;}
+	.boton:active{background-color: #f2f2f2;}
+	
+
+	#SalidaPreview{width: 100%;min-height: 200px;max-height: 50vh;}
+	#SalidaPreview svg{background-color: #191919;fill: #FFF;width: 100%;height: 100%;}
+	
+	/* Boton de descargar SVG*/
+	#bottonDownload{
+		width: 50px;
+		height: 50px;
+		display: none;
+		
+		position: absolute;
+		bottom: 40px;
+		right: 40px;
+		
+		padding: 0;
+		cursor: pointer;
+		transition: all 0.2s ease;
+	}
+	#bottonDownload:hover {
+		width: 55px;
+		height: 55px;
+		bottom: 37.5px;
+		right: 37.5px;
+	}
+	#bottonDownload:active {
+		width: 45px;
+		height: 45px;
+		bottom: 42.5px;
+		right: 42.5px;
+	}
+	
+	#bottonDownload svg{width: 100%; height: 100%;}
+</style>
+</head>
+<body>
+	<! –– Texto de entrada ––>
+	<textarea id="EntradaTexto" placeholder="Introduce el texto aquí..." onkeyup="CambiosSalida()"></textarea>
+
+	<! –– Formulario ––>
+	<div id="form">
+		<h2>Embellecedor código SVG</h2>
+		<br>
+		<select id="HTML_CSS" onchange="Compatibilizar('A'); CambiosSalida()">
+			<option>En HTML</option>
+			<option>En CSS</option>
+			<option>En .SVG</option>
+		</select>
+		<br>
+		<select id="Espacios" onchange="Compatibilizar('B'); CambiosSalida()">
+			<optgroup label="Defecto">
+				<option>Por defecto</option>
+				<option>Mantener solo espacios</option>
+				<option>Mantener solo saltos de línea</option>
+			</optgroup>
+			<optgroup label="Formateado">
+				<option>Sin espacios</option>
+				<option>Saltos de línea</option>
+			</optgroup>
+		</select>
+		<br>
+		<label><input type="checkbox" id="Beautifier" onchange="CambiosSalida()" checked>Quitar atributos</label>
+		<br>
+		<div class="boton" onclick="Abrir()">Abrir archivo</div>
+		<br>
+		<div id="SalidaPreview"></div>
+	</div>
+
+	<! –– Respuesta ––>
+	<textarea readonly id="SalidaTexto" onclick="CopiarClipboard()"></textarea>
+	
+	<! –– Boton descarga ––>
+	<div onclick="Download()" id="bottonDownload"><svg viewBox="0 0 447.5 468.7"><path fill="#393536" transform="translate(-302.4 -137.7)" d="M716.8,137.7H699v3.1H660.5l-7,7.5H345.1V137.7H317.4a15,15,0,0,0-15,15V591.4a15,15,0,0,0,15,15H734.9a15,15,0,0,0,15-15V172.6ZM323.6,570a9.2,9.2,0,1,1,9.2-9.2A9.2,9.2,0,0,1,323.6,570Zm404.3,0a9.2,9.2,0,1,1,9.1-9.2A9.2,9.2,0,0,1,727.9,570Z"/><path fill="#302c2d" d="M57.8,187.5H387.6a16.9,16.9,0,0,1,16.9,16.9V468.7a0,0,0,0,1,0,0H40.9a0,0,0,0,1,0,0V204.4A16.9,16.9,0,0,1,57.8,187.5Z"/><path fill="#302c2d" transform="translate(-302.4 -137.7)" d="M648.5,278.6V137.7H401v3H356l-8.2,7.5h-4.4V278.6a15.2,15.2,0,0,0,15.3,15.3H633.2A15.2,15.2,0,0,0,648.5,278.6Z"/><path fill="#302c2d" transform="translate(-302.4 -137.7)" d="M317.7,203.1h10.5V189.7l4.5.9L323,167.7l-9.8,22.9,4.5-.9Z"/><path fill="#918f90" transform="translate(-302.4 -137.7)" d="M384,569.3H667.4V358.8H384Z"/><path fill="#f4f4f4" transform="translate(-302.4 -137.7)" d="M675.3,342.4H376.1a13.5,13.5,0,0,0-13.5,13.5V575.7a13.5,13.5,0,0,0,13.5,13.5H675.3a13.5,13.5,0,0,0,13.5-13.5V355.9a13.5,13.5,0,0,0-13.5-13.5"/><line style="stroke:#918f90;stroke-width:2px" x1="81.3" y1="229.1" x2="364.7" y2="229.1"/><line style="stroke:#918f90;stroke-width:2px" x1="81.3" y1="257.2" x2="364.7" y2="257.2"/><line style="stroke:#918f90;stroke-width:2px" x1="81.3" y1="285.3" x2="364.7" y2="285.3"/><line style="stroke:#918f90;stroke-width:2px" x1="81.3" y1="313.4" x2="364.7" y2="313.4"/><line style="stroke:#918f90;stroke-width:2px" x1="81.3" y1="341.5" x2="364.7" y2="341.5"/><line style="stroke:#918f90;stroke-width:2px" x1="81.3" y1="369.7" x2="364.7" y2="369.7"/><line style="stroke:#918f90;stroke-width:2px" x1="81.3" y1="397.8" x2="364.7" y2="397.8"/><line style="stroke:#918f90;stroke-width:2px" x1="81.3" y1="425.9" x2="364.7" y2="425.9"/><path fill="#e9e9e9" transform="translate(-302.4 -137.7)" d="M550.5,158.9h60.7V280.8H550.5Zm-125.3,135H633.3a15,15,0,0,0,15.1-15.1V137.7H410.1V278.8A15.1,15.1,0,0,0,425.2,293.9Z"/></svg></div>
+<script>
+	async function Abrir(){
+		let [fileHandle] = await window.showOpenFilePicker({
+			excludeAcceptAllOption: true,
+			startIn: 'downloads',
+			multiple: false,
+			types:[{
+				description: 'Imagen (*.svg)',
+				accept:{'image/svg':['.svg']}
+			}]
+		});
+		let fileData = await fileHandle.getFile();
+		EntradaTexto.value = await fileData.text();
+		CambiosSalida();
+	}
+	
+	async function Download(){
+		let fileHandle = await window.showSaveFilePicker({
+			/* Ubicacion inicial por defecto */
+			startIn: 'downloads',
+			/* Nombre por defecto */
+			suggestedName: 'Imagen.svg',
+			types:[{
+				description: 'Imagen (*.svg)',
+				accept:{'image/svg': ['.svg']}
+			}],
+			/* Excluir opción de que se pueda cualquier archivo */
+			excludeAcceptAllOption: true
+		});
+		let stream = await fileHandle.createWritable();
+		/* Contindo del archivo */
+		await stream.write(SalidaTexto.value);
+		await stream.close();
+	}
+
+
+	function Compatibilizar(Cambiar) {
+		HTML_CSS = document.getElementById("HTML_CSS"),
+		Espacios = document.getElementById("Espacios"),
+		bottonDownload = document.getElementById("bottonDownload");
+		
+		if(Cambiar=="A" && HTML_CSS.value=="En CSS"){
+			Espacios.value="Sin espacios";
+		} else if(Cambiar=="B" && Espacios.value!="Sin espacios") {
+			HTML_CSS.value="En HTML";
+		}
+		
+		if(HTML_CSS.value=="En .SVG"){
+			bottonDownload.style.display = "block";
+		} else {
+			bottonDownload.style.display = "none";
+		}
+	}
+
+
+	function CambiosSalida() {
+		let EntradaTexto = document.getElementById("EntradaTexto").value,
+			SalidaTexto = document.getElementById("SalidaTexto"),
+
+			HTML_CSS = document.getElementById("HTML_CSS").value,
+			Espacios = document.getElementById("Espacios").value,
+			Beautifier = document.getElementById("Beautifier").checked;
+
+		// Vaciar
+		SalidaTexto.innerHTML = "";
+
+		// Conversión Texto defecto base
+		EntradaTexto = EntradaTexto.replaceAll("  "," ").replaceAll("%3C","<").replaceAll("%3E",">").replaceAll(" >",">").replaceAll("%23","#").replaceAll("'",'"');
+
+		// Extraer codigo solo del SVG
+		let ComienzoSVG = EntradaTexto.indexOf("<svg"),
+			FinSVG = EntradaTexto.indexOf("</svg>")+6;
+			
+			// Si no encuentra el final añadirlo
+			if(FinSVG==5 && !(EntradaTexto=="")){
+				EntradaTexto = EntradaTexto+"</svg>";
+				FinSVG=EntradaTexto.length;
+			}
+			EntradaTexto = EntradaTexto.substr(ComienzoSVG, FinSVG-ComienzoSVG);
+
+		
+		// Espacios y saltos de linea
+		switch (true) {
+			// Sin espacios o es para convertirse en CSS
+			case Espacios == "Sin espacios" || HTML_CSS=="En CSS":
+				EntradaTexto = EntradaTexto.replaceAll("\t","").replaceAll(" <","<").replace(/ +/g," ").replaceAll(" >",">").replaceAll(" />","/>").replaceAll("<g></g>","").replaceAll("\n","");
+			break;
+			// Salto de linea reformateado
+			case Espacios == "Saltos de línea":
+				EntradaTexto = EntradaTexto.replaceAll("\t","").replaceAll(" <","<").replace(/ +/g," ").replaceAll(" >",">").replaceAll(" />","/>").replaceAll("<g></g>","").replace(/\n+/g,"").replaceAll(">",">\n");
+			break;
+			// Mantener solo espacios
+			case Espacios == "Mantener solo espacios":
+				EntradaTexto = EntradaTexto.replaceAll("\n","");
+			break;
+			// Quitar espacios y dejar saltos de linea
+			case Espacios == "Mantener solo saltos de línea":
+				EntradaTexto = EntradaTexto.replaceAll("\t","").replaceAll(" <","<").replace(/ +/g," ").replaceAll(" >",">").replaceAll(" />","/>").replaceAll("<g></g>","");
+			break;
+		}
+
+
+		// Embellecer
+		if(Beautifier){
+			// Eliminar atributos
+			let ArrayElimnarAtributos = [" class=", " onclick=",  " clip-rule=", " data-name=", " enable-background=", " fill-rule=", " focusable=", " id=", " inkscape:export-filename=", " inkscape:export-xdpi=", " inkscape:export-ydpi=", " inkscape:output_extension=", " inkscape:version=", " sodipodi:docname=", " stroke-linejoin=", " stroke-miterlimit=", " version=", " xml:space=", " xmlns:", " xmlns:cc=", " xmlns:dc=", " xmlns:inkscape=", " xmlns:ns1=", " xmlns:rdf=", " xmlns:sodipodi=", " xmlns:svg=", " xmlns:xlink=", " xmlns="];
+			for (let i = 0; i<ArrayElimnarAtributos.length; i++) {
+				let ComienzoElimnar = EntradaTexto.indexOf(ArrayElimnarAtributos[i]),
+					FinElimnar = EntradaTexto.indexOf('"',EntradaTexto.indexOf('"',ComienzoElimnar)+1)+1,
+					TextoEliminar = EntradaTexto.substr(ComienzoElimnar, FinElimnar-ComienzoElimnar);
+
+				if(ComienzoElimnar>0){EntradaTexto = EntradaTexto.replaceAll(TextoEliminar,""); i--}
+			}
+			
+			// Eliminar atributos de svg
+			let ArrayElimnarAtributosSVG = [" height=", " width=",  " x=", " y=", " style="];
+			for (let i = 0; i<ArrayElimnarAtributosSVG.length; i++) {
+				let ComienzoElimnar = EntradaTexto.indexOf(ArrayElimnarAtributosSVG[i]),
+					FinElimnar = EntradaTexto.indexOf('"',EntradaTexto.indexOf('"',ComienzoElimnar)+1)+1,
+					TextoEliminar = EntradaTexto.substr(ComienzoElimnar, FinElimnar-ComienzoElimnar);
+
+				if(ComienzoElimnar>0 && FinElimnar<=EntradaTexto.indexOf(">")){EntradaTexto = EntradaTexto.replace(TextoEliminar,""); i--}
+			}
+			
+			// Eliminar metadatos
+			let ArrayElimnarMetadatosEntrada = ["<metadata"],
+				ArrayElimnarMetadatosSalida = ["</metadata>"];
+			for (let i = 0; i<ArrayElimnarMetadatosEntrada.length; i++) {
+				let ComienzoElimnar = EntradaTexto.indexOf(ArrayElimnarMetadatosEntrada[i]),
+					FinElimnar = EntradaTexto.indexOf(ArrayElimnarMetadatosSalida[i],ComienzoElimnar)+ArrayElimnarMetadatosSalida[i].length,
+					TextoEliminar = EntradaTexto.substr(ComienzoElimnar, FinElimnar-ComienzoElimnar);
+
+				if(ComienzoElimnar>0){EntradaTexto = EntradaTexto.replaceAll(TextoEliminar,""); i--}
+			}
+		}
+		
+		//Añadir preview
+		document.getElementById("SalidaPreview").innerHTML = EntradaTexto;
+
+		// Conversión Texto
+		if (HTML_CSS!="En HTML"){
+			if(!(EntradaTexto.includes('xmlns="http://www.w3.org/2000/svg"'))){
+				EntradaTexto = EntradaTexto.replaceAll('<svg','<svg xmlns="http://www.w3.org/2000/svg"')
+			}
+		}
+		if(HTML_CSS=="En CSS"){
+			EntradaTexto = 'url("data:image/svg+xml,'+EntradaTexto.replaceAll("  "," ").replaceAll("<","%3C").replaceAll(">","%3E").replaceAll("#","%23").replaceAll('"',"'").replaceAll("\n","").replaceAll("\t","")+'")';
+		}
+
+		//Añadir linea
+		SalidaTexto.innerHTML += EntradaTexto;
+	}
+
+
+
+	function CopiarClipboard() {
+		let SalidaTexto = document.getElementById("SalidaTexto");
+		SalidaTexto.select();
+		SalidaTexto.setSelectionRange(0, 99999);
+		navigator.clipboard.writeText(SalidaTexto.value);
+	}
+</script>
+</body>
+</html>

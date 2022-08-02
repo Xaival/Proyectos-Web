@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es" >
+<head>
+<meta charset="UTF-8">
+<title>Diagrama de emparejamiento</title>
+<style>
+	*{box-sizing: border-box;}
+	body{
+		background-color: #101010;
+		min-width: max-content;
+		min-height: 95vh;
+
+		margin: 0;
+		padding: 20px 0;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+
+		color:White;
+		text-align:center;
+		font-family: Arial;
+		font-size:min(18px, max(5vw, 13px));
+	}
+
+	#diagrama{min-width: 100%;}
+
+	.fila{
+		min-width: 100%;
+		display: flex;
+		justify-content: space-around;
+	}
+
+
+	.elemnt{
+		width: 50%;
+		margin: 0 5px;
+	}
+	.elemnt>div{margin-left:auto;margin-right:auto;}
+
+	.cont{
+		background-color: #353535;
+		width: 150px;
+		height: 80px;
+		padding-top: calc(40px - 0.5em);
+		cursor: pointer;
+	}
+	.line{
+		width: 50%;
+		height: 75px;
+		display: flex;
+		flex-wrap: wrap;
+	}
+	.fila:first-of-type .line{width: 100%;}
+	.fila:last-of-type .line{display: none;}
+
+	.line>div{
+		width: 50%;
+		height: 50%;
+		border-color: white;
+		border-style: solid;
+	}
+	.line>div:nth-child(1){border-width: 0 2px 0 0;}
+	.line>div:nth-child(2){border-width: 0 0 0 0;}
+	.line>div:nth-child(3){border-width: 2px 0 0 2px;}
+	.line>div:nth-child(4){border-width: 2px 2px 0 0;}
+
+
+	.OpenList{
+		background-color: #606060;
+		width: 70px;
+		height: 70px;
+
+		position: fixed;
+		bottom: 25px;
+		right: 25px;
+
+		padding: 5px;
+		border-radius: 50%;
+		cursor: pointer;
+		transition: all 0.1s ease;
+	}
+	.OpenList:hover{background-color: #545454;}
+	.OpenList:active{background-color: #353535;}
+
+	#OpenList{display:none;}
+	#OpenList:checked ~ .PantallaList{display: flex;}
+
+	.PantallaList{
+		background-color: rgb(25, 25, 25, 0.5);
+		width: 100%;
+		height: 100%;
+
+		position: fixed;
+		top: 0px;
+		left: 0;
+
+		display: none;
+		align-items:center;
+		justify-content:center;
+	}
+
+	.PantallaExit{
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		top:0;
+		left: 0;
+	}
+
+	.Lista{
+		background-color: #c8c8c8;
+		min-width: 50%;
+		width: 500px;
+		max-width: 100%;
+		height: 75%;
+		position: relative;
+		color: black;
+		z-index: 1;
+	}
+
+	.Aplicar, .Cancelar{
+		height: 2em;
+		width: 2.2em;
+
+		position: absolute;
+		top: 0px;
+
+		cursor: pointer;
+		font-size:1.5em;
+	}
+	h2{height: 2em; margin: 0px; padding-top: 0.4em;}
+	.Aplicar{left: 0px; padding-top: 0.25em;}
+	.Cancelar{right: 0px; padding-top: 0.25em;}
+
+	textarea{
+		width: 100%;
+		height: calc(100% - 2em);
+		overflow: auto;
+		border-width: 0px;
+		outline:0;
+		resize: none;
+	}
+</style>
+
+</head>
+<body>
+	<div id="diagrama">
+		<div class="fila">
+			<div class="elemnt">
+				<div class="cont" onclick="Marcardo(0, 0)">?</div>
+				<div class="line"><div></div><div></div><div></div><div></div></div>
+			</div>
+		</div>
+
+		<div class="fila">
+			<div class="elemnt">
+				<div class="cont" onclick="Marcardo(1, 0)">?</div>
+				<div class="line"><div></div><div></div><div></div><div></div></div>
+			</div>
+			<div class="elemnt">
+				<div class="cont" onclick="Marcardo(1, 1)">?</div>
+				<div class="line"><div></div><div></div><div></div><div></div></div>
+			</div>
+		</div>
+
+		<div class="fila">
+			<div class="elemnt">
+				<div class="cont" onclick="Marcardo(2, 0)">?</div>
+				<div class="line"><div></div><div></div><div></div><div></div></div>
+			</div>
+			<div class="elemnt">
+				<div class="cont" onclick="Marcardo(2, 1)">?</div>
+				<div class="line"><div></div><div></div><div></div><div></div></div>
+			</div>
+			<div class="elemnt">
+				<div class="cont" onclick="Marcardo(2, 2)">?</div>
+				<div class="line"><div></div><div></div><div></div><div></div></div>
+			</div>
+			<div class="elemnt">
+				<div class="cont" onclick="Marcardo(2, 3)">?</div>
+				<div class="line"><div></div><div></div><div></div><div></div></div>
+			</div>
+		</div>
+
+
+		<div class="fila">
+			<div class="elemnt">
+				<div class="cont" onclick="Marcardo(3, 0)">Nombre 1</div>
+				<div class="line"><div></div><div></div><div></div><div></div></div>
+			</div>
+			<div class="elemnt">
+				<div class="cont" onclick="Marcardo(3, 1)">Nombre 2</div>
+				<div class="line"><div></div><div></div><div></div><div></div></div>
+			</div>
+			<div class="elemnt">
+				<div class="cont" onclick="Marcardo(3, 2)">Nombre 3</div>
+				<div class="line"><div></div><div></div><div></div><div></div></div>
+			</div>
+			<div class="elemnt">
+				<div class="cont" onclick="Marcardo(3, 3)">Nombre 4</div>
+				<div class="line"><div></div><div></div><div></div><div></div></div>
+			</div>
+			<div class="elemnt">
+				<div class="cont" onclick="Marcardo(3, 4)">Nombre 5</div>
+				<div class="line"><div></div><div></div><div></div><div></div></div>
+			</div>
+			<div class="elemnt">
+				<div class="cont" onclick="Marcardo(3, 5)">Nombre 6</div>
+				<div class="line"><div></div><div></div><div></div><div></div></div>
+			</div>
+			<div class="elemnt">
+				<div class="cont" onclick="Marcardo(3, 6)">Nombre 7</div>
+				<div class="line"><div></div><div></div><div></div><div></div></div>
+			</div>
+			<div class="elemnt">
+				<div class="cont" onclick="Marcardo(3, 7)">Nombre 8</div>
+				<div class="line"><div></div><div></div><div></div><div></div></div>
+			</div>
+		</div>
+	</div>
+
+	<label for="OpenList" class="OpenList">
+		<svg viewBox="0 0 110 110"><path d="M23,26.8A3.8,3.8,0,0,1,26.8,23H55L71,36.4V83.2A3.8,3.8,0,0,1,67.2,87H26.8A3.8,3.8,0,0,1,23,83.2h0Z" style="fill:#fff"/><path d="M56,76a.9.9,0,0,1-1,1H46a.9.9,0,0,1-1-1h0a.9.9,0,0,1,1-1h9A.9.9,0,0,1,56,76Z" style="fill:#e2e4e5"/><path d="M62,71a.9.9,0,0,1-1,1H46a.9.9,0,0,1-1-1h0a.9.9,0,0,1,1-1H61A.9.9,0,0,1,62,71Z" style="fill:#e2e4e5"/><path d="M56,63a1.1,1.1,0,0,1-1,1H46a1.1,1.1,0,0,1-1-1h0a1.1,1.1,0,0,1,1-1h9A1.1,1.1,0,0,1,56,63Z" style="fill:#e2e4e5"/><path d="M62,58a1.1,1.1,0,0,1-1,1H46a1.1,1.1,0,0,1-1-1h0a1.1,1.1,0,0,1,1-1H61A1.1,1.1,0,0,1,62,58Z" style="fill:#e2e4e5"/><path d="M56,50a1.1,1.1,0,0,1-1,1H46a1.1,1.1,0,0,1-1-1h0a1.1,1.1,0,0,1,1-1h9A1.1,1.1,0,0,1,56,50Z" style="fill:#e2e4e5"/><path d="M62,45a1.1,1.1,0,0,1-1,1H46a1.1,1.1,0,0,1-1-1h0a1.1,1.1,0,0,1,1-1H61A1.1,1.1,0,0,1,62,45Z" style="fill:#e2e4e5"/><path d="M35.1,52l-3.8-3.8a1,1,0,0,1,1.2-1.6l.2.2L34.9,49l4.3-5.1a1,1,0,0,1,1.4-.1.9.9,0,0,1,.2,1.4Z" style="fill:#17b198"/><path d="M35.1,65l-3.8-3.8a1,1,0,0,1,1.2-1.6l.2.2L34.9,62l4.3-5.1a1,1,0,0,1,1.4-.1.9.9,0,0,1,.2,1.4Z" style="fill:#17b198"/><path d="M35.1,78l-3.8-3.8a1,1,0,0,1,1.2-1.6l.2.2L34.9,75l4.3-5.1a1.1,1.1,0,0,1,1.5-.1,1,1,0,0,1,.1,1.4Z" style="fill:#17b198"/><path d="M55,23v9.6a3.8,3.8,0,0,0,3.8,3.8H71Z" style="fill:#f0f1f1"/><polygon points="77 41.5 80.1 35 82 36.1 82 44 77 44 77 41.5" style="fill:#f4d0a1"/><polygon points="87 44 87 41.5 83.9 35 82 36.1 82 44 87 44" style="fill:#edbc7c"/><path d="M87,84a2.9,2.9,0,0,1-2.8,3H80a2.9,2.9,0,0,1-3-2.8V82H87Z" style="fill:#f79392"/><path d="M77.1,82v2a2.9,2.9,0,0,0,2.8,3h2.2V82Z" style="fill:#f7b4b4"/><rect x="77" y="79.1" width="10" height="3" style="fill:#7d261e"/><rect x="77" y="80.1" width="5" height="2" style="fill:#b84e44"/><path d="M84.5,43a2.5,2.5,0,0,1-2.4-1.8c0-.1-.2-.1-.2,0V80h5V41.5c0-.1-.1-.1-.2,0A2.2,2.2,0,0,1,84.5,43Z" style="fill:#c23023"/><path d="M77,80V41.5c0-.1.1-.1.2,0A2.5,2.5,0,0,0,79.5,43a2.5,2.5,0,0,0,2.4-1.8c0-.1.1-.1.1,0V80Z" style="fill:#e54b44"/><path d="M82,31l-1.9,4a2.1,2.1,0,0,0,3,.8,3,3,0,0,0,.8-.8Z" style="fill:#212121"/></svg>
+	</label>
+
+
+	<input type="checkbox" id="OpenList"/>
+	<div class="PantallaList">
+		<label for="OpenList" class="PantallaExit"></label>
+		<div class="Lista">
+			<h2>Lista de elementos</h2>
+			<label for="OpenList" class="Aplicar" onclick="Enlistar()">✔</label>
+			<label for="OpenList" class="Cancelar">✖</label>
+			<textarea id="EntradaLista" placeholder="Introduce el texto aquí..."></textarea>
+		</div>
+	</div>
+<script>
+	function Enlistar() {
+		let EntradaLista = document.getElementById("EntradaLista").value,
+		ArrayLista = document.getElementById("EntradaLista").value.split('\n').filter(Boolean),
+		NumFilas = Math.ceil(Math.log2(ArrayLista.length)),
+		Diagrama = document.getElementById("diagrama");
+
+		// No ejecutar si la lista esta en blanco
+		if(document.getElementById("EntradaLista").value!==""){
+			Diagrama.innerHTML = "";
+
+			// Blucle por numero de filas a crear
+			for (let i=0; i<=NumFilas; i++) {
+				let ContenidosFila="";
+
+				// Bucle por el numero de elementos
+				for (let y=0; y<=Math.pow(2, i)-1; y++) {ContenidosFila+=`<div class="elemnt"><div class="cont" onclick="Marcardo(`+i+`, `+y+`)">?<\/div><div class="line"><div><\/div><div><\/div><div><\/div><div><\/div><\/div><\/div>`}
+
+				// Imprimir fila 
+				Diagrama.innerHTML += `<div class="fila">`+ContenidosFila+`<\/div>`;
+			}
+
+			// Añadir nombres al final
+			for (let i=0; i<=ArrayLista.length-1; i++) {
+				document.querySelectorAll(".fila")[NumFilas].querySelectorAll(".elemnt")[i].querySelector(".cont").innerHTML = ArrayLista[i];
+			}
+
+		} else {alert("No se a escrito ningun valor");}
+	}
+
+
+	function Marcardo(Fila, Posicion) {
+		// Si no es la primera fila aplicar
+		if(Fila!==0){
+			// Si es de la fila inferior o predecesores ya han sido marcado
+			let Marcar=false;
+			if(document.querySelectorAll(".fila").length !== Fila+1){
+				let ObjetoAntesA, ObjetoAntesB, ObjetoAntesC, ObjetoAntesD;
+
+				// Guardar antecesores del propio y del otro
+				if (Posicion%2==0) {
+					ObjetoAntesA=document.querySelectorAll(".fila")[Fila+1].querySelectorAll(".elemnt")[Posicion*2].querySelector(".cont");
+					ObjetoAntesB=document.querySelectorAll(".fila")[Fila+1].querySelectorAll(".elemnt")[(Posicion*2)+1].querySelector(".cont");
+					ObjetoAntesC=document.querySelectorAll(".fila")[Fila+1].querySelectorAll(".elemnt")[(Posicion*2)+2].querySelector(".cont");
+					ObjetoAntesD=document.querySelectorAll(".fila")[Fila+1].querySelectorAll(".elemnt")[(Posicion*2)+3].querySelector(".cont");
+				}else{
+					ObjetoAntesA=document.querySelectorAll(".fila")[Fila+1].querySelectorAll(".elemnt")[(Posicion*2)-2].querySelector(".cont");
+					ObjetoAntesB=document.querySelectorAll(".fila")[Fila+1].querySelectorAll(".elemnt")[(Posicion*2)-1].querySelector(".cont");
+					ObjetoAntesC=document.querySelectorAll(".fila")[Fila+1].querySelectorAll(".elemnt")[Posicion*2].querySelector(".cont");
+					ObjetoAntesD=document.querySelectorAll(".fila")[Fila+1].querySelectorAll(".elemnt")[(Posicion*2)+1].querySelector(".cont");
+				}
+
+				// Revisar antecesores del propio y del otro
+				if((ObjetoAntesA.getAttribute("style")=="background-color: #42AB49;" || ObjetoAntesB.getAttribute("style")=="background-color: #42AB49;") && (ObjetoAntesC.getAttribute("style")=="background-color: #42AB49;" || ObjetoAntesD.getAttribute("style")=="background-color: #42AB49;")){
+					Marcar=true;
+				}
+			} else {Marcar=true;}
+
+			// Depende de los condicionales anteriores
+			if(Marcar){
+				let ObjetoActual, ObjetoOtro, ObjetoResultado;
+
+				// Si es par
+				if (Posicion%2==0) {
+					ObjetoActual= document.querySelectorAll(".fila")[Fila].querySelectorAll(".elemnt")[Posicion].querySelector(".cont");
+					ObjetoOtro= document.querySelectorAll(".fila")[Fila].querySelectorAll(".elemnt")[Posicion+1].querySelector(".cont");
+					ObjetoResultado= document.querySelectorAll(".fila")[Fila-1].querySelectorAll(".elemnt")[Posicion/2].querySelector(".cont");
+				} else {
+					ObjetoActual = document.querySelectorAll(".fila")[Fila].querySelectorAll(".elemnt")[Posicion].querySelector(".cont");
+					ObjetoOtro= document.querySelectorAll(".fila")[Fila].querySelectorAll(".elemnt")[Posicion-1].querySelector(".cont");
+					ObjetoResultado= document.querySelectorAll(".fila")[Fila-1].querySelectorAll(".elemnt")[(Posicion-1)/2].querySelector(".cont");
+				}
+
+				ObjetoActual.setAttribute("style", "background-color: #42AB49;"); // El actual verde
+				ObjetoOtro.setAttribute("style", "background-color: #C63637;"); // El otro rojo
+
+				// Si es el ultimo poner el de arriba en verde
+				if(Fila==1){document.querySelectorAll(".fila")[0].querySelectorAll(".elemnt")[0].querySelector(".cont").setAttribute("style", "background-color: #42AB49;");}
+
+				ImpresionTexto();
+			}
+		}
+	}
+
+	// Crear funcion para que restructure los contenidos
+	function ImpresionTexto() {
+		// Cantidad de filas
+		let CantidadFila = document.querySelectorAll(".fila").length-1;
+
+		// Bucle por fila
+		for (let i=CantidadFila; 0<=i; i--) {
+			// Cantidad de filas
+			let CantidadObjeto = document.querySelectorAll(".fila")[i].querySelectorAll(".elemnt").length-1;
+
+			// Bucle por contenidos
+			for (let y=0; y<=CantidadObjeto;y++) {
+				// Verificar si es parejo
+				let Superior;
+				if (y%2==0) {Superior=y/2} else {Superior=(y-1)/2}
+
+				let Objeto= document.querySelectorAll(".fila")[i].querySelectorAll(".elemnt")[y].querySelector(".cont"),
+				ObjetoResultado= document.querySelectorAll(".fila")[i-1].querySelectorAll(".elemnt")[Superior].querySelector(".cont");
+
+				// Si es verde poner arriba y el de al lado rojo
+				if(Objeto.getAttribute("style")=="background-color: #42AB49;"){
+					ObjetoResultado.innerHTML = Objeto.innerHTML;
+				}
+			}
+		}
+	}
+</script>
+</body>
+</html>

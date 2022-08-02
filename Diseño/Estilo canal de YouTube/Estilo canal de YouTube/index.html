@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es" >
+<head>
+<meta charset="UTF-8">
+<title>Estilo canal de YouTube</title>
+<style>
+	* {box-sizing: border-box;}
+	body {
+		margin: 0;
+		padding: 0;
+
+		background-color: #0f0f0f;
+		font-family: Arial;
+		color: white;
+	}
+
+	/* Menu navegacion */
+	.menu-toogle {
+		width: 50px;
+		height: 50px;
+		position: fixed;
+		top: 0px;
+		left: 0px;
+		z-index: 10;
+
+		cursor: pointer;
+		padding: 10px 15px;
+	}
+
+	.menu-toogle:hover {opacity: 0.75;}
+	.menu-toogle:active {opacity: 0.5;}
+	.menu-toogle::before {
+		content: "☰";
+		font-size: 30px;
+	}
+
+	#check-menu {display: none;}
+	#check-menu:checked ~ .nav {left: -250px;}
+	.nav {
+		height: 100%;
+		width: 250px;
+
+		z-index: 2;
+		position: fixed;
+		left: 0px;
+		transition: left 0.5s ease;
+
+		background-color: #212121;
+	}
+
+	.nav .titulo {
+		width: 100%;
+		height: 50px;
+
+		padding: 14px 10px 14px 40px;
+
+		font-size: 30px;
+		text-align: center;
+	}
+	.nav .titulo a {
+		text-decoration: none;
+		color: white;
+	}
+	.nav .titulo a:hover {color: #e6e6e6;}
+
+	.nav .enlaces {
+		height: 100%;
+		overflow-x: hidden;
+		overflow-y: scroll;
+	}
+	.nav .enlaces::-webkit-scrollbar {
+		width: 10px;
+		background-color: #212121;
+	}
+	.nav .enlaces::-webkit-scrollbar-thumb {background-color: #212121;}
+	.nav .enlaces:hover::-webkit-scrollbar-thumb {background-color: #494949;}
+
+	.nav .enlaces hr {border: 1px solid #2d2d2d;}
+	.nav .enlaces > p {
+		margin: 18px 25px -5px;
+
+		color: #9e9e9e;
+		text-transform: uppercase;
+	}
+	.nav .enlaces ul {
+		width: 100%;
+
+		margin: 10px 0;
+		padding: 0px;
+		list-style: none;
+	}
+	.nav .enlaces li {
+		width: 100%;
+		height: 40px;
+
+		display: block;
+		padding: 7px 7px 7px calc(max(3px, min(7vw, 35px)) - 10px);
+	}
+
+	.nav .enlaces .img li::before {
+		width: 25px;
+		height: 25px;
+		display: inline-block;
+
+		margin: 0 15px -7px 0;
+
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+
+		content: "";
+	}
+	.nav .enlaces li:hover {background-color: #383838;}
+	.nav .enlaces li:active {background-color: #4f4f4f;}
+
+	.nav .enlaces .open {
+		font-weight: bold;
+		background-color: #383838;
+	}
+	.nav .enlaces .open:hover {background-color: #4c4c4c;}
+	.nav .enlaces .open:active {background-color: #616161;}
+	.nav .enlaces #X::before {background-image: url(https://i.ibb.co/GpcfL1T/Xaival.webp);}
+	.nav .enlaces #XC::before {background-image: url(https://i.ibb.co/QjbJLsC/Xaival-CO.webp);}
+	.nav .enlaces #XP::before {background-image: url(https://i.ibb.co/Cmb0Hhh/Xaival-Photo.webp);}
+
+	.nav .enlaces .ico li {padding: 2px 2px 2px max(3px, min(7vw, 35px));}
+	.nav .enlaces .ico svg {
+		height: 24px;
+		position: relative;
+		top: 7px;
+		left: -10px;
+		display: inline;
+
+		fill: #909090;
+	}
+
+	.nav .enlaces a {
+		text-decoration: none;
+		color: inherit;
+	}
+
+	/* Cuerpo________________________________________________ */
+	#check-menu:checked ~ .cuerpo {width: 100%;}
+	.cuerpo {
+		width: calc(100% - 250px);
+		height: 100%;
+		text-align: left;
+		margin-left: auto;
+		transition: all 0.5s ease;
+	}
+
+	@media screen and (max-width: 1250px) {
+		#check-menu:checked ~ .nav {left: 0px;}
+		.nav {left: -250px;}
+		.cuerpo {width: 100%;}
+	}
+	@media screen and (max-width: 250px) {
+		#check-menu:checked ~ .nav {left: 0px;}
+		.nav {left: -250vw;width: 100vw;}
+	}
+
+	/* Banner________________________________________________ */
+	.cuerpo .banner {
+		width: 100%;
+		height: min(250px, 40vw);
+
+		background-color: #a9a9a9;
+		background-size: cover;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+	.cuerpo .contenido,
+	.cuerpo .contenidob {
+		height: 100%;
+		width: min(100%, max(950px, 80%));
+		margin-left: auto;
+		margin-right: auto;
+		padding: 10px;
+	}
+
+	/* Encabezado________________________________________________ */
+	.cuerpo .encabezado {
+		width: 100%;
+		height: 100px;
+		background-color: #181818;
+		transition: height 0.2s ease;
+	}
+	.cuerpo .encabezado .contenido {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.cuerpo .encabezado .contenido .titulo {
+		height: 80px;
+		display:flex;
+		align-items: center;
+	}
+	.cuerpo .encabezado .contenido .titulo .logo {
+		width: min(60px, 25vw);
+		height: 60px;
+
+		background-image: url(https://i.ibb.co/GpcfL1T/Xaival.webp);
+		background-size: contain;
+		background-position: center;
+		background-repeat: no-repeat;
+	}
+	.cuerpo .encabezado .contenido .titulo p {
+		margin-left: 10px;
+		font-size: min(30px, 10vw);
+	}
+	.cuerpo .encabezado .contenido .buscador {
+		height: 40px;
+		width: 210px;
+		display: flex;
+		margin-top: 43px;
+	}
+	.cuerpo .encabezado .contenido .buscador a {
+		height: 40px;
+		width: 40px;
+
+		border-radius: 20px;
+		margin-top: 4px;
+		background: rgb(255, 255, 255, 0);
+		transition: background ease 0.45s;
+		order: 1;
+
+		cursor: pointer;
+	}
+	.cuerpo .encabezado .contenido .buscador a:active {background: rgb(255, 255, 255, 0.25);}
+
+	.cuerpo .encabezado .contenido .buscador a svg {
+		height: 35px;
+		width: 35px;
+		display: inline-block;
+		fill: #8d8d8d;
+	}
+	.cuerpo .encabezado .contenido .buscador a svg:active {fill: #aaaaaa;}
+	.cuerpo .encabezado .contenido .buscador input:focus ~ svg {fill: #aaaaaa;}
+
+	.cuerpo .encabezado .contenido .buscador input {
+		height: 40px;
+		width: 0px;
+
+		display: inline-block;
+		order: 2;
+		margin-left: 5px;
+
+		background-color: transparent;
+		outline: 0;
+		opacity: 0;
+		border: 0;
+		border-bottom: 2px hidden #ffffff;
+		transition: width ease 0.1s, opacity ease 0.2s, border-color ease 0.5s;
+
+		color: #fff;
+		font-size: 15px;
+	}
+	.cuerpo .encabezado .contenido .buscador input::placeholder {color: #fff;}
+	.cuerpo .encabezado .contenido .buscador input:active {border-bottom: 2px solid #ffffff;}
+	.cuerpo .encabezado .contenido .buscador input:invalid,
+	.cuerpo .encabezado .contenido .buscador input:focus {border-bottom: 2px solid #8d8d8d;}
+	.cuerpo .encabezado .contenido .buscador input:active,
+	.cuerpo .encabezado .contenido .buscador input:invalid,
+	.cuerpo .encabezado .contenido .buscador input:focus {
+		width: 160px;
+		opacity: 1;
+	}
+
+	@media screen and (max-width: 1000px) {
+		.cuerpo .encabezado .contenido {padding: 8px min(30px, 1010px - 100vw);}
+	}
+	@media screen and (max-width: 625px) {
+		.cuerpo .encabezado {height: 140px;}
+		.cuerpo .encabezado .contenido {align-items:flex-end; flex-direction:column;}
+		.cuerpo .encabezado .contenido .titulo{width: 100%;}
+		.cuerpo .encabezado .contenido .buscador {margin-top: 0px;}
+	}
+	@media screen and (max-width: 400px) {
+		.cuerpo .encabezado {height: min(150px, max(70vw, 110px));}
+		.cuerpo .encabezado .contenido {align-items:center; padding: 10px;}
+		.cuerpo .encabezado .contenido .titulo{justify-content:center;}
+		.cuerpo .encabezado .contenido .buscador {width: 100%;}
+		.cuerpo .encabezado .contenido .buscador input:active,
+		.cuerpo .encabezado .contenido .buscador input:invalid,
+		.cuerpo .encabezado .contenido .buscador input:focus {width: calc(100% - 35px);}
+	}
+
+
+	/* Contenido________________________________________________ */
+	.cuerpo .contenidob hr {border: 1px solid rgba(255, 255, 255, 0.1);}
+	.cuerpo .contenidob {padding: 10px 0px;}
+	.cuerpo .contenidob .categoria {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		font-size: min(20px, max(5vw, 15px));
+		margin: 15px 5px 20px 10px;
+	}
+	.cuerpo .contenidob .categoria p {margin:0px;}
+	.cuerpo .contenidob .categoria svg {
+		height: 1em;
+		fill: #FFFFFF;
+		cursor: pointer;
+	}
+	.cuerpo .contenidob .categoria svg:hover {fill: #e6e6e6;}
+	.cuerpo .contenidob .categoria svg:active {fill: #cccccc;}
+</style>
+</head>
+<body>
+	<label for="check-menu" class="menu-toogle"></label>
+	<input type="checkbox" id="check-menu"/>
+	<nav class="nav">
+		<div class="titulo"><a href="/">Xaival</a></div>
+		<div class="enlaces">
+			<hr>
+			<ul class="img">
+				<a href=""><li id="X" class="open">Xaival</li></a>
+				<a href=""><li id="XC">Xaival CO</li></a>
+				<a href=""><li id="XP">Xaival Photo</li></a>
+			</ul>
+			<hr>
+			<ul class="ico">
+				<a href=""><li id="RRSS">
+					<svg viewBox="-75 -75 800 800"><path d="M53.244,0.002c46.512,0,91.29,6.018,134.334,18.054s83.334,29.07,120.869,51.102    c37.537,22.032,71.707,48.45,102.514,79.254c30.803,30.804,57.221,64.974,79.254,102.51    c22.029,37.539,39.063,77.828,51.102,120.873c12.037,43.043,18.055,87.818,18.055,134.334c0,14.688-5.201,27.23-15.605,37.637    c-10.404,10.407-22.949,15.604-37.637,15.604c-14.689,0-27.234-5.199-37.641-15.604c-10.402-10.404-15.604-22.949-15.604-37.637    c0-36.723-4.795-72.115-14.383-106.186c-9.588-34.064-23.055-65.891-40.395-95.471c-17.34-29.581-38.145-56.509-62.424-80.785    c-24.277-24.276-51.203-45.084-80.784-62.424c-29.58-17.34-61.404-30.804-95.472-40.392s-69.462-14.382-106.182-14.382    c-14.688,0-27.234-5.202-37.638-15.606S0.001,67.933,0.001,53.245s5.202-27.234,15.606-37.638    C26.01,5.204,38.556,0.002,53.244,0.002z M53.244,201.35c42.024,0,81.498,8.058,118.422,24.174s69.156,37.944,96.696,65.484    c27.541,27.541,49.369,59.771,65.484,96.693c16.117,36.928,24.174,76.398,24.174,118.426c0,14.688-5.201,27.23-15.604,37.637    c-10.404,10.404-22.949,15.604-37.641,15.604c-14.688,0-27.233-5.199-37.637-15.604c-10.404-10.404-15.606-22.949-15.606-37.637    c0-27.338-5.202-53.041-15.606-77.113c-10.404-24.072-24.582-45.084-42.534-63.035c-17.952-17.953-38.964-32.131-63.036-42.535    c-24.072-10.402-49.776-15.604-77.112-15.604c-14.688,0-27.234-5.201-37.638-15.605C5.202,281.83,0,269.284,0,254.596    s5.202-27.234,15.606-37.638C26.01,206.552,38.556,201.35,53.244,201.35z M151.164,481.033c0,10.609-1.938,20.4-5.814,29.377    c-3.876,8.979-9.18,16.83-15.912,23.563c-6.732,6.729-14.688,12.035-23.868,15.912c-9.18,3.875-18.87,5.811-29.07,5.811    c-10.608,0-20.4-1.938-29.376-5.811c-8.976-3.875-16.83-9.184-23.562-15.912c-6.732-6.732-12.036-14.586-15.912-23.563    c-3.876-8.977-5.814-18.768-5.814-29.377c0-10.197,1.938-19.889,5.814-29.066c3.876-9.184,9.18-17.139,15.912-23.869    c6.732-6.732,14.586-12.035,23.562-15.912c8.976-3.875,18.768-5.814,29.376-5.814c10.2,0,19.89,1.939,29.07,5.814    c9.18,3.877,17.136,9.18,23.868,15.912c6.732,6.73,12.036,14.688,15.912,23.869C149.226,461.145,151.164,470.834,151.164,481.033z    "/></svg>
+					RRSS
+				</li></a>
+			</ul>
+			<hr>
+			<p>Playlist</p>
+			<ul class="ico">
+				<a href="#ListTo"><li>
+					<svg viewBox="0 0 24 24"><g><path d="M3.67 8.67h14V11h-14V8.67zm0-4.67h14v2.33h-14V4zm0 9.33H13v2.34H3.67v-2.34zm11.66 0v7l5.84-3.5-5.84-3.5z"></path></g></svg>
+					Todos los videos
+				</li></a>
+				<a href="#ListJuCa"><li>
+					<svg viewBox="0 0 24 24"><g><path d="M3.67 8.67h14V11h-14V8.67zm0-4.67h14v2.33h-14V4zm0 9.33H13v2.34H3.67v-2.34zm11.66 0v7l5.84-3.5-5.84-3.5z"></path></g></svg>
+					Juegos - Camapaña
+				</li></a>
+				<a href="#ListJuOn"><li>
+					<svg viewBox="0 0 24 24"><g><path d="M3.67 8.67h14V11h-14V8.67zm0-4.67h14v2.33h-14V4zm0 9.33H13v2.34H3.67v-2.34zm11.66 0v7l5.84-3.5-5.84-3.5z"></path></g></svg>
+					Juegos - Online
+				</li></a>
+				<a href="#ListJuMo"><li>
+					<svg viewBox="0 0 24 24"><g><path d="M3.67 8.67h14V11h-14V8.67zm0-4.67h14v2.33h-14V4zm0 9.33H13v2.34H3.67v-2.34zm11.66 0v7l5.84-3.5-5.84-3.5z"></path></g></svg>
+					Juegos - Montajes
+				</li></a>
+				<a href="#ListJuOt"><li>
+					<svg viewBox="0 0 24 24"><g><path d="M3.67 8.67h14V11h-14V8.67zm0-4.67h14v2.33h-14V4zm0 9.33H13v2.34H3.67v-2.34zm11.66 0v7l5.84-3.5-5.84-3.5z"></path></g></svg>
+					Juegos - Otros
+				</li></a>
+				<a href="#ListMo"><li>
+					<svg viewBox="0 0 24 24"><g><path d="M3.67 8.67h14V11h-14V8.67zm0-4.67h14v2.33h-14V4zm0 9.33H13v2.34H3.67v-2.34zm11.66 0v7l5.84-3.5-5.84-3.5z"></path></g></svg>
+					Montajes reales
+				</li></a>
+				<a href="#ListCo"><li>
+					<svg viewBox="0 0 24 24"><g><path d="M3.67 8.67h14V11h-14V8.67zm0-4.67h14v2.33h-14V4zm0 9.33H13v2.34H3.67v-2.34zm11.66 0v7l5.84-3.5-5.84-3.5z"></path></g></svg>
+					Colaboraciones
+				</li></a>
+				<a href="#ListOt"><li>
+					<svg viewBox="0 0 24 24"><g><path d="M3.67 8.67h14V11h-14V8.67zm0-4.67h14v2.33h-14V4zm0 9.33H13v2.34H3.67v-2.34zm11.66 0v7l5.84-3.5-5.84-3.5z"></path></g></svg>
+					Otros
+				</li></a>
+			</ul>
+		</div>  
+	</nav>
+	<div class="cuerpo">
+		<div class="banner" style="background-image: url(https://64.media.tumblr.com/7435fcb25a94765d9cfe1c8014def0bc/3eade2ec0f1391be-a0/s2048x3072/37b2fef4275548637462a9269663c3dae2d05559.png);"></div>
+		<div class="encabezado">
+			<div class="contenido">
+				<div class="titulo"><div class="logo"></div><p>Xaival</p></div>
+				<label class="buscador"><input placeholder="Buscar" type="email">
+				<a><svg viewBox="-5 -4 30 30"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path></svg></a></label>
+			</div>
+		</div>
+		<div class="contenidob"  id="Listado">
+			<div class="categoria" id="ListTo">
+				<p>Todos los videos</p>
+				<svg viewBox="3 2 20 20"><path d="M19 17H22L18 21L14 17H17V3H19M11 13V15L7.67 19H11V21H5V19L8.33 15H5V13M9 3H7C5.9 3 5 3.9 5 5V11H7V9H9V11H11V5C11 3.9 10.11 3 9 3M9 7H7V5H9Z"/></svg>
+			</div><hr>
+			<div class="categoria" id="ListJuCa">
+				<p>Juegos - Camapaña</p>
+				<svg viewBox="3 2 20 20"><path d="M19 17H22L18 21L14 17H17V3H19M11 13V15L7.67 19H11V21H5V19L8.33 15H5V13M9 3H7C5.9 3 5 3.9 5 5V11H7V9H9V11H11V5C11 3.9 10.11 3 9 3M9 7H7V5H9Z"/></svg>
+			</div><hr>
+			<div class="categoria" id="ListJuOn">
+				<p>Juegos - Online</p>
+				<svg viewBox="3 2 20 20"><path d="M19 17H22L18 21L14 17H17V3H19M11 13V15L7.67 19H11V21H5V19L8.33 15H5V13M9 3H7C5.9 3 5 3.9 5 5V11H7V9H9V11H11V5C11 3.9 10.11 3 9 3M9 7H7V5H9Z"/></svg>
+			</div><hr>
+			<div class="categoria" id="ListJuMo">
+				<p>Juegos - Montajes</p>
+				<svg viewBox="3 2 20 20"><path d="M19 17H22L18 21L14 17H17V3H19M11 13V15L7.67 19H11V21H5V19L8.33 15H5V13M9 3H7C5.9 3 5 3.9 5 5V11H7V9H9V11H11V5C11 3.9 10.11 3 9 3M9 7H7V5H9Z"/></svg>
+			</div><hr>
+			<div class="categoria" id="ListJuOt">
+				<p>Juegos - Otros</p>
+				<svg viewBox="3 2 20 20"><path d="M19 17H22L18 21L14 17H17V3H19M11 13V15L7.67 19H11V21H5V19L8.33 15H5V13M9 3H7C5.9 3 5 3.9 5 5V11H7V9H9V11H11V5C11 3.9 10.11 3 9 3M9 7H7V5H9Z"/></svg>
+			</div><hr>
+			<div class="categoria" id="ListMo">
+				<p>Montajes reales</p>
+				<svg viewBox="3 2 20 20"><path d="M19 17H22L18 21L14 17H17V3H19M11 13V15L7.67 19H11V21H5V19L8.33 15H5V13M9 3H7C5.9 3 5 3.9 5 5V11H7V9H9V11H11V5C11 3.9 10.11 3 9 3M9 7H7V5H9Z"/></svg>
+			</div><hr>
+			<div class="categoria" id="ListCo">
+				<p>Colaboraciones</p>
+				<svg viewBox="3 2 20 20"><path d="M19 17H22L18 21L14 17H17V3H19M11 13V15L7.67 19H11V21H5V19L8.33 15H5V13M9 3H7C5.9 3 5 3.9 5 5V11H7V9H9V11H11V5C11 3.9 10.11 3 9 3M9 7H7V5H9Z"/></svg>
+			</div><hr>
+			<div class="categoria" id="ListOt">
+				<p>Otros</p>
+				<svg viewBox="3 2 20 20"><path d="M19 17H22L18 21L14 17H17V3H19M11 13V15L7.67 19H11V21H5V19L8.33 15H5V13M9 3H7C5.9 3 5 3.9 5 5V11H7V9H9V11H11V5C11 3.9 10.11 3 9 3M9 7H7V5H9Z"/></svg>
+			</div><hr>
+		</div>
+	</div>
+</body>
+</html>

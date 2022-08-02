@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es" >
+<head>
+<meta charset="UTF-8">
+<title>Secuencia de texto</title>
+<style>
+	* {margin:0; padding:0; box-sizing:border-box;}
+	body{
+		background-color: #101010;
+
+		display: flex;
+		flex-wrap: wrap;
+		justify-content:space-evenly;
+		overflow-y: hidden;
+
+		color: white;
+		font-family: Arial;
+		font-size: min(18px, max(5vw, 13px));
+	}
+	body > *{
+		width:50vw;
+		height:100vh;
+
+		resize: none;
+		padding: 8px;
+		padding-top: 20px;
+		font-size:min(14px, max(5vw, 13px));
+	}
+
+	/* Texto de entrada */
+	form {
+		background-color: #1f1f1f;
+		display: flex;
+		flex-direction: column;
+		line-height: 15px;
+	}
+	form div{width:100%;}
+	h2 {text-align:center; line-height: 20px;}
+	h3 {margin-top: 15px;}
+	input, select {
+		width:100%;
+		margin-top: 5px;
+		border-width: 0px;
+		outline:0;
+	}
+	input[type="checkbox"]{margin-right: 5px;}
+	input[type="text"], input[type="number"]{height:1.5em;}
+	select{height: 1.8em;}
+
+	#SalidaTexto{overflow-y: auto;}
+</style>
+</head>
+<body>
+	<! –– Formulario ––>
+	<form>
+		<h2>Secuencia de texto</h2>
+		<br>
+		<h3>Texto 1</h3>
+		<input type="text" id="EntradaTexto1" value="Texto" onkeyup="CambiosSalida()">
+		<h3>Texto 2</h3>
+		<input type="text" id="EntradaTexto2" value="Texto" onkeyup="CambiosSalida()">
+		<br>
+
+		<h3>Cantidad</h3>
+		<input type="number" id="Cantidad" value="1" min="1" max="999" onkeyup="CambiosSalida()" onchange="CambiosSalida()">
+
+		<h3>Tipo de numeracion</h3>
+		<select id="TipoNum" onchange="CambiosSalida()">
+			<option>Números</option>
+			<option>Letras</option>
+		</select>
+		<br>
+
+		<h3>Posicion de numeracion</h3>
+		<select id="PosicionNum" onchange="CambiosSalida()">
+			<option>Num + Texto1 + Texto2</option>
+			<option>Texto1 + Num + Texto2</option>
+			<option>Texto1 + Texto2 + Num</option>
+		</select>
+
+		<div id="ComoAlfabetico" style="display:none;">
+			<h3>Minúscula o mayúscula</h3>
+			<select id="MayusMinus" onchange="CambiosSalida()">
+				<option>Mayúscula</option>
+				<option>Minúscula</option>
+			</select>
+		</div>
+
+		<div id="ComoNumero">
+			<h3>Poner 0 delante</h3>
+			<select id="Delante0" onchange="CambiosSalida()">
+				<option>Ninguno</option>
+				<option>Auto</option>
+			</select>
+		</div>
+	</form>
+
+	<! –– Respuesta ––>
+	<div id="SalidaTexto"></div>
+<script>
+	function CambiosSalida() {
+		var EntradaTexto1 = document.getElementById("EntradaTexto1").value;
+		var EntradaTexto2 = document.getElementById("EntradaTexto2").value;
+
+		var Cantidad = document.getElementById("Cantidad").value;
+		var TipoNum = document.getElementById("TipoNum").value;
+		var PosicionNum = document.getElementById("PosicionNum").value;
+		var Delante0 = document.getElementById("Delante0").value;
+		var MayusMinus = document.getElementById("MayusMinus").value;
+
+		var ComoNumero = document.getElementById("ComoNumero");
+		var ComoAlfabetico = document.getElementById("ComoAlfabetico");
+
+		var SalidaTexto = document.getElementById("SalidaTexto");
+
+		// Limipiar
+		SalidaTexto.innerHTML = "";
+
+		if(TipoNum=="Números"){
+			ComoNumero.style.display = "block";
+			ComoAlfabetico.style.display = "none";
+
+			for(var Num=1; Num-1<Cantidad; Num++){
+				//Condicional si poner 0 delante
+				var Plus0 = "";
+				if(Delante0=="Auto"){
+					var SumCaracteres = Cantidad.toString().length - Num.toString().length; //Numeros de caracteres a poner
+					for(var y=0; y<SumCaracteres; y++){Plus0 = Plus0 + "0";} //Texto decorativo 001
+				}
+				//Añadir linea
+				switch (PosicionNum) {
+					case 'Num + Texto1 + Texto2':
+					SalidaTexto.innerHTML += "<div>"+Plus0+Num+" "+EntradaTexto1+" "+EntradaTexto2+"</div>";
+					break;
+					case 'Texto1 + Num + Texto2':
+					SalidaTexto.innerHTML += "<div>"+EntradaTexto1+" "+Plus0+Num+" "+EntradaTexto2+"</div>";
+					break;
+					case 'Texto1 + Texto2 + Num':
+					SalidaTexto.innerHTML += "<div>"+EntradaTexto1+" "+EntradaTexto2+" "+Plus0+Num+"</div>";
+					break;
+				}
+			}
+		} else {
+			ComoNumero.style.display = "none";
+			ComoAlfabetico.style.display = "block";
+
+			//Letras AAA, AAB, AAC
+			var UnCaracter = 1;
+			var FinBucle = true;
+			var NumCaracteres = 0;
+			while (FinBucle) {
+				UnCaracter = 26 * UnCaracter;
+				if (Cantidad / UnCaracter <= 1) {FinBucle = false;}
+				else {++NumCaracteres; } //Cantidad de letras
+			}
+			NumeroAlfabeto(Cantidad + 1, NumCaracteres, "");
+		}
+	}
+	CambiosSalida()
+
+	function NumeroAlfabeto(NumHasta, NumCaracteres, Caracter) {
+		// Al ser otra funcion hay que añadir esto de nuevo
+		var EntradaTexto1 = document.getElementById("EntradaTexto1").value;
+		var EntradaTexto2 = document.getElementById("EntradaTexto2").value;
+		var PosicionNum = document.getElementById("PosicionNum").value;
+		var MayusMinus = document.getElementById("MayusMinus").value;
+		var SalidaTexto = document.getElementById("SalidaTexto");
+
+		var Alfabeto = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]; //26
+		var BucleActual = 0;
+
+		while (1 <= NumHasta && BucleActual <= 25) {  //Numero de carpetas o Numero de letras alfaveto (Como empieza desde 0 es uno menos)
+			if (NumCaracteres > 0) {
+				Caracter = Caracter + Alfabeto[BucleActual]; //Almacenar primeras letras
+				--NumCaracteres;
+				NumeroAlfabeto(NumHasta, NumCaracteres, Caracter);
+				++NumCaracteres;
+				NumHasta = NumHasta - 26;
+				Caracter = Caracter.substr(0, Caracter.Length - 1); //Limpiar ultima letra
+			} else { //Mostrar grupo final AAAA
+				var NumAlfabetica = Caracter+Alfabeto[BucleActual];
+				//Convertir en minusculas
+				if(MayusMinus=="Minúscula"){NumAlfabetica=NumAlfabetica.toLowerCase();}
+				switch (PosicionNum) {
+					case 'Num + Texto1 + Texto2':
+						SalidaTexto.innerHTML += "<div>"+NumAlfabetica+" "+EntradaTexto1+" "+EntradaTexto2+"</div>";
+						break;
+					case 'Texto1 + Num + Texto2':
+						SalidaTexto.innerHTML += "<div>"+EntradaTexto1+" "+NumAlfabetica+" "+EntradaTexto2+"</div>";
+						break;
+					case 'Texto1 + Texto2 + Num':
+						SalidaTexto.innerHTML += "<div>"+EntradaTexto1+" "+EntradaTexto2+" "+NumAlfabetica+"</div>";
+						break;
+				}
+				--NumHasta; //Se resta ya que ya se han creado
+			} ++BucleActual; //Siguiente numero del bucle
+		}
+	}
+</script>
+</body>
+</html>

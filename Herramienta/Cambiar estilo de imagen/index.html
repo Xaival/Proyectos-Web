@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es" >
+<head>
+<meta charset="UTF-8">
+<title>Cambiar estilo de imagen</title>
+<script src ="https://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js"></script>
+<style>
+	* {margin:0; padding:0; box-sizing:border-box;}
+	body{
+		background-color: #101010;
+		display:flex;
+		flex-wrap: wrap;
+		justify-content:space-evenly;
+		color: white;
+		font-family: Arial;
+		font-size: min(18px, max(5vw, 13px));
+	}
+
+	.Contenedor {
+		width: min(100vw, max(75vw, 595px));
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		margin: 0 auto;
+	}
+	.Contenedor > *{
+		width: 100%;
+		max-width: 100vw;
+		display: flex;
+	}
+
+	/* Titulo y opcion de subida */
+	.Contenedor_Subida {
+		align-items: center;
+		flex-direction: column;
+		padding: 20px;
+	}
+	.Contenedor_Subida h1 {margin-bottom:10px;}
+	.Contenedor_Subida input {max-width: 100vw;}
+
+
+	/* Previsualizacion de imagenes */
+	.Contenedor_Imagen {
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+	.Contenedor_Imagen > * {
+		background-color: #080808;
+		width: calc(100% * .5 - 3px);
+		min-width: 200px;
+		height: auto;
+		min-height: calc(min(100vw, max(75vw, 600px))*.5/1.8);
+		border: 1px solid rgba(85, 85, 85, 0.212);
+		margin-bottom:5px;
+	}
+	@media screen and (max-width: 400px) {
+		.Contenedor_Imagen {justify-content: center;}
+		.Contenedor_Imagen > * {width: max(50%, 250px); max-width:100vw;}
+	}
+
+
+	/* Botones de ajustes */
+	.Contenedor_Opciones {
+		margin: 1rem 0;
+		flex-wrap: wrap;
+		justify-content: space-between;
+	}
+	.Contenedor_Opciones button {
+		background-color: #1f1f1f;
+		width: 20%;
+		min-width: 110px;
+		padding: 0.90em 0.75em;
+		cursor: pointer;
+		color: #FFF;
+		border: 1px solid #474747;
+		transition: .2s ease;
+	}
+	.Contenedor_Opciones button:hover {
+		background-color: #3d3d3d;
+	}
+	@media screen and (max-width: 440px) {
+		.Contenedor_Opciones button {width:50%;}
+	}
+	@media screen and (max-width: 220px) {
+		.Contenedor_Opciones button {width:100%;}
+	}
+</style>
+</head>
+<body>
+	<div class="Contenedor">
+		<div class="Contenedor_Subida"> 
+			<h1>Converciones de imagenes</h1>
+			<input type="file" id="imagen" accept="image/*" onchange="UploadFile()"/>
+		</div>
+		<div class="Contenedor_Imagen">
+			<canvas id="imgPreviewOriginal"></canvas>
+			<canvas id="imgPreviewCanvas"></canvas>
+		</div>
+		<div class="Contenedor_Opciones">
+			<button onclick="btn_restablecer()">Restablecer</button>
+			<button onclick="btn_escalas()">Escala grises</button>
+			<button onclick="btn_invertir()">Invertir</button>
+			<button onclick="btn_sepia()">Sepia</button>
+		</div>
+	</div>
+<script>
+	const imagenPreview = document.getElementById('imgPreviewOriginal');
+	const canvasPreview = document.getElementById('imgPreviewCanvas');
+
+	//Dopear archivos
+	imgPreviewOriginal.ondrop = imgPreviewOriginal.ondragover = function(evt) {
+		evt.preventDefault();
+		// Si desea utilizar algunos de los archivos caídos
+		const dT = new DataTransfer();
+		dT.items.add(evt.dataTransfer.files[0]);
+		imagen.files = dT.files;
+		// Ejecucion funcion para Mostrar archivo
+		UploadFile();
+	};
+
+
+	//Mostrar archivo
+	function UploadFile() {
+		// Guardar valores de imagen
+		imagenChange = new SimpleImage(imagen);
+		// Agregar imagen a original
+		imagenChange.drawTo(imagenPreview);
+		// Agregar imagen a canvas
+		imagenChange.drawTo(canvasPreview);
+	}
+
+	//Restablecer
+	function btn_restablecer() {
+		// Recuperar colores de la imagen principal
+		imagenChange = new SimpleImage(imagen);
+		// Agregar imagen a canvas
+		imagenChange.drawTo(canvasPreview);
+	}
+	//Blanco y negro
+	function btn_escalas() {
+		// Cambiar colores
+		for (var pixel of imagenChange.values()) {
+			var monocolor = ((pixel.getRed() + pixel.getGreen() + pixel.getBlue()) / 3);
+			pixel.setRed(monocolor); //Rojo
+			pixel.setGreen(monocolor); //Verde
+			pixel.setBlue(monocolor); //Azul
+		}
+		// Agregar imagen a canvas
+		imagenChange.drawTo(canvasPreview);
+	}
+	//Invertir
+	function btn_invertir() {
+		// Cambiar colores
+		for (var pixel of imagenChange.values()) {
+			pixel.setRed(255 - pixel.getRed()); //Rojo
+			pixel.setGreen(255 - pixel.getGreen()); //Verde
+			pixel.setBlue(255 - pixel.getBlue()); //Azul
+		}
+		// Agregar imagen a canvas
+		imagenChange.drawTo(canvasPreview);
+	}
+	//Sepia
+	function btn_sepia() {
+		// Cambiar colores
+		for (var pixel of imagenChange.values()) {
+			pixel.setRed(1.09 * pixel.getRed()); //Rojo
+			pixel.setGreen(1.05 * pixel.getGreen()); //Verde
+			pixel.setBlue(0.86 * pixel.getBlue()); //Azul
+		}
+		// Agregar imagen a canvas
+		imagenChange.drawTo(canvasPreview);
+	}
+</script>
+</body>
+</html>

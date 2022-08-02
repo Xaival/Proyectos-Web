@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es" >
+<head>
+<meta charset="UTF-8">
+<title>Combinación de una lista</title>
+<style>
+	* {margin:0; padding:0; box-sizing:border-box;}
+	body{
+		background-color: #101010;
+
+		display: flex;
+		flex-wrap: wrap;
+		justify-content:space-evenly;
+		overflow-y: hidden;
+
+		color: white;
+		font-family: Arial;
+		font-size: min(18px, max(5vw, 13px));
+	}
+	body > *{
+		width:33%;
+		height:100vh;
+
+		resize: none;
+		padding: 8px;
+		padding-top: 20px;
+		font-size:min(14px, max(5vw, 13px));
+	}
+	#SalidaTexto{overflow: auto;}
+
+	@media screen and (max-width: 750px) {
+		body > *{width:100vw; height:33vh;}
+		#SalidaTexto{overflow-y: auto;}
+	}
+
+	/* Texto de entrada */
+	textarea{
+		background-color: #101010;
+		color: white;
+		border-width: 0px;
+		outline:0;
+	}
+
+	/* Formulario */
+	form {
+		background-color: #1f1f1f;
+		display: flex;
+		flex-direction: column;
+		line-height: 15px;
+	}
+	h2 {text-align:center; line-height: 20px;}
+	h3 {margin-bottom: 5px;}
+	input {
+		margin-top: 5px;
+		border-width: 0px;
+		outline:0;
+	}
+	input[type="text"]{height:1.5em;}
+</style>
+</head>
+<body>
+	<! –– Texto de entrada ––>
+	<textarea id="EntradaTexto" placeholder="Introduce el texto aquí..." onkeyup="CambiosSalida()"></textarea>
+
+	<! –– Formulario ––>
+	<form>
+		<h2>Combinaciones de texto</h2>
+		<br>
+		<h3>Separar con</h3>
+		<input type="text" id="Separador" value=", " onkeyup="CambiosSalida()">
+		<br>
+		<h3>Numero de combinaciones</h3>
+		<p id="NumCombinaciones">0</p>
+	</form>
+
+	<! –– Respuesta ––>
+	<div id="SalidaTexto"></div>
+<script>
+	function CambiosSalida() {
+		var EntradaTexto = document.getElementById("EntradaTexto").value.split('\n');
+		var SalidaTexto = document.getElementById("SalidaTexto");
+		var Separador = document.getElementById("Separador").value;
+		var NumCombinaciones = document.getElementById("NumCombinaciones");
+
+		//Calcular combinaciones posibles
+		NumCombinaciones.innerHTML = Math.pow(2, EntradaTexto.length);
+
+		// Limipiar salida
+		SalidaTexto.innerHTML = "";
+
+		//Nuevo array de agrupacion
+		var Batidora = [""];
+
+		//Combinaciones posibles
+		for(i=0; i<EntradaTexto.length; i++){
+			if(EntradaTexto[i]!==""){
+				// Guardar valor de largo para prevenir bucle infinito
+				var BatidoraLargo=Batidora.length;
+				//Largo de EntradaTexto
+				for(y=0; y<BatidoraLargo; y++){
+					Batidora[Batidora.length]=Batidora[y]+Separador+EntradaTexto[i];
+				}
+			}
+		}
+		for(x=0; x<Batidora.length; x++){
+			SalidaTexto.innerHTML += "<div>"+Batidora[x].substr(Separador.length)+"</div>";
+		}
+	}
+</script>
+</body>
+</html>

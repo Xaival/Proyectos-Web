@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es" >
+<head>
+<meta charset="UTF-8">
+<title>Eliminar duplicados</title>
+<style>
+	* {margin:0; padding:0; box-sizing:border-box;}
+	body{
+		background-color: #1f1f1f;
+
+		display: flex;
+		flex-wrap: wrap;
+		justify-content:space-evenly;
+		overflow-y: hidden;
+
+		color: white;
+		font-family: Arial;
+		font-size: min(18px, max(5vw, 13px));
+	}
+	body > *{
+		width:50vw;
+		height:100vh;
+
+		resize: none;
+		padding: 8px;
+		padding-top: 20px;
+		font-size:min(14px, max(5vw, 13px));
+	}
+
+	/* Texto de entrada */
+	textarea{
+		background-color: #1f1f1f;
+		color: white;
+		border-width: 0px;
+		outline:0;
+	}
+	/* Texto de salida */
+	#SalidaTexto{background-color: #101010;overflow-y: auto;}
+</style>
+</head>
+<body>
+	<! –– Texto de entrada ––>
+	<textarea id="EntradaTexto" placeholder="Introduce el texto aquí..." onkeyup="CambiosSalida()"></textarea>
+
+	<! –– Respuesta ––>
+	<div id="SalidaTexto"></div>
+<script>
+	function CambiosSalida() {
+		var EntradaTexto = document.getElementById("EntradaTexto").value.split('\n');
+		var SalidaTexto = document.getElementById("SalidaTexto");
+
+		// Limipiar
+		SalidaTexto.innerHTML = "";
+
+		// Recorrer todas las lineas
+		for(var i=0; i<EntradaTexto.length; i++){
+			var LineaTexto = EntradaTexto[i];
+			var Duplicado = false;
+
+			// Comprobar que no haya uno igual antes
+			for(var y=0; y<i; y++){
+				if(EntradaTexto[i]==EntradaTexto[y]){var Duplicado = true;}
+			}
+			//Añadir linea si no es duplicada
+			if(!Duplicado){SalidaTexto.innerHTML += "<div>"+LineaTexto+"</div>";}
+		}
+	}
+</script>
+</body>
+</html>
