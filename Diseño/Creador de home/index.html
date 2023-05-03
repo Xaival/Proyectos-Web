@@ -1079,8 +1079,7 @@
 		<ul id=Buscadores>
 		<li id=Google><a href=https:\/\/www.google.es\/ target=_top><div><p>Google<\/p><\/div><\/a><\/li>
 		<li id=GoogleMaps><a href=https:\/\/www.google.com\/maps target=_top><div><p>Google Maps<\/p><\/div><\/a><\/li>
-		<li id=
-		><a href=https:\/\/www.youtube.com\/feed\/subscriptions target=_top><div><p>Youtube<\/p><\/div><\/a><\/li>
+		<li id=Youtube><a href=https:\/\/www.youtube.com\/feed\/subscriptions target=_top><div><p>Youtube<\/p><\/div><\/a><\/li>
 		<\/ul>
 		${TempContent}
 		<script>function CambiosSalida(){let EntradaTexto=document.getElementById("EntradaTexto").value;let Google=document.querySelector("#Buscadores #Google a");let GoogleMaps=document.querySelector("#Buscadores #GoogleMaps a");let Youtube=document.querySelector("#Buscadores #Youtube a");if(EntradaTexto.match(\/^[0-9A-Za-z]\/)){Google.href="https:\/\/www.google.com\/search?&q="+EntradaTexto;GoogleMaps.href="https:\/\/www.google.com\/maps?q="+EntradaTexto;Youtube.href="https:\/\/www.youtube.com\/results?search_query="+EntradaTexto}else{Google.href="https:\/\/www.google.es\/";GoogleMaps.href="https:\/\/www.google.com\/maps";Youtube.href="https:\/\/www.youtube.com\/feed\/subscriptions"}}document.getElementById("EntradaTexto").onkeypress=function(a){if(a.charCode==13){let EntradaTexto=document.getElementById("EntradaTexto").value;window.open("https:\/\/www.google.com\/search?&q="+EntradaTexto,"_top")}};<\/script>
