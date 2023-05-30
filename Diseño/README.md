@@ -7,13 +7,13 @@ Estilo simple para mostrar en redes sociales.
 
 <br>
 
-## [Creador de página de inicio v2](https://xaival.github.io/Proyectos-Web/Dise%C3%B1o/Creador%20de%20home/)
+## [Creador de página de inicio v2](https://raw.githubusercontent.com/Xaival/Proyectos-Web/main/Dise%C3%B1o/Creador%20de%20home%20v2/)
 Esta es una página que te da la posibilidad de crear un documento HTML completo de una página de inicio.
 La página te permite crear, editar, eliminar, exportar, importar y descargar el resultado final.
 
 ![image](https://github.com/Xaival/Proyectos-Web/assets/54257745/604c3c2e-d96a-49a6-b41b-4e6421815bb6)
 
-El resultado final quedaría [así](https://xaival.github.io/Proyectos-Web/Dise%C3%B1o/Creador%20de%20home/).
+El resultado final quedaría [así](https://raw.githubusercontent.com/Xaival/Proyectos-Web/main/Dise%C3%B1o/Creador%20de%20home%20v2/Ejemplo.html).
 
 ![image](https://github.com/Xaival/Proyectos-Web/assets/54257745/2cc0465d-4475-40af-8d4b-387fa2f6037a)
 
