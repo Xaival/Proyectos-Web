@@ -1,12 +1,5 @@
 # Diseño
 
-## [Enlaces a RRSS](https://xaival.github.io/Proyectos-Web/Diseño/Enlaces%20a%20RRSS/)
-Estilo simple para mostrar en redes sociales.
-
-![image](https://user-images.githubusercontent.com/54257745/135287520-1e9bddf0-fe99-460c-99e4-18b90ad05d40.png)
-
-<br>
-
 ## [Creador de página de inicio v2](https://xaival.github.io/Proyectos-Web/Dise%C3%B1o/Creador%20de%20home%20v2/)
 Esta es una página que te da la posibilidad de crear un documento HTML completo de una página de inicio.
 La página te permite crear, editar, eliminar, exportar, importar y descargar el resultado final.
@@ -32,6 +25,13 @@ El resultado final quedaría así.
 ![image](https://user-images.githubusercontent.com/54257745/137644143-c0db1eff-97b2-451f-bbc7-83feb529181a.png)
 
 Puedes usar la extensión [New Tab Changer](https://chrome.google.com/webstore/detail/new-tab-changer/occbjkhimchkolibngmcefpjlbknggfh) para poner el archivo como página por defecto.
+
+<br>
+
+## [Enlaces a RRSS](https://xaival.github.io/Proyectos-Web/Diseño/Enlaces%20a%20RRSS/)
+Estilo simple para mostrar en redes sociales.
+
+![image](https://user-images.githubusercontent.com/54257745/135287520-1e9bddf0-fe99-460c-99e4-18b90ad05d40.png)
 
 <br>
 
