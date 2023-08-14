@@ -30,39 +30,38 @@ Hacer conversión de regla de 3 inversa o directa automática con JavaScript.
 
 <br>
 
-### Acciones sobre texto
-  #### [Modificación de texto](https://xaival.github.io/Proyectos-Web/Herramienta/Acciones%20sobre%20texto/Modificaci%C3%B3n%20de%20texto/)
-  Cambiar texto sin caracteres especiales, reemplazar, mayúsculas o minúsculas.
-  
-  ![image](https://user-images.githubusercontent.com/54257745/135284845-fd0c2be4-3d70-4c65-adab-ce5a59d635c1.png)
+### [Modificación de texto](https://xaival.github.io/Proyectos-Web/Herramienta/Acciones%20sobre%20texto/Modificaci%C3%B3n%20de%20texto/)
+Cambiar texto sin caracteres especiales, reemplazar, mayúsculas o minúsculas.
+
+![image](https://user-images.githubusercontent.com/54257745/135284845-fd0c2be4-3d70-4c65-adab-ce5a59d635c1.png)
 
 <br>
 
-  #### [Eliminar duplicados](https://xaival.github.io/Proyectos-Web/Herramienta/Acciones%20sobre%20texto/Eliminar%20duplicados/)
-  Eliminar duplicados de la lista.
-  
-  ![image](https://user-images.githubusercontent.com/54257745/135284968-8edec20e-a5df-437c-8b6a-d919e3010fbc.png)
+### [Eliminar duplicados](https://xaival.github.io/Proyectos-Web/Herramienta/Acciones%20sobre%20texto/Eliminar%20duplicados/)
+Eliminar duplicados de la lista.
+
+![image](https://user-images.githubusercontent.com/54257745/135284968-8edec20e-a5df-437c-8b6a-d919e3010fbc.png)
 
 <br>
 
-  #### [Combinación de una lista](https://xaival.github.io/Proyectos-Web/Herramienta/Acciones%20sobre%20texto/Combinación%20de%20una%20lista/)
-  Todas las combinaciones posibles de una lista de palabras.
-  
-  ![image](https://user-images.githubusercontent.com/54257745/135285661-81f9b019-1f6e-44ab-bc75-cb989bc52a3f.png)
+### [Combinación de una lista](https://xaival.github.io/Proyectos-Web/Herramienta/Acciones%20sobre%20texto/Combinación%20de%20una%20lista/)
+Todas las combinaciones posibles de una lista de palabras.
+
+![image](https://user-images.githubusercontent.com/54257745/135285661-81f9b019-1f6e-44ab-bc75-cb989bc52a3f.png)
 
 <br>
 
-  #### [Secuencia de texto](https://xaival.github.io/Proyectos-Web/Herramienta/Acciones%20sobre%20texto/Secuencia%20de%20texto/)
-  Secuencia de texto con numeración alfabética y numérica.
-  
-  ![image](https://user-images.githubusercontent.com/54257745/135285980-b2350d1a-2d8c-4efb-9411-9584d5aa396a.png)
+### [Secuencia de texto](https://xaival.github.io/Proyectos-Web/Herramienta/Acciones%20sobre%20texto/Secuencia%20de%20texto/)
+Secuencia de texto con numeración alfabética y numérica.
+
+![image](https://user-images.githubusercontent.com/54257745/135285980-b2350d1a-2d8c-4efb-9411-9584d5aa396a.png)
 
 <br>
 
-  #### [Separar por condición](https://xaival.github.io/Proyectos-Web/Herramienta/Acciones%20sobre%20texto/Separar%20por%20condición/)
-  Separar por condición y si no se repite.
-  
-  ![image](https://user-images.githubusercontent.com/54257745/135286879-357ee252-b08b-4396-ab04-68432dded667.png)
+### [Separar por condición](https://xaival.github.io/Proyectos-Web/Herramienta/Acciones%20sobre%20texto/Separar%20por%20condición/)
+Separar por condición y si no se repite.
+
+![image](https://user-images.githubusercontent.com/54257745/135286879-357ee252-b08b-4396-ab04-68432dded667.png)
 
 <br>
 
