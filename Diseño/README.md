@@ -28,13 +28,6 @@ Puedes usar la extensión [New Tab Changer](https://chrome.google.com/webstore/d
 
 <br>
 
-## [Enlaces a RRSS](https://xaival.github.io/Proyectos-Web/Diseño/Enlaces%20a%20RRSS/)
-Estilo simple para mostrar en redes sociales.
-
-![image](https://user-images.githubusercontent.com/54257745/135287520-1e9bddf0-fe99-460c-99e4-18b90ad05d40.png)
-
-<br>
-
 ## Estilo canal de YouTube
   ### [Estilo canal de YouTube](https://xaival.github.io/Proyectos-Web/Diseño/Estilo%20canal%20de%20YouTube/Estilo%20canal%20de%20YouTube/)
   Estilo parecido a la página de un canal en youtube. Sin java.
