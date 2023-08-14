@@ -94,7 +94,7 @@ Cambiar estilo de imagen subida con javascript.
 
 <br>
 
-## [Diagrama de emparejamiento](https://xaival.github.io/Proyectos-Web/Juego/Diagrama%20de%20emparejamiento/)
+### [Diagrama de emparejamiento](https://xaival.github.io/Proyectos-Web/Juego/Diagrama%20de%20emparejamiento/)
 Crea una estructura en árbol para emparejamientos con ganador y perdedor.
 
 ![image](https://user-images.githubusercontent.com/54257745/138579419-d47f0c1e-e86a-4ba0-912a-0a515dcdce32.png)
@@ -107,14 +107,7 @@ Crea una estructura en árbol para emparejamientos con ganador y perdedor.
 
 ## [Diseño](https://github.com/Xaival/Proyectos-Web/tree/main/Dise%C3%B1o)
 
-### [Enlaces a RRSS](https://xaival.github.io/Proyectos-Web/Diseño/Enlaces%20a%20RRSS/)
-Estilo simple para mostrar en redes sociales.
-
-![image](https://user-images.githubusercontent.com/54257745/135287520-1e9bddf0-fe99-460c-99e4-18b90ad05d40.png)
-
-<br>
-
-## [Creador de página de inicio v2](https://xaival.github.io/Proyectos-Web/Dise%C3%B1o/Creador%20de%20home%20v2/)
+### [Creador de página de inicio v2](https://xaival.github.io/Proyectos-Web/Dise%C3%B1o/Creador%20de%20home%20v2/)
 Esta es una página que te da la posibilidad de crear un documento HTML completo de una página de inicio.
 La página te permite crear, editar, eliminar, exportar, importar y descargar el resultado final.
 
