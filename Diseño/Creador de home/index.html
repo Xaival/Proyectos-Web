@@ -492,7 +492,7 @@
 </head>
 <body>
 	<! –– Formulario ––>
-	<form>
+	<form id="formulario">
 		<div class="Defecto" id="ViewEstilo"></div>
 
 		<select id="Estilo" required onchange="ChangePreview()">
@@ -729,8 +729,7 @@
 			MostrarLista();
 
 			// Limpiar formulario
-			document.getElementById("Nombre").value = "";
-			document.getElementById("URL").value = "";
+			document.getElementById('formulario').reset()
 			
 			
 			// Mensaje de que se a guardado con exito
@@ -960,8 +959,7 @@
 	// Restablecer formulario
 	function restablecer() {
 		// Limpiar formulario
-		document.getElementById("Nombre").value = "";
-		document.getElementById("URL").value = "";
+		document.getElementById('formulario').reset()
 
 		// Quitar onclick de guardar
 		BtnGuardar.removeAttribute("onclick")
