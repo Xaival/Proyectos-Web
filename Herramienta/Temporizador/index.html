@@ -98,19 +98,20 @@
 		<svg id="PausaReplay" fill="#FFF" onclick="PauseReplay()" viewBox="-5.5 -3.5 25 25"><path d="M2.067,0.043C2.21-0.028,2.372-0.008,2.493,0.085l13.312,8.503c0.094,0.078,0.154,0.191,0.154,0.313c0,0.12-0.061,0.237-0.154,0.314L2.492,17.717c-0.07,0.057-0.162,0.087-0.25,0.087l-0.176-0.04c-0.136-0.065-0.222-0.207-0.222-0.361V0.402C1.844,0.25,1.93,0.107,2.067,0.043z"/></svg>
 	</div>
 
-	<input type="number" id="PlusHoras" value="0" min="0" max="99" onchange="EnCero(this)" onkeypress="if(event.charCode==13){PauseReplay()}"> :
-	<input type="number" id="PlusMinutos" value="0" min="0" max="60" onchange="EnCero(this); CambiosM()" onkeypress="if(event.charCode==13){PauseReplay()}"> :
-	<input type="number" id="PlusSegundos" value="0" min="0" max="60" onchange="EnCero(this); CambiosS()" onkeypress="if(event.charCode==13){PauseReplay()}">
+	<input type="number" id="PlusHoras" value="0" min="0" max="99" onchange="EnCero(this)" onkeypress="if(event.charCode==13){Comenzar()}"> :
+	<input type="number" id="PlusMinutos" value="0" min="0" max="60" onchange="EnCero(this); CambiosM()" onkeypress="if(event.charCode==13){Comenzar()}"> :
+	<input type="number" id="PlusSegundos" value="0" min="0" max="60" onchange="EnCero(this); CambiosS()" onkeypress="if(event.charCode==13){Comenzar()}">
 	<br>
 	<button onclick="Comenzar()">Comenzar</button>
 <script>
-	var timerA, timerB, PauseReplayBool=true,
+	let timerA, timerB, PauseReplayBool=true,
 	PlusHoras = document.getElementById("PlusHoras"),
 	PlusMinutos = document.getElementById("PlusMinutos"),
 	PlusSegundos = document.getElementById("PlusSegundos"),
 	Circulo = document.getElementById("Circulo"),
 	CuentaRegresiva = document.getElementById("CuentaRegresiva"),
-	PausaReplay = document.getElementById("PausaReplay");
+	PausaReplay = document.getElementById("PausaReplay"),
+	horasRestantes, minutosRestantes, segundosRestantes;
 
 
 	function CambiosS() {
@@ -133,16 +134,16 @@
 		if(Elemento.value == ""){Elemento.value = 0;}
 	}
 	
-
 	function PauseReplay() {
 		/* Si se esta parado */
+		console.log(PauseReplayBool);
 		if(PauseReplayBool){Comenzar();}
 		else{
 			timerA.finish();
 			clearTimeout(timerB);
-			PlusHoras.value = Horas;
-			PlusMinutos.value = Minutos;
-			PlusSegundos.value = Segundos;
+			PlusHoras.value = horasRestantes;
+			PlusMinutos.value = minutosRestantes;
+			PlusSegundos.value = segundosRestantes;
 			document.title = "Temporizador";
 			PausaReplay.innerHTML = `<path d="M2.067,0.043C2.21-0.028,2.372-0.008,2.493,0.085l13.312,8.503c0.094,0.078,0.154,0.191,0.154,0.313c0,0.12-0.061,0.237-0.154,0.314L2.492,17.717c-0.07,0.057-0.162,0.087-0.25,0.087l-0.176-0.04c-0.136-0.065-0.222-0.207-0.222-0.361V0.402C1.844,0.25,1.93,0.107,2.067,0.043z"/>`;
 			PauseReplayBool=true;
@@ -150,77 +151,88 @@
 	}
 
 	function Comenzar() {
-		// Cambios de boton
+		// Cambios de diseño del botón
 		PauseReplayBool=false;
 		PausaReplay.innerHTML = `
 			<rect x="-2" y="-1" width="7" height="20"/>
 			<rect x="9" y="-1" width="7" height="20"/>`;
 
-		// Importar valores
-		Segundos = parseInt(PlusSegundos.value, 10);
-		Minutos = parseInt(PlusMinutos.value, 10);
-		Horas = parseInt(PlusHoras.value, 10);
-
-		// Evitar que se duplique las funciones
+		// Limpiar cualquier temporizador previo
 		if(timerA!=null){timerA.finish();}
 		if(timerB!==null){clearTimeout(timerB);}
 
-		// Circulo
-		Duracion = parseInt(PlusSegundos.value, 10)+parseInt(PlusMinutos.value, 10)*60+parseInt(PlusHoras.value, 10) * 3600;
+		// Obtener la hora actual
+		let horaActual = new Date();
+		
+		// Obtener la hora deseada
+		let horaDeseada = new Date();
+		horaDeseada.setHours(horaDeseada.getHours() + parseInt(PlusHoras.value, 10));
+		horaDeseada.setMinutes(horaDeseada.getMinutes() + parseInt(PlusMinutos.value, 10));
+		horaDeseada.setSeconds(horaDeseada.getSeconds() + parseInt(PlusSegundos.value, 10));
 
+		// Calcular la diferencia entre la hora deseada y la hora actual
+		let tiempoRestante = horaDeseada - horaActual;
+
+		// Calcular las horas, minutos y segundos de diferencia
+		horasRestantes = Math.floor(tiempoRestante / (60 * 60 * 1000));
+		minutosRestantes = Math.floor((tiempoRestante % (60 * 60 * 1000)) / (60 * 1000));
+		segundosRestantes = Math.floor((tiempoRestante % (60 * 1000)) / 1000);
+
+		// Añadir cero delante si es necesario
+		let horasFormateadas = (horasRestantes < 10) ? "0" + horasRestantes : horasRestantes;
+		let minutosFormateados = (minutosRestantes < 10) ? "0" + minutosRestantes : minutosRestantes;
+		let segundosFormateados = (segundosRestantes < 10) ? "0" + segundosRestantes : segundosRestantes;
+
+		// Utilizar esta diferencia como la duración total para el temporizador
 		timerA=Circulo.animate([
 			{strokeDasharray: "100, 100"},
 			{strokeDasharray: "0, 100"}],
-			{duration: Duracion*1000});
+			{duration: tiempoRestante-500});
 
-		// Previo al bucle para evitar delay
-		// Añadir 0 delante si es menor que 10
-		if(Segundos < 10){PrindSegundos = "0"+Segundos;} else {PrindSegundos = Segundos;}
-		if(Minutos < 10){PrindMinutos = "0"+Minutos;} else {PrindMinutos = Minutos;}
-		if(Horas < 10){PrindHoras = "0"+Horas;} else {PrindHoras = Horas;}
-
-		// Imprimir
-		CuentaRegresiva.innerHTML = PrindHoras+" : "+PrindMinutos+" : "+PrindSegundos;
-		document.title = "Temporizador "+PrindHoras+":"+PrindMinutos+":"+PrindSegundos;
+		// Mostrar en el temporizador y título
+		CuentaRegresiva.innerHTML = horasFormateadas+" : "+minutosFormateados+" : "+segundosFormateados;
+		document.title = "Temporizador "+horasFormateadas+":"+minutosFormateados+":"+segundosFormateados;
 		
-		// Bucle que va restando
+		// Bucle que va restando el tiempo
 		timerB=setInterval(function(){
-			// Restar
-			Segundos--;
-			if(Segundos <= 0 && Minutos >= 1){
-				Segundos = Segundos + 60;
-				Minutos = Minutos - 1;
-			} else if(Segundos <= 0 && Minutos <= 0 && Horas >= 1){
-				Horas = Horas - 1;
-				Minutos = Minutos + 59;
-				Segundos = Segundos + 60;
-			}
+		
+			// Calcular las horas, minutos y segundos de diferencia
+			horasRestantes = Math.floor(tiempoRestante / (60 * 60 * 1000));
+			minutosRestantes = Math.floor((tiempoRestante % (60 * 60 * 1000)) / (60 * 1000));
+			segundosRestantes = Math.floor((tiempoRestante % (60 * 1000)) / 1000);
 
-			//Terminar bucle
-			if(Horas<=0 && Minutos<=0 && Segundos<=0){
+			// Añadir cero delante si es necesario
+			horasFormateadas = (horasRestantes < 10) ? "0" + horasRestantes : horasRestantes;
+			minutosFormateados = (minutosRestantes < 10) ? "0" + minutosRestantes : minutosRestantes;
+			segundosFormateados = (segundosRestantes < 10) ? "0" + segundosRestantes : segundosRestantes;
+
+			// Obtener la hora actual
+			horaActual = new Date();
+			
+			// Calcular la diferencia entre la hora deseada y la hora actual
+			tiempoRestante = horaDeseada - horaActual;
+
+			// Terminar el bucle si el tiempo llega a cero
+			if(horasRestantes<=0 && minutosRestantes<=0 && segundosRestantes<=0){
 				finish.playclip();
 				clearTimeout(timerB);
+				// Cambios de diseño del botón al finalizar
 				PausaReplay.innerHTML = `<path d="M2.067,0.043C2.21-0.028,2.372-0.008,2.493,0.085l13.312,8.503c0.094,0.078,0.154,0.191,0.154,0.313c0,0.12-0.061,0.237-0.154,0.314L2.492,17.717c-0.07,0.057-0.162,0.087-0.25,0.087l-0.176-0.04c-0.136-0.065-0.222-0.207-0.222-0.361V0.402C1.844,0.25,1.93,0.107,2.067,0.043z"/>`;
 				PauseReplayBool=true;
 			}
-
-			// Añadir 0 delante si es menor que 10
-			if(Segundos < 10){PrindSegundos = "0"+Segundos;} else {PrindSegundos = Segundos;}
-			if(Minutos < 10){PrindMinutos = "0"+Minutos;} else {PrindMinutos = Minutos;}
-			if(Horas < 10){PrindHoras = "0"+Horas;} else {PrindHoras = Horas;}
-			
-			// Imprimir si es mayor o igual a 0
-			if(Segundos>=0) {
-				CuentaRegresiva.innerHTML = PrindHoras+" : "+PrindMinutos+" : "+PrindSegundos;
-				document.title = "Temporizador "+PrindHoras+":"+PrindMinutos+":"+PrindSegundos;
+		
+			// Actualizar el temporizador y título si el tiempo es mayor o igual a cero
+			if(tiempoRestante>=0) {
+				CuentaRegresiva.innerHTML = horasFormateadas+" : "+minutosFormateados+" : "+segundosFormateados;
+				document.title = "Temporizador "+horasFormateadas+":"+minutosFormateados+":"+segundosFormateados;
 			} else {document.title = "Temporizador";}
-		},1000);
+		},500);
 	}
 
 
 
 	// Definir lista de extensiones y el tipo de fichero de audio asociado
-	var html5_audiotypes={
+	let html5_audiotypes={
 		"mp3": "audio/mpeg",
 		"mp4": "audio/mp4",
 		"ogg": "audio/ogg",
@@ -228,14 +240,14 @@
 	}
 
 	//Elegir sonido
-	var finish = createsoundbite('./Sonido.mp3');
+	let finish = createsoundbite('./Sonido.mp3');
 
 	//Inicializar sonidos
 	function createsoundbite(sound){
-		var html5audio=document.createElement('audio')
+		let html5audio=document.createElement('audio')
 		if (html5audio.canPlayType){ //Comprobar soporte para audio HTML5
-			for (var i=0; i<arguments.length; i++){
-				var sourceel=document.createElement('source')
+			for (let i=0; i<arguments.length; i++){
+				let sourceel=document.createElement('source')
 				sourceel.setAttribute('src', arguments[i])
 				if (arguments[i].match(/.(w+)$/i))
 				sourceel.setAttribute('type', html5_audiotypes[RegExp.$1])
