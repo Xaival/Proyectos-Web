@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de la Ley de Ohm</title>
+    <style>
+        * {margin: 0; box-sizing: border-box;}
+        body {
+            background-color: #101010;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial;
+            font-size: min(18px, max(5vw, 13px));
+        }
+
+        .elemento-flotante {
+            background-color: #333;
+            width: fit-content;
+            max-width: 650px;
+            padding: 20px;
+			display: flex;
+            border-radius: 25px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .elemento-flotante h2 {margin-bottom: 1.25em;}
+
+		/* Formulario */
+        .elemento-flotante form {
+            width: fit-content;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+		
+		/* Graficos */
+        .elemento-flotante form .grafico {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .elemento-flotante form .grafico svg {width: 45%; max-width: 300px;}
+        .elemento-flotante form #graficaRTC,
+        .elemento-flotante form #graficaPTC {stroke: #03a9f4; fill: #03a9f480}
+        .elemento-flotante form.error #graficaRTC,
+        .elemento-flotante form.error #graficaPTC {stroke: #ff0000; fill: #ff000080}
+
+		/* Campos */
+        .elemento-flotante form .entradas {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            width: min-content;
+        }
+        .elemento-flotante form .entradas > div {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 5px;
+            width: min-content;
+			position: relative;
+        }
+        .elemento-flotante form .entradas > div p {display: flex; align-items: center;}
+        .elemento-flotante form .entradas > div > div {
+            display: flex;
+            gap: 5px;
+		}
+        .elemento-flotante form .entradas p spam {margin: 0 5px;}
+        .elemento-flotante form .entradas input {
+            width: 100px;
+            height: 2.75em;
+            padding: 5px;
+            border-radius: 8px;
+            outline: 0px;
+        }
+        .elemento-flotante form .entradas input[type="radio"] {display: none;}
+        .elemento-flotante form .entradas label {
+            background: #818181;
+            width: 2em;
+            height: 2em;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            user-select: none;
+        }
+
+		@media (max-width: 600px) {
+			.elemento-flotante .grafico {
+				flex-direction: column;
+				align-items: center;
+			}
+			.elemento-flotante form .grafico svg {width: 100%; margin-bottom: 20px;}
+
+			.elemento-flotante form .entradas label {display: none;}
+			.elemento-flotante form .entradas > div {align-items: baseline; padding-right: 45px;}
+			.elemento-flotante form .entradas > div > div {
+				flex-direction: column; 
+				position: absolute;
+				bottom: 0px;
+				right: 3px;
+				border-radius: 8px;
+			}
+			.elemento-flotante form .entradas > div > div.open {
+				background: #77777780;
+				bottom: -3px;
+				right: 0px;
+				padding: 3px;
+			}
+			.elemento-flotante form .entradas > div > div.open label {display: flex;}
+    
+			.elemento-flotante #pV-escala:checked~label[for="pV-escala"],
+			.elemento-flotante #nV-escala:checked~label[for="nV-escala"],
+			.elemento-flotante #uV-escala:checked~label[for="uV-escala"],
+			.elemento-flotante #mV-escala:checked~label[for="mV-escala"],
+			.elemento-flotante #V-escala:checked~label[for="V-escala"],
+			.elemento-flotante #kV-escala:checked~label[for="kV-escala"],
+			.elemento-flotante #MV-escala:checked~label[for="MV-escala"],
+			.elemento-flotante #GV-escala:checked~label[for="GV-escala"],
+			.elemento-flotante #pA-escala:checked~label[for="pA-escala"],
+			.elemento-flotante #nA-escala:checked~label[for="nA-escala"],
+			.elemento-flotante #uA-escala:checked~label[for="uA-escala"],
+			.elemento-flotante #mA-escala:checked~label[for="mA-escala"],
+			.elemento-flotante #A-escala:checked~label[for="A-escala"],
+			.elemento-flotante #kA-escala:checked~label[for="kA-escala"],
+			.elemento-flotante #MA-escala:checked~label[for="MA-escala"],
+			.elemento-flotante #GA-escala:checked~label[for="GA-escala"],
+			.elemento-flotante #pΩ-escala:checked~label[for="pΩ-escala"],
+			.elemento-flotante #nΩ-escala:checked~label[for="nΩ-escala"],
+			.elemento-flotante #uΩ-escala:checked~label[for="uΩ-escala"],
+			.elemento-flotante #mΩ-escala:checked~label[for="mΩ-escala"],
+			.elemento-flotante #Ω-escala:checked~label[for="Ω-escala"],
+			.elemento-flotante #kΩ-escala:checked~label[for="kΩ-escala"],
+			.elemento-flotante #MΩ-escala:checked~label[for="MΩ-escala"],
+			.elemento-flotante #GΩ-escala:checked~label[for="GΩ-escala"],
+			.elemento-flotante #pW-escala:checked~label[for="pW-escala"],
+			.elemento-flotante #nW-escala:checked~label[for="nW-escala"],
+			.elemento-flotante #uW-escala:checked~label[for="uW-escala"],
+			.elemento-flotante #mW-escala:checked~label[for="mW-escala"],
+			.elemento-flotante #W-escala:checked~label[for="W-escala"],
+			.elemento-flotante #kW-escala:checked~label[for="kW-escala"],
+			.elemento-flotante #MW-escala:checked~label[for="MW-escala"],
+			.elemento-flotante #GW-escala:checked~label[for="GW-escala"] {display: flex;}
+		}
+
+        .elemento-flotante #pV-escala:checked~label[for="pV-escala"],
+        .elemento-flotante #nV-escala:checked~label[for="nV-escala"],
+        .elemento-flotante #uV-escala:checked~label[for="uV-escala"],
+        .elemento-flotante #mV-escala:checked~label[for="mV-escala"],
+        .elemento-flotante #V-escala:checked~label[for="V-escala"],
+        .elemento-flotante #kV-escala:checked~label[for="kV-escala"],
+        .elemento-flotante #MV-escala:checked~label[for="MV-escala"],
+        .elemento-flotante #GV-escala:checked~label[for="GV-escala"],
+        .elemento-flotante #pA-escala:checked~label[for="pA-escala"],
+        .elemento-flotante #nA-escala:checked~label[for="nA-escala"],
+        .elemento-flotante #uA-escala:checked~label[for="uA-escala"],
+        .elemento-flotante #mA-escala:checked~label[for="mA-escala"],
+        .elemento-flotante #A-escala:checked~label[for="A-escala"],
+        .elemento-flotante #kA-escala:checked~label[for="kA-escala"],
+        .elemento-flotante #MA-escala:checked~label[for="MA-escala"],
+        .elemento-flotante #GA-escala:checked~label[for="GA-escala"],
+        .elemento-flotante #pΩ-escala:checked~label[for="pΩ-escala"],
+        .elemento-flotante #nΩ-escala:checked~label[for="nΩ-escala"],
+        .elemento-flotante #uΩ-escala:checked~label[for="uΩ-escala"],
+        .elemento-flotante #mΩ-escala:checked~label[for="mΩ-escala"],
+        .elemento-flotante #Ω-escala:checked~label[for="Ω-escala"],
+        .elemento-flotante #kΩ-escala:checked~label[for="kΩ-escala"],
+        .elemento-flotante #MΩ-escala:checked~label[for="MΩ-escala"],
+        .elemento-flotante #GΩ-escala:checked~label[for="GΩ-escala"],
+        .elemento-flotante #pW-escala:checked~label[for="pW-escala"],
+        .elemento-flotante #nW-escala:checked~label[for="nW-escala"],
+        .elemento-flotante #uW-escala:checked~label[for="uW-escala"],
+        .elemento-flotante #mW-escala:checked~label[for="mW-escala"],
+        .elemento-flotante #W-escala:checked~label[for="W-escala"],
+        .elemento-flotante #kW-escala:checked~label[for="kW-escala"],
+        .elemento-flotante #MW-escala:checked~label[for="MW-escala"],
+        .elemento-flotante #GW-escala:checked~label[for="GW-escala"] {background-color: #03A9F4;}
+
+        .elemento-flotante form.error #pV-escala:checked~label[for="pV-escala"],
+        .elemento-flotante form.error #nV-escala:checked~label[for="nV-escala"],
+        .elemento-flotante form.error #uV-escala:checked~label[for="uV-escala"],
+        .elemento-flotante form.error #mV-escala:checked~label[for="mV-escala"],
+        .elemento-flotante form.error #V-escala:checked~label[for="V-escala"],
+        .elemento-flotante form.error #kV-escala:checked~label[for="kV-escala"],
+        .elemento-flotante form.error #MV-escala:checked~label[for="MV-escala"],
+        .elemento-flotante form.error #GV-escala:checked~label[for="GV-escala"],
+        .elemento-flotante form.error #pA-escala:checked~label[for="pA-escala"],
+        .elemento-flotante form.error #nA-escala:checked~label[for="nA-escala"],
+        .elemento-flotante form.error #uA-escala:checked~label[for="uA-escala"],
+        .elemento-flotante form.error #mA-escala:checked~label[for="mA-escala"],
+        .elemento-flotante form.error #A-escala:checked~label[for="A-escala"],
+        .elemento-flotante form.error #kA-escala:checked~label[for="kA-escala"],
+        .elemento-flotante form.error #MA-escala:checked~label[for="MA-escala"],
+        .elemento-flotante form.error #GA-escala:checked~label[for="GA-escala"],
+        .elemento-flotante form.error #pΩ-escala:checked~label[for="pΩ-escala"],
+        .elemento-flotante form.error #nΩ-escala:checked~label[for="nΩ-escala"],
+        .elemento-flotante form.error #uΩ-escala:checked~label[for="uΩ-escala"],
+        .elemento-flotante form.error #mΩ-escala:checked~label[for="mΩ-escala"],
+        .elemento-flotante form.error #Ω-escala:checked~label[for="Ω-escala"],
+        .elemento-flotante form.error #kΩ-escala:checked~label[for="kΩ-escala"],
+        .elemento-flotante form.error #MΩ-escala:checked~label[for="MΩ-escala"],
+        .elemento-flotante form.error #GΩ-escala:checked~label[for="GΩ-escala"],
+        .elemento-flotante form.error #pW-escala:checked~label[for="pW-escala"],
+        .elemento-flotante form.error #nW-escala:checked~label[for="nW-escala"],
+        .elemento-flotante form.error #uW-escala:checked~label[for="uW-escala"],
+        .elemento-flotante form.error #mW-escala:checked~label[for="mW-escala"],
+        .elemento-flotante form.error #W-escala:checked~label[for="W-escala"],
+        .elemento-flotante form.error #kW-escala:checked~label[for="kW-escala"],
+        .elemento-flotante form.error #MW-escala:checked~label[for="MW-escala"],
+        .elemento-flotante form.error #GW-escala:checked~label[for="GW-escala"] {background-color: red;}
+
+
+		/* Tablas */
+        .elemento-flotante table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        .elemento-flotante table th,
+        .elemento-flotante table td {
+            padding: 10px;
+            text-align: center;
+        }
+        .elemento-flotante table th {
+            background-color: #03a9f4;
+            color: white;
+        }
+        .elemento-flotante table tr:nth-child(even) {background-color: #4f4f4f;}
+        .elemento-flotante table th,
+        .elemento-flotante table td {width: 25%;}
+        .elemento-flotante table p {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+        }
+        .elemento-flotante form.error~table {color: red}
+        .elemento-flotante form.error~table th {background-color: red;}
+
+
+        i {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+			width: 25px;
+			height: 25px;
+        }
+        i.Voltaje {background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64.005 64.006'%3E%3Cpath style='fill:%23666666;' d='M62.844,17.984L46.022,1.162c-1.549-1.549-4.06-1.549-5.608,0L1.161,40.415c-1.548,1.549-1.548,4.06,0,5.607l16.823,16.822c1.548,1.549,4.059,1.549,5.607,0l39.253-39.253C64.392,22.044,64.392,19.533,62.844,17.984z'/%3E%3Cpath style='fill:%23CCCCCC;' d='M60.788,6.109l-2.893-2.893c-1.599-1.598-4.188-1.598-5.786,0l-2.894,2.893c-1.598,1.598-1.598,4.188,0,5.786l2.894,2.894c1.598,1.597,4.188,1.597,5.786,0l2.893-2.894C62.385,10.298,62.385,7.707,60.788,6.109z'/%3E%3Cpath style='fill:%23FFA769;' d='M62.844,17.984L46.022,1.162c-1.549-1.549-4.06-1.549-5.608,0l-9.253,9.253l22.431,22.431l9.253-9.254C64.392,22.044,64.392,19.533,62.844,17.984z'/%3E%3Cpath style='fill:%23FFA769;' d='M33.974,35.487c-0.115-0.274-0.378-0.452-0.668-0.452l-5.632,0.749l1.977-8.831c0.075-0.335-0.08-0.68-0.376-0.836c-0.294-0.156-0.657-0.086-0.878,0.171L18.215,39.789c-0.189,0.22-0.235,0.535-0.117,0.804c0.117,0.269,0.377,0.441,0.662,0.441l5.562-0.749l-1.893,8.779c-0.1,0.333,0.037,0.693,0.329,0.868c0.114,0.068,0.24,0.103,0.365,0.103c0.196,0,0.389-0.082,0.53-0.236l10.183-13.5C34.035,36.08,34.088,35.762,33.974,35.487z'/%3E%3C/svg%3E")}
+        i.Corriente {background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpolygon style='fill:%23FAC917;' points='320.557,215.066 203.181,512 246.321,215.066'/%3E%3Cpolygon style='fill:%23FAC917;' points='351.806,0 234.43,296.934 160.194,296.934 203.339,0'/%3E%3C/svg%3E")}
+        i.Resistencia {background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 319.92 319.92'%3E%3Crect x='-21.63' y='153.43' width='363.18' height='13.06' transform='translate(-66.26 159.96) rotate(-45)' fill='%23414042'/%3E%3Cpath d='m184.67,69.37c-9.32,9.32-13.86,21.62-13.62,33.84l-67.84,67.84c-12.22-.23-24.51,4.3-33.84,13.62-18.19,18.19-18.19,47.69,0,65.89,18.19,18.19,47.69,18.19,65.89,0,9.32-9.32,13.86-21.62,13.62-33.84l67.84-67.84c12.22.23,24.51-4.3,33.84-13.62,18.19-18.19,18.19-47.69,0-65.89s-47.69-18.19-65.89,0Z' fill='%23ffdd90'/%3E%3Ccircle cx='20.47' cy='299.45' r='20.47' fill='%23ffdd90'/%3E%3Ccircle cx='299.45' cy='20.47' r='20.47' fill='%23ffdd90'/%3E%3Cpath d='m142.15,241.88c4.07-6.59,6.35-13.97,6.84-21.45l-49.51-49.51c-7.48.48-14.86,2.76-21.45,6.84l64.11,64.11Z' fill='%2384cba1'/%3E%3Crect x='150.18' y='127.45' width='20' height='64.59' transform='translate(-66.04 160.05) rotate(-45)' fill='%23ff6c6c'/%3E%3Cpath d='m220.87,148.56c7.48-.48,14.86-2.76,21.45-6.84l-64.11-64.11c-4.07,6.59-6.35,13.97-6.84,21.45l49.51,49.51Z' fill='%2371cddd'/%3E%3C/svg%3E")}
+        i.Potencia {background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 336.47 334.12'%3E%3Cpolygon points='0 146.82 96 154.35 67.76 97.41 128 111.06 107.29 0 175.53 88.47 200.47 23.06 216.94 92.71 276.24 32.47 254.12 129.41 336.47 137.88 250.35 193.88 323.29 240.94 242.82 233.41 279.06 334.12 205.85 260.41 181.65 303.53 160.47 248 73.88 319.53 101.65 217.88 61.18 225.88 86.12 198.12 0 146.82' fill='%23da0f2a'/%3E%3Cpolygon points='148.41 141.65 132.88 70.71 180.18 127.18 197.47 86.24 209.12 130 250.41 89.42 234.88 153.65 291.71 158.94 232.76 195.3 282.53 225.65 227.12 220.71 251.82 285.18 201 237.65 185.47 265.18 168.88 230.94 110.65 276.47 129.07 210.53 102.18 215.42 119.82 197.77 59.12 165.65 126.66 169.03 105 132.83 148.41 141.65' fill='%23ea5243'/%3E%3Cpolygon points='159.18 166.94 151.29 131.77 176.94 160.12 187.06 139.3 193.29 161.3 216.35 142 207.53 172.59 239.65 175.18 206.94 193.3 234 207.89 203.65 205.89 217.65 237.65 188.82 213.77 180.35 228.12 171.41 210 138.71 233.3 149.65 200.36 134.59 202.71 143.53 194.59 111.18 179.06 147.18 180.24 134.47 161.77 159.18 166.94' fill='%23f29933'/%3E%3C/svg%3E")}
+    </style>
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+    <div class="elemento-flotante">
+        <h2>Calculadora de la Ley de Ohm</h2>
+
+        <form onchange="calcular(this)" oninput="calcular(this)">
+            <div class="grafico">
+                <svg viewBox="0 0 561.19 400.6">
+                    <circle cx="290.84" cy="220.1" r="179.49" fill="none" opacity=".5" stroke="#777" stroke-width="2" />
+                    <circle cx="290.84" cy="220.1" r="89.84" fill="none" opacity=".5" stroke="#777" />
+                    <circle cx="290.84" cy="220.1" r="139.19" fill="none" opacity=".5" stroke="#777" />
+                    <path d="m476.23,303.17h-5.92v-2.14h14.41v2.14h-5.95v17.33h-2.54v-17.33Z" fill="#fff" />
+                    <path d="m486.16,313.97c.06,3.44,2.25,4.85,4.79,4.85,1.82,0,2.92-.32,3.87-.72l.43,1.82c-.9.41-2.43.87-4.65.87-4.3,0-6.88-2.83-6.88-7.05s2.48-7.54,6.56-7.54c4.56,0,5.78,4.01,5.78,6.59,0,.52-.06.92-.09,1.18h-9.82Zm7.45-1.82c.03-1.62-.67-4.13-3.52-4.13-2.57,0-3.7,2.37-3.9,4.13h7.42Z" fill="#fff" />
+                    <path d="m499.21,310.3c0-1.44-.03-2.63-.12-3.78h2.25l.14,2.31h.06c.69-1.33,2.31-2.63,4.62-2.63,1.93,0,4.94,1.16,4.94,5.95v8.35h-2.54v-8.06c0-2.25-.84-4.13-3.24-4.13-1.68,0-2.98,1.18-3.41,2.6-.12.32-.17.75-.17,1.18v8.41h-2.54v-10.2Z" fill="#fff" />
+                    <path d="m514.89,317.9c.75.49,2.08,1.01,3.35,1.01,1.85,0,2.72-.92,2.72-2.08,0-1.21-.72-1.88-2.6-2.57-2.51-.9-3.7-2.28-3.7-3.96,0-2.25,1.82-4.1,4.82-4.1,1.42,0,2.66.4,3.44.87l-.64,1.85c-.55-.35-1.56-.81-2.86-.81-1.5,0-2.34.87-2.34,1.91,0,1.16.84,1.68,2.66,2.37,2.43.92,3.67,2.14,3.67,4.22,0,2.46-1.91,4.19-5.23,4.19-1.53,0-2.95-.38-3.93-.95l.63-1.94Z" fill="#fff" />
+                    <path d="m529.51,302.59c.03.87-.61,1.56-1.62,1.56-.89,0-1.53-.69-1.53-1.56s.66-1.59,1.59-1.59,1.56.69,1.56,1.59Zm-2.83,17.91v-13.98h2.54v13.98h-2.54Z" fill="#fff" />
+                    <path d="m546.08,313.39c0,5.17-3.58,7.42-6.96,7.42-3.78,0-6.7-2.77-6.7-7.19,0-4.68,3.06-7.42,6.93-7.42s6.73,2.92,6.73,7.19Zm-11.09.14c0,3.06,1.76,5.37,4.25,5.37s4.25-2.28,4.25-5.43c0-2.37-1.18-5.37-4.19-5.37s-4.3,2.77-4.3,5.43Zm8.06-13.06l-3.52,4.13h-1.82l2.54-4.13h2.8Z" fill="#fff" />
+                    <path d="m549.29,310.3c0-1.44-.03-2.63-.12-3.78h2.25l.14,2.31h.06c.69-1.33,2.31-2.63,4.62-2.63,1.93,0,4.94,1.16,4.94,5.95v8.35h-2.54v-8.06c0-2.25-.84-4.13-3.24-4.13-1.68,0-2.98,1.18-3.41,2.6-.12.32-.17.75-.17,1.18v8.41h-2.54v-10.2Z" fill="#fff" />
+                    <path d="m14.76,319.86c-.92.46-2.77.92-5.14.92-5.49,0-9.62-3.47-9.62-9.85s4.13-10.23,10.17-10.23c2.43,0,3.96.52,4.62.87l-.61,2.05c-.95-.46-2.31-.81-3.93-.81-4.56,0-7.6,2.92-7.6,8.03,0,4.77,2.74,7.83,7.48,7.83,1.53,0,3.09-.32,4.1-.81l.52,1.99Z" fill="#fff" />
+                    <path d="m30.15,313.39c0,5.17-3.58,7.42-6.96,7.42-3.78,0-6.7-2.77-6.7-7.19,0-4.68,3.06-7.42,6.93-7.42s6.73,2.92,6.73,7.19Zm-11.09.14c0,3.06,1.76,5.37,4.25,5.37s4.25-2.28,4.25-5.43c0-2.37-1.18-5.37-4.19-5.37s-4.3,2.77-4.3,5.43Z" fill="#fff" />
+                    <path d="m33.35,310.88c0-1.65-.03-3.06-.12-4.36h2.22l.09,2.74h.12c.64-1.88,2.17-3.06,3.87-3.06.29,0,.49.03.72.09v2.4c-.26-.06-.52-.09-.87-.09-1.79,0-3.06,1.36-3.41,3.26-.06.35-.12.75-.12,1.18v7.45h-2.51v-9.62Z" fill="#fff" />
+                    <path d="m42.91,310.88c0-1.65-.03-3.06-.12-4.36h2.22l.09,2.74h.12c.64-1.88,2.17-3.06,3.87-3.06.29,0,.49.03.72.09v2.4c-.26-.06-.52-.09-.87-.09-1.79,0-3.06,1.36-3.41,3.26-.06.35-.12.75-.12,1.18v7.45h-2.51v-9.62Z" fill="#fff" />
+                    <path d="m55.3,302.59c.03.87-.61,1.56-1.62,1.56-.9,0-1.53-.69-1.53-1.56s.66-1.59,1.59-1.59,1.56.69,1.56,1.59Zm-2.83,17.91v-13.98h2.54v13.98h-2.54Z" fill="#fff" />
+                    <path d="m60.64,313.97c.06,3.44,2.25,4.85,4.79,4.85,1.82,0,2.92-.32,3.87-.72l.43,1.82c-.9.41-2.43.87-4.65.87-4.3,0-6.87-2.83-6.87-7.05s2.48-7.54,6.56-7.54c4.56,0,5.78,4.01,5.78,6.59,0,.52-.06.92-.09,1.18h-9.82Zm7.45-1.82c.03-1.62-.66-4.13-3.52-4.13-2.57,0-3.7,2.37-3.9,4.13h7.42Z" fill="#fff" />
+                    <path d="m73.69,310.3c0-1.44-.03-2.63-.12-3.78h2.25l.14,2.31h.06c.69-1.33,2.31-2.63,4.62-2.63,1.94,0,4.94,1.16,4.94,5.95v8.35h-2.54v-8.06c0-2.25-.84-4.13-3.23-4.13-1.68,0-2.98,1.18-3.41,2.6-.12.32-.17.75-.17,1.18v8.41h-2.54v-10.2Z" fill="#fff" />
+                    <path d="m92.67,302.5v4.01h3.64v1.94h-3.64v7.54c0,1.73.49,2.71,1.91,2.71.66,0,1.16-.09,1.47-.17l.12,1.91c-.49.2-1.27.35-2.25.35-1.18,0-2.14-.38-2.74-1.07-.72-.75-.98-1.99-.98-3.64v-7.63h-2.17v-1.94h2.17v-3.35l2.48-.66Z" fill="#fff" />
+                    <path d="m100.41,313.97c.06,3.44,2.25,4.85,4.79,4.85,1.82,0,2.92-.32,3.87-.72l.43,1.82c-.9.41-2.43.87-4.65.87-4.3,0-6.87-2.83-6.87-7.05s2.48-7.54,6.56-7.54c4.56,0,5.78,4.01,5.78,6.59,0,.52-.06.92-.09,1.18h-9.82Zm7.45-1.82c.03-1.62-.66-4.13-3.52-4.13-2.57,0-3.7,2.37-3.9,4.13h7.42Z" fill="#fff" />
+                    <path d="m226.2.4c1.27-.26,3.09-.4,4.82-.4,2.69,0,4.42.49,5.63,1.59.98.87,1.53,2.2,1.53,3.7,0,2.57-1.62,4.28-3.67,4.97v.09c1.5.52,2.4,1.91,2.86,3.93.64,2.72,1.1,4.59,1.5,5.34h-2.6c-.32-.55-.75-2.22-1.3-4.65-.58-2.69-1.62-3.7-3.9-3.78h-2.37v8.43h-2.51V.4Zm2.51,8.87h2.57c2.69,0,4.39-1.47,4.39-3.7,0-2.51-1.82-3.61-4.48-3.64-1.21,0-2.08.12-2.48.23v7.11Z" fill="#fff" />
+                    <path d="m243.18,13.08c.06,3.44,2.25,4.85,4.79,4.85,1.82,0,2.92-.32,3.87-.72l.43,1.82c-.9.4-2.43.87-4.65.87-4.3,0-6.87-2.83-6.87-7.05s2.48-7.54,6.56-7.54c4.56,0,5.78,4.01,5.78,6.59,0,.52-.06.92-.09,1.18h-9.82Zm7.45-1.82c.03-1.62-.66-4.13-3.52-4.13-2.57,0-3.7,2.37-3.9,4.13h7.42Z" fill="#fff" />
+                    <path d="m255.89,17.01c.75.49,2.08,1.01,3.35,1.01,1.85,0,2.71-.92,2.71-2.08,0-1.21-.72-1.88-2.6-2.57-2.51-.9-3.7-2.28-3.7-3.96,0-2.25,1.82-4.1,4.82-4.1,1.42,0,2.66.4,3.44.87l-.64,1.85c-.55-.35-1.56-.81-2.86-.81-1.5,0-2.34.87-2.34,1.91,0,1.16.84,1.68,2.66,2.37,2.43.92,3.67,2.14,3.67,4.22,0,2.46-1.91,4.19-5.23,4.19-1.53,0-2.95-.38-3.93-.95l.64-1.94Z" fill="#fff" />
+                    <path d="m270.5,1.7c.03.87-.61,1.56-1.62,1.56-.9,0-1.53-.69-1.53-1.56s.66-1.59,1.59-1.59,1.56.69,1.56,1.59Zm-2.83,17.91V5.63h2.54v13.98h-2.54Z" fill="#fff" />
+                    <path d="m274.08,17.01c.75.49,2.08,1.01,3.35,1.01,1.85,0,2.71-.92,2.71-2.08,0-1.21-.72-1.88-2.6-2.57-2.51-.9-3.7-2.28-3.7-3.96,0-2.25,1.82-4.1,4.82-4.1,1.42,0,2.66.4,3.44.87l-.64,1.85c-.55-.35-1.56-.81-2.86-.81-1.5,0-2.34.87-2.34,1.91,0,1.16.84,1.68,2.66,2.37,2.43.92,3.67,2.14,3.67,4.22,0,2.46-1.91,4.19-5.23,4.19-1.53,0-2.95-.38-3.93-.95l.64-1.94Z" fill="#fff" />
+                    <path d="m288.92,1.62v4.01h3.64v1.94h-3.64v7.54c0,1.73.49,2.71,1.91,2.71.66,0,1.16-.09,1.47-.17l.12,1.91c-.49.2-1.27.35-2.25.35-1.18,0-2.14-.38-2.74-1.07-.72-.75-.98-1.99-.98-3.64v-7.63h-2.17v-1.94h2.17v-3.35l2.48-.66Z" fill="#fff" />
+                    <path d="m296.66,13.08c.06,3.44,2.25,4.85,4.79,4.85,1.82,0,2.92-.32,3.87-.72l.43,1.82c-.9.4-2.43.87-4.65.87-4.3,0-6.88-2.83-6.88-7.05s2.48-7.54,6.56-7.54c4.56,0,5.78,4.01,5.78,6.59,0,.52-.06.92-.09,1.18h-9.82Zm7.45-1.82c.03-1.62-.67-4.13-3.52-4.13-2.57,0-3.7,2.37-3.9,4.13h7.42Z" fill="#fff" />
+                    <path d="m309.71,9.42c0-1.44-.03-2.63-.12-3.78h2.25l.14,2.31h.06c.69-1.33,2.31-2.63,4.62-2.63,1.93,0,4.94,1.16,4.94,5.95v8.35h-2.54v-8.06c0-2.25-.84-4.13-3.24-4.13-1.68,0-2.98,1.18-3.41,2.6-.12.32-.17.75-.17,1.18v8.41h-2.54v-10.2Z" fill="#fff" />
+                    <path d="m335.7,19.09c-.67.35-2.14.81-4.02.81-4.22,0-6.96-2.86-6.96-7.13s2.95-7.42,7.51-7.42c1.5,0,2.83.38,3.52.72l-.58,1.96c-.61-.35-1.56-.66-2.95-.66-3.21,0-4.94,2.37-4.94,5.29,0,3.24,2.08,5.23,4.85,5.23,1.44,0,2.4-.38,3.12-.69l.43,1.91Z" fill="#fff" />
+                    <path d="m341.51,1.7c.03.87-.61,1.56-1.62,1.56-.89,0-1.53-.69-1.53-1.56s.66-1.59,1.59-1.59,1.56.69,1.56,1.59Zm-2.83,17.91V5.63h2.54v13.98h-2.54Z" fill="#fff" />
+                    <path d="m353.17,19.61l-.2-1.76h-.09c-.78,1.1-2.28,2.08-4.27,2.08-2.83,0-4.28-1.99-4.28-4.02,0-3.38,3-5.23,8.41-5.2v-.29c0-1.16-.32-3.23-3.18-3.23-1.3,0-2.66.4-3.64,1.04l-.58-1.68c1.16-.75,2.83-1.24,4.59-1.24,4.28,0,5.32,2.92,5.32,5.72v5.23c0,1.21.06,2.4.23,3.35h-2.31Zm-.38-7.13c-2.77-.06-5.92.43-5.92,3.15,0,1.65,1.1,2.43,2.4,2.43,1.82,0,2.98-1.16,3.38-2.34.09-.26.14-.55.14-.81v-2.43Z" fill="#fff" />
+                    <line x1="290.84" y1="220.1" x2="446.45" y2="310.13" fill="none" opacity=".5" stroke="#777" />
+                    <line x1="135.23" y1="310.13" x2="291.17" y2="219.92" fill="none" opacity=".5" stroke="#777" />
+                    <line x1="290.84" y1="40.61" x2="290.84" y2="219.92" fill="none" opacity=".5" stroke="#777" />
+                    <polygon id="graficaRTC" points="290 40 445 310 135 310" stroke-width="3" />
+                </svg>
+
+                <svg viewBox="0 0 561.19 401.39">
+                    <circle cx="290.84" cy="220.9" r="179.49" fill="none" opacity=".5" stroke="#777" stroke-width="2" />
+                    <circle cx="290.84" cy="220.9" r="89.84" fill="none" opacity=".5" stroke="#777" />
+                    <circle cx="290.84" cy="220.9" r="139.19" fill="none" opacity=".5" stroke="#777" />
+                    <path d="m476.23,303.96h-5.92v-2.14h14.41v2.14h-5.95v17.33h-2.54v-17.33Z" fill="#fff" />
+                    <path d="m486.16,314.77c.06,3.44,2.25,4.85,4.79,4.85,1.82,0,2.92-.32,3.87-.72l.43,1.82c-.9.41-2.43.87-4.65.87-4.3,0-6.88-2.83-6.88-7.05s2.48-7.54,6.56-7.54c4.56,0,5.78,4.01,5.78,6.59,0,.52-.06.92-.09,1.18h-9.82Zm7.45-1.82c.03-1.62-.67-4.13-3.52-4.13-2.57,0-3.7,2.37-3.9,4.13h7.42Z" fill="#fff" />
+                    <path d="m499.21,311.1c0-1.44-.03-2.63-.12-3.78h2.25l.14,2.31h.06c.69-1.33,2.31-2.63,4.62-2.63,1.93,0,4.94,1.16,4.94,5.95v8.35h-2.54v-8.06c0-2.25-.84-4.13-3.24-4.13-1.68,0-2.98,1.18-3.41,2.6-.12.32-.17.75-.17,1.18v8.41h-2.54v-10.2Z" fill="#fff" />
+                    <path d="m514.89,318.69c.75.49,2.08,1.01,3.35,1.01,1.85,0,2.72-.92,2.72-2.08,0-1.21-.72-1.88-2.6-2.57-2.51-.9-3.7-2.28-3.7-3.96,0-2.25,1.82-4.1,4.82-4.1,1.42,0,2.66.4,3.44.87l-.64,1.85c-.55-.35-1.56-.81-2.86-.81-1.5,0-2.34.87-2.34,1.91,0,1.16.84,1.68,2.66,2.37,2.43.92,3.67,2.14,3.67,4.22,0,2.46-1.91,4.19-5.23,4.19-1.53,0-2.95-.38-3.93-.95l.63-1.94Z" fill="#fff" />
+                    <path d="m529.51,303.39c.03.87-.61,1.56-1.62,1.56-.89,0-1.53-.69-1.53-1.56s.66-1.59,1.59-1.59,1.56.69,1.56,1.59Zm-2.83,17.91v-13.98h2.54v13.98h-2.54Z" fill="#fff" />
+                    <path d="m546.08,314.19c0,5.17-3.58,7.42-6.96,7.42-3.78,0-6.7-2.77-6.7-7.19,0-4.68,3.06-7.42,6.93-7.42s6.73,2.92,6.73,7.19Zm-11.09.14c0,3.06,1.76,5.37,4.25,5.37s4.25-2.28,4.25-5.43c0-2.37-1.18-5.37-4.19-5.37s-4.3,2.77-4.3,5.43Zm8.06-13.06l-3.52,4.13h-1.82l2.54-4.13h2.8Z" fill="#fff" />
+                    <path d="m549.29,311.1c0-1.44-.03-2.63-.12-3.78h2.25l.14,2.31h.06c.69-1.33,2.31-2.63,4.62-2.63,1.93,0,4.94,1.16,4.94,5.95v8.35h-2.54v-8.06c0-2.25-.84-4.13-3.24-4.13-1.68,0-2.98,1.18-3.41,2.6-.12.32-.17.75-.17,1.18v8.41h-2.54v-10.2Z" fill="#fff" />
+                    <path d="m14.76,320.66c-.92.46-2.77.92-5.14.92-5.49,0-9.62-3.47-9.62-9.85s4.13-10.23,10.17-10.23c2.43,0,3.96.52,4.62.87l-.61,2.05c-.95-.46-2.31-.81-3.93-.81-4.56,0-7.6,2.92-7.6,8.03,0,4.77,2.74,7.83,7.48,7.83,1.53,0,3.09-.32,4.1-.81l.52,1.99Z" fill="#fff" />
+                    <path d="m30.15,314.19c0,5.17-3.58,7.42-6.96,7.42-3.78,0-6.7-2.77-6.7-7.19,0-4.68,3.06-7.42,6.93-7.42s6.73,2.92,6.73,7.19Zm-11.09.14c0,3.06,1.76,5.37,4.25,5.37s4.25-2.28,4.25-5.43c0-2.37-1.18-5.37-4.19-5.37s-4.3,2.77-4.3,5.43Z" fill="#fff" />
+                    <path d="m33.35,311.68c0-1.65-.03-3.06-.12-4.36h2.22l.09,2.74h.12c.64-1.88,2.17-3.06,3.87-3.06.29,0,.49.03.72.09v2.4c-.26-.06-.52-.09-.87-.09-1.79,0-3.06,1.36-3.41,3.26-.06.35-.12.75-.12,1.18v7.45h-2.51v-9.62Z" fill="#fff" />
+                    <path d="m42.91,311.68c0-1.65-.03-3.06-.12-4.36h2.22l.09,2.74h.12c.64-1.88,2.17-3.06,3.87-3.06.29,0,.49.03.72.09v2.4c-.26-.06-.52-.09-.87-.09-1.79,0-3.06,1.36-3.41,3.26-.06.35-.12.75-.12,1.18v7.45h-2.51v-9.62Z" fill="#fff" />
+                    <path d="m55.3,303.39c.03.87-.61,1.56-1.62,1.56-.9,0-1.53-.69-1.53-1.56s.66-1.59,1.59-1.59,1.56.69,1.56,1.59Zm-2.83,17.91v-13.98h2.54v13.98h-2.54Z" fill="#fff" />
+                    <path d="m60.64,314.77c.06,3.44,2.25,4.85,4.79,4.85,1.82,0,2.92-.32,3.87-.72l.43,1.82c-.9.41-2.43.87-4.65.87-4.3,0-6.87-2.83-6.87-7.05s2.48-7.54,6.56-7.54c4.56,0,5.78,4.01,5.78,6.59,0,.52-.06.92-.09,1.18h-9.82Zm7.45-1.82c.03-1.62-.66-4.13-3.52-4.13-2.57,0-3.7,2.37-3.9,4.13h7.42Z" fill="#fff" />
+                    <path d="m73.69,311.1c0-1.44-.03-2.63-.12-3.78h2.25l.14,2.31h.06c.69-1.33,2.31-2.63,4.62-2.63,1.94,0,4.94,1.16,4.94,5.95v8.35h-2.54v-8.06c0-2.25-.84-4.13-3.23-4.13-1.68,0-2.98,1.18-3.41,2.6-.12.32-.17.75-.17,1.18v8.41h-2.54v-10.2Z" fill="#fff" />
+                    <path d="m92.67,303.3v4.01h3.64v1.94h-3.64v7.54c0,1.73.49,2.71,1.91,2.71.66,0,1.16-.09,1.47-.17l.12,1.91c-.49.2-1.27.35-2.25.35-1.18,0-2.14-.38-2.74-1.07-.72-.75-.98-1.99-.98-3.64v-7.63h-2.17v-1.94h2.17v-3.35l2.48-.66Z" fill="#fff" />
+                    <path d="m100.41,314.77c.06,3.44,2.25,4.85,4.79,4.85,1.82,0,2.92-.32,3.87-.72l.43,1.82c-.9.41-2.43.87-4.65.87-4.3,0-6.87-2.83-6.87-7.05s2.48-7.54,6.56-7.54c4.56,0,5.78,4.01,5.78,6.59,0,.52-.06.92-.09,1.18h-9.82Zm7.45-1.82c.03-1.62-.66-4.13-3.52-4.13-2.57,0-3.7,2.37-3.9,4.13h7.42Z" fill="#fff" />
+                    <path d="m240.83.38c1.21-.2,2.8-.38,4.82-.38,2.48,0,4.3.58,5.46,1.62,1.07.92,1.7,2.34,1.7,4.07s-.52,3.15-1.5,4.16c-1.33,1.42-3.5,2.14-5.95,2.14-.75,0-1.44-.03-2.02-.17v7.8h-2.51V.38Zm2.51,9.39c.55.14,1.24.2,2.08.2,3.03,0,4.88-1.47,4.88-4.16s-1.82-3.81-4.59-3.81c-1.1,0-1.94.09-2.37.2v7.57Z" fill="#fff" />
+                    <path d="m268.03,12.51c0,5.17-3.58,7.42-6.96,7.42-3.78,0-6.7-2.77-6.7-7.19,0-4.68,3.06-7.42,6.93-7.42s6.73,2.92,6.73,7.19Zm-11.09.14c0,3.06,1.76,5.37,4.25,5.37s4.25-2.28,4.25-5.43c0-2.37-1.18-5.37-4.19-5.37s-4.3,2.77-4.3,5.43Z" fill="#fff" />
+                    <path d="m274.3,1.62v4.01h3.64v1.94h-3.64v7.54c0,1.73.49,2.71,1.91,2.71.66,0,1.16-.09,1.47-.17l.12,1.91c-.49.2-1.27.35-2.25.35-1.18,0-2.14-.38-2.74-1.07-.72-.75-.98-1.99-.98-3.64v-7.63h-2.17v-1.94h2.17v-3.35l2.48-.66Z" fill="#fff" />
+                    <path d="m282.03,13.08c.06,3.44,2.25,4.85,4.79,4.85,1.82,0,2.92-.32,3.87-.72l.43,1.82c-.9.4-2.43.87-4.65.87-4.3,0-6.87-2.83-6.87-7.05s2.48-7.54,6.56-7.54c4.56,0,5.78,4.01,5.78,6.59,0,.52-.06.92-.09,1.18h-9.82Zm7.45-1.82c.03-1.62-.66-4.13-3.52-4.13-2.57,0-3.7,2.37-3.9,4.13h7.42Z" fill="#fff" />
+                    <path d="m295.09,9.42c0-1.44-.03-2.63-.12-3.78h2.25l.14,2.31h.06c.69-1.33,2.31-2.63,4.62-2.63,1.93,0,4.94,1.16,4.94,5.95v8.35h-2.54v-8.06c0-2.25-.84-4.13-3.24-4.13-1.68,0-2.98,1.18-3.41,2.6-.12.32-.17.75-.17,1.18v8.41h-2.54v-10.2Z" fill="#fff" />
+                    <path d="m321.08,19.09c-.67.35-2.14.81-4.02.81-4.22,0-6.96-2.86-6.96-7.13s2.95-7.42,7.51-7.42c1.5,0,2.83.38,3.52.72l-.58,1.96c-.61-.35-1.56-.66-2.95-.66-3.21,0-4.94,2.37-4.94,5.29,0,3.24,2.08,5.23,4.85,5.23,1.44,0,2.4-.38,3.12-.69l.43,1.91Z" fill="#fff" />
+                    <path d="m326.88,1.7c.03.87-.61,1.56-1.62,1.56-.89,0-1.53-.69-1.53-1.56s.66-1.59,1.59-1.59,1.56.69,1.56,1.59Zm-2.83,17.91V5.63h2.54v13.98h-2.54Z" fill="#fff" />
+                    <path d="m338.55,19.61l-.2-1.76h-.09c-.78,1.1-2.28,2.08-4.27,2.08-2.83,0-4.28-1.99-4.28-4.02,0-3.38,3-5.23,8.41-5.2v-.29c0-1.16-.32-3.23-3.18-3.23-1.3,0-2.66.4-3.64,1.04l-.58-1.68c1.16-.75,2.83-1.24,4.59-1.24,4.28,0,5.32,2.92,5.32,5.72v5.23c0,1.21.06,2.4.23,3.35h-2.31Zm-.38-7.13c-2.77-.06-5.92.43-5.92,3.15,0,1.65,1.1,2.43,2.4,2.43,1.82,0,2.98-1.16,3.38-2.34.09-.26.14-.55.14-.81v-2.43Z" fill="#fff" />
+                    <line x1="290.84" y1="220.9" x2="446.45" y2="310.93" fill="none" opacity=".5" stroke="#777" />
+                    <line x1="135.23" y1="310.93" x2="291.17" y2="220.71" fill="none" opacity=".5" stroke="#777" />
+                    <line x1="290.84" y1="41.41" x2="290.84" y2="220.71" fill="none" opacity=".5" stroke="#777" />
+                    <polygon id="graficaPTC" points="290 40 445 310 135 310" stroke-width="3" />
+                </svg>
+            </div>
+
+            <div class="entradas">
+                <!-- Bloque para Voltaje -->
+                <div>
+                    <i class="Voltaje"></i>
+                    <spam>Tensión</spam>
+                    <input type="number" placeholder="Voltaje" id="CantidadVoltaje">
+					<div onfocus="this.classList.add('open')" onblur="this.classList.remove('open')" tabindex="0">
+						<input type="radio" name="voltajeMedida" value="0.000000000001" id="pV-escala">
+						<input type="radio" name="voltajeMedida" value="0.000000001" id="nV-escala">
+						<input type="radio" name="voltajeMedida" value="0.000001" id="uV-escala">
+						<input type="radio" name="voltajeMedida" value="0.001" id="mV-escala">
+						<input type="radio" name="voltajeMedida" value="1" id="V-escala" checked>
+						<input type="radio" name="voltajeMedida" value="1000" id="kV-escala">
+						<input type="radio" name="voltajeMedida" value="1000000" id="MV-escala">
+						<input type="radio" name="voltajeMedida" value="1000000000" id="GV-escala">
+						<label for="pV-escala">pV</label>
+						<label for="nV-escala">nV</label>
+						<label for="uV-escala">μV</label>
+						<label for="mV-escala">mV</label>
+						<label for="V-escala">V</label>
+						<label for="kV-escala">kV</label>
+						<label for="MV-escala">MV</label>
+						<label for="GV-escala">GV</label>
+					</div>
+                </div>
+			
+                <!-- Bloque para Amperios -->
+                <div>
+                    <i class="Corriente"></i>
+                    <spam>Corriente</spam>
+                    <input type="number" placeholder="Amperios" id="CantidadAmperios">
+					<div onfocus="this.classList.add('open')" onblur="this.classList.remove('open')" tabindex="0">
+						<input type="radio" name="corrienteMedida" value="0.000000000001" id="pA-escala">
+						<input type="radio" name="corrienteMedida" value="0.000000001" id="nA-escala">
+						<input type="radio" name="corrienteMedida" value="0.000001" id="uA-escala">
+						<input type="radio" name="corrienteMedida" value="0.001" id="mA-escala">
+						<input type="radio" name="corrienteMedida" value="1" id="A-escala" checked>
+						<input type="radio" name="corrienteMedida" value="1000" id="kA-escala">
+						<input type="radio" name="corrienteMedida" value="1000000" id="MA-escala">
+						<input type="radio" name="corrienteMedida" value="1000000000" id="GA-escala">
+						<label for="pA-escala">pA</label>
+						<label for="nA-escala">nA</label>
+						<label for="uA-escala">μA</label>
+						<label for="mA-escala">mA</label>
+						<label for="A-escala">A</label>
+						<label for="kA-escala">kA</label>
+						<label for="MA-escala">MA</label>
+						<label for="GA-escala">GA</label>
+					</div>
+                </div>
+
+                <!-- Bloque para Resistencia -->
+                <div>
+                    <i class="Resistencia"></i>
+                    <spam>Resistencia</spam>
+                    <input type="number" placeholder="Ohmios" id="CantidadOhmios">
+					<div onfocus="this.classList.add('open')" onblur="this.classList.remove('open')" tabindex="0">
+						<input type="radio" name="resistenciaMedida" value="0.000000000001" id="pΩ-escala">
+						<input type="radio" name="resistenciaMedida" value="0.000000001" id="nΩ-escala">
+						<input type="radio" name="resistenciaMedida" value="0.000001" id="uΩ-escala">
+						<input type="radio" name="resistenciaMedida" value="0.001" id="mΩ-escala">
+						<input type="radio" name="resistenciaMedida" value="1" id="Ω-escala" checked>
+						<input type="radio" name="resistenciaMedida" value="1000" id="kΩ-escala">
+						<input type="radio" name="resistenciaMedida" value="1000000" id="MΩ-escala">
+						<input type="radio" name="resistenciaMedida" value="1000000000" id="GΩ-escala">
+						<label for="pΩ-escala">pΩ</label>
+						<label for="nΩ-escala">nΩ</label>
+						<label for="uΩ-escala">μΩ</label>
+						<label for="mΩ-escala">mΩ</label>
+						<label for="Ω-escala">Ω</label>
+						<label for="kΩ-escala">kΩ</label>
+						<label for="MΩ-escala">MΩ</label>
+						<label for="GΩ-escala">GΩ</label>
+					</div>
+                </div>
+
+                <!-- Bloque para Potencia -->
+                <div>
+					<p>
+						<i class="Potencia"></i>
+						<spam>Potencia</spam>
+						<input type="number" placeholder="Vatios" id="CantidadVatios">
+					</p>
+					<div onfocus="this.classList.add('open')" onblur="this.classList.remove('open')" tabindex="0">
+						<input type="radio" name="potenciaMedida" value="0.000000000001" id="pW-escala">
+						<input type="radio" name="potenciaMedida" value="0.000000001" id="nW-escala">
+						<input type="radio" name="potenciaMedida" value="0.000001" id="uW-escala">
+						<input type="radio" name="potenciaMedida" value="0.001" id="mW-escala">
+						<input type="radio" name="potenciaMedida" value="1" id="W-escala" checked>
+						<input type="radio" name="potenciaMedida" value="1000" id="kW-escala">
+						<input type="radio" name="potenciaMedida" value="1000000" id="MW-escala">
+						<input type="radio" name="potenciaMedida" value="1000000000" id="GW-escala">
+						<label for="pW-escala">pW</label>
+						<label for="nW-escala">nW</label>
+						<label for="uW-escala">μW</label>
+						<label for="mW-escala">mW</label>
+						<label for="W-escala">W</label>
+						<label for="kW-escala">kW</label>
+						<label for="MW-escala">MW</label>
+						<label for="GW-escala">GW</label>
+					</div>
+                </div>
+            </div>
+        </form>
+
+        <table border="1">
+            <tr>
+                <th><p><i class="Voltaje"></i> Tensión</p></th>
+                <th><p><i class="Corriente"></i> Corriente</p></th>
+                <th><p><i class="Resistencia"></i> Resistencia</p></th>
+                <th><p><i class="Potencia"></i> Potencia</p></th>
+            </tr>
+            <tr>
+                <td><spam id="UnidadV" title="0 V">0 V</spam></td>
+                <td><spam id="UnidadA" title="0 A">0 A</spam></td>
+                <td><spam id="UnidadR" title="0 Ω">0 Ω</spam></td>
+                <td><spam id="UnidadP" title="0 W">0 W</spam></td>
+            </tr>
+        </table>
+    </div>
+	
+    <script>
+        // Comprobar si todos los elementos del array son iguales
+        function arraySimilar(formulario, array) {
+            if (array.every((valor, index, arr) => valor === arr[0]) && array.length != 0) {
+                return array[0];
+            } else {
+                return "?";
+                formulario.classList.add('error');
+            }
+        }
+
+        // Cambiar al unidad de medida a la mas acorde
+        function ajustarUnidad(formulario, valor) {
+            const magnitud = Math.floor(Math.log10(Math.abs(valor)));
+            let unidad;
+            if (magnitud >= -12 && magnitud < -9) {
+                unidad = 'p';
+                valor *= 1e12;
+            } else if (magnitud >= -9 && magnitud < -6) {
+                unidad = 'n';
+                valor *= 1e9;
+            } else if (magnitud >= -6 && magnitud < -3) {
+                unidad = 'u';
+                valor *= 1e6;
+            } else if (magnitud >= -3 && magnitud < 0) {
+                unidad = 'm';
+                valor *= 1e3;
+            } else if (magnitud >= 0 && magnitud < 3) {
+                unidad = '';
+            } else if (magnitud >= 3 && magnitud < 6) {
+                unidad = 'k';
+                valor /= 1e3;
+            } else if (magnitud >= 6 && magnitud < 9) {
+                unidad = 'M';
+                valor /= 1e6;
+            } else if (magnitud >= 9) {
+                unidad = 'G';
+                valor /= 1e9;
+            } else {
+                unidad = '';
+                valor = '?';
+                formulario.classList.add('error');
+            }
+            return valor + " " + unidad;
+        }
+
+        // Grafica
+        function Graficar(A, B, C, grafica) {
+            // Determinar el mayor de los tres valores
+            let mayor = Math.max(A, B, C);
+
+            console.log("---");
+            console.log(A / mayor);
+            console.log(B / mayor);
+            console.log(C / mayor);
+
+            grafica.setAttribute("points", `290 ${180*(1-A/mayor)+40} ${(155*B/mayor)+290} ${(90*B/mayor)+220} ${(155*(1-C/mayor))+135} ${(90*C/mayor)+220}`);
+        }
+
+        function calcular(formulario) {
+            // Obtener valores del formulario
+            const cantidadVoltaje = Number(formulario.elements['CantidadVoltaje'].value * formulario.elements['voltajeMedida'].value);
+            const cantidadAmperios = Number(formulario.elements['CantidadAmperios'].value * formulario.elements['corrienteMedida'].value);
+            const cantidadOhmios = Number(formulario.elements['CantidadOhmios'].value * formulario.elements['resistenciaMedida'].value);
+            const cantidadVatios = Number(formulario.elements['CantidadVatios'].value * formulario.elements['potenciaMedida'].value);
+
+            // Variables calculadas
+            let voltajesCalculados = cantidadVoltaje !== 0 ? [cantidadVoltaje] : [];
+            let amperiosCalculados = cantidadAmperios !== 0 ? [cantidadAmperios] : [];
+            let ohmiosCalculados = cantidadOhmios !== 0 ? [cantidadOhmios] : [];
+            let vatiosCalculados = cantidadVatios !== 0 ? [cantidadVatios] : [];
+
+            // Variables calculadas final
+            let voltajesCalculado = "?",
+                amperiosCalculado = "?",
+                ohmiosCalculado = "?",
+                vatiosCalculado = "?";
+
+
+            // Calcular voltaje en función de corriente y resistencia
+            if (cantidadAmperios !== 0 && cantidadOhmios !== 0) {
+                voltajesCalculados.push(cantidadAmperios * cantidadOhmios);
+            }
+            // Calcular voltaje en función de potencia y corriente
+            if (cantidadVatios !== 0 && cantidadAmperios !== 0) {
+                voltajesCalculados.push(cantidadVatios / cantidadAmperios);
+            }
+            // Calcular voltaje en función de resistencia y potencia
+            if (cantidadOhmios !== 0 && cantidadVatios !== 0) {
+                voltajesCalculados.push(Math.sqrt(cantidadOhmios * cantidadVatios));
+            }
+            // Calcular corriente en función de voltaje y resistencia
+            if (cantidadVoltaje !== 0 && cantidadOhmios !== 0) {
+                amperiosCalculados.push(cantidadVoltaje / cantidadOhmios);
+            }
+            // Calcular corriente en función de potencia y voltaje
+            if (cantidadVatios !== 0 && cantidadVoltaje !== 0) {
+                amperiosCalculados.push(cantidadVatios / cantidadVoltaje);
+            }
+            // Calcular corriente en función de potencia y resistencia
+            if (cantidadVatios !== 0 && cantidadOhmios !== 0) {
+                amperiosCalculados.push(Math.sqrt(cantidadVatios / cantidadOhmios));
+            }
+            // Calcular resistencia en función de voltaje y corriente
+            if (cantidadVoltaje !== 0 && cantidadAmperios !== 0) {
+                ohmiosCalculados.push(cantidadVoltaje / cantidadAmperios);
+            }
+            // Calcular resistencia en función de potencia y corriente
+            if (cantidadVatios !== 0 && cantidadAmperios !== 0) {
+                ohmiosCalculados.push(cantidadVatios / (cantidadAmperios * cantidadAmperios));
+            }
+            // Calcular resistencia en función de voltaje y potencia
+            if (cantidadVoltaje !== 0 && cantidadVatios !== 0) {
+                ohmiosCalculados.push((cantidadVoltaje * cantidadVoltaje) / cantidadVatios);
+            }
+            // Calcular potencia en función de voltaje y corriente
+            if (cantidadVoltaje !== 0 && cantidadAmperios !== 0) {
+                vatiosCalculados.push(cantidadVoltaje * cantidadAmperios);
+            }
+            // Calcular potencia en función de corriente y resistencia
+            if (cantidadAmperios !== 0 && cantidadOhmios !== 0) {
+                vatiosCalculados.push(cantidadAmperios * cantidadAmperios * cantidadOhmios);
+            }
+            // Calcular potencia en función de voltaje y resistencia
+            if (cantidadVoltaje !== 0 && cantidadOhmios !== 0) {
+                vatiosCalculados.push((cantidadVoltaje * cantidadVoltaje) / cantidadOhmios);
+            }
+
+            // Comprobar si todos los elementos del array son iguales
+            formulario.classList.remove('error');
+            voltajesCalculado = arraySimilar(formulario, voltajesCalculados);
+            amperiosCalculado = arraySimilar(formulario, amperiosCalculados);
+            ohmiosCalculado = arraySimilar(formulario, ohmiosCalculados);
+            vatiosCalculado = arraySimilar(formulario, vatiosCalculados);
+
+            // Calculando la unidad mas optima
+            document.getElementById('UnidadV').innerText = ajustarUnidad(formulario, voltajesCalculado) + "V";
+            document.getElementById('UnidadA').innerText = ajustarUnidad(formulario, amperiosCalculado) + "A";
+            document.getElementById('UnidadR').innerText = ajustarUnidad(formulario, ohmiosCalculado) + "Ω";
+            document.getElementById('UnidadP').innerText = ajustarUnidad(formulario, vatiosCalculado) + "W";
+
+            // Valor real (Poner como hover)
+            document.getElementById('UnidadV').title = voltajesCalculado.toLocaleString() + " V";
+            document.getElementById('UnidadA').title = amperiosCalculado.toLocaleString() + " A";
+            document.getElementById('UnidadR').title = ohmiosCalculado.toLocaleString() + " Ω";
+            document.getElementById('UnidadP').title = vatiosCalculado.toLocaleString() + " W";
+
+            if (vatiosCalculado != "?" && voltajesCalculado != "?" && amperiosCalculado != "?" && ohmiosCalculado != "?") {
+                Graficar(vatiosCalculado, voltajesCalculado, amperiosCalculado, document.getElementById('graficaPTC'));
+                Graficar(ohmiosCalculado, voltajesCalculado, amperiosCalculado, document.getElementById('graficaRTC'));
+            } else {
+                document.getElementById('graficaPTC').setAttribute("points", "290 40 445 310 135 310");
+                document.getElementById('graficaRTC').setAttribute("points", "290 40 445 310 135 310");
+            }
+        }
+    </script>
+</body>
+</html>
