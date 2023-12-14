@@ -30,6 +30,13 @@ Hacer conversión de regla de 3 inversa o directa automática con JavaScript.
 
 <br>
 
+## [Calculadora de la Ley de Ohm](https://xaival.github.io/Proyectos-Web/Herramienta/Calculadora%20de%20la%20Ley%20de%20Ohm/)
+Calcular tensión, intensidad, resistencia y potencia con solo dos de estos.
+
+![image](https://github.com/Xaival/Proyectos-Web/assets/54257745/deeb4b7d-99ec-474c-8409-2e4cc4d0fe0c)
+
+<br>
+
 ### [Modificación de texto](https://xaival.github.io/Proyectos-Web/Herramienta/Acciones%20sobre%20texto/Modificaci%C3%B3n%20de%20texto/)
 Cambiar texto sin caracteres especiales, reemplazar, mayúsculas o minúsculas.
 
