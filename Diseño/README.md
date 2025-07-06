@@ -4,6 +4,8 @@
 Esta es una página que te da la posibilidad de crear un documento HTML completo de una página de inicio.
 La página te permite editar, descargar como html, exportar, importar y actualizar en modo PHP.
 
+En progreso...
+
 Puedes usar la extensión [New Tab Changer](https://chrome.google.com/webstore/detail/new-tab-changer/occbjkhimchkolibngmcefpjlbknggfh) para poner el archivo como página por defecto.
 
 <br>
