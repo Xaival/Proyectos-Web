@@ -2,6 +2,7 @@
 
 ## [Creador de página de inicio v3](https://xaival.github.io/Proyectos-Web/Dise%C3%B1o/Creador%20de%20home%20v3/)
 Pagina de inicio modificable todo desde un HTML, la página te permite editar, descargar como html, exportar, importar y actualizar en el servidor con PHP.
+En caso de no tener la pagina con el php quitar la clase php del body para que se oculte la funcion que usa PHP.
 
 En progreso...
 
