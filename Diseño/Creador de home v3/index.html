@@ -710,26 +710,24 @@ body:not(.php) .edit header button[onclick="updatePHP()"] {display: none}
     // Descargar la pagina con los cambios realizados
     async function saveHTML() {
       try {
-        // 1) Parsear el HTML original sin variables intermedias
-        const doc = new DOMParser().parseFromString(
-          await (await fetch(window.location.href, { cache: 'no-store' })).text(),
-          'text/html'
-        );
+        const response = await fetch(window.location.href, { cache: 'no-store' });
+        const doc = new DOMParser().parseFromString(await response.text(), 'text/html');
 
-        // 2) Sustituir el JSON directamente
         const script = doc.getElementById('marcadoresJSON');
         if (script) {
-          script.textContent = 'const marcadoresJSON = ' + JSON.stringify(EditToJson(), null, 2) + ';';
+          script.replaceWith(Object.assign(document.createElement('script'), {
+            id: 'marcadoresJSON',
+            textContent: 'const marcadoresJSON = ' + JSON.stringify(EditToJson(), null, 2) + ';'
+          }));
         }
 
-        // 3) Serializar y guardar con File System Access API
-        const nuevoHTML = new XMLSerializer().serializeToString(doc);
         const handle = await window.showSaveFilePicker({
           suggestedName: 'index.html',
           types: [{ description: 'HTML', accept: { 'text/html': ['.html'] } }]
         });
+
         const writable = await handle.createWritable();
-        await writable.write(nuevoHTML);
+        await writable.write('<!DOCTYPE html>\n' + doc.documentElement.outerHTML);
         await writable.close();
 
         alert('Guardado correcto.');
