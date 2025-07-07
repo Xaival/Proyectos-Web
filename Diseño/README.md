@@ -4,8 +4,8 @@
 Página de inicio modificable todo desde un HTML, la página te permite editar, descargar como HTML, exportar, importar y actualizar en el servidor con PHP.
 En caso de no tener la página con el PHP quitar la clase PHP del body para que se oculte la función que usa PHP. En GitHub es visible pero no funcional.
 
-El resultado final quedaría [así](https://xaival.github.io/Proyectos-Web/Dise%C3%B1o/Creador%20de%20home%20v3/) ![image](https://github.com/user-attachments/assets/9120dc67-1f4a-4419-b87a-0b4c8b94936c)
-Para editar hay que dar en el texto del footer ![image](https://github.com/user-attachments/assets/2a41af81-489c-45b3-8859-521053b88cfd)
+El resultado final quedaría [así](https://xaival.github.io/Proyectos-Web/Dise%C3%B1o/Creador%20de%20home%20v3/) ![image](https://github.com/user-attachments/assets/22f75bc1-e411-4b40-b614-55178b5be1ac)
+Para editar hay que dar en el texto del footer.
 
 Esta es la vista del editor ![image](https://github.com/user-attachments/assets/892e2188-5bd9-4de3-872e-a31b5f00b245)
 
