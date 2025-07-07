@@ -484,10 +484,16 @@ body:not(.php) .edit header button[onclick="updatePHP()"] {display: none}
       const filtro = document.getElementById("searchInput").value.trim().toUpperCase();
 
       document.querySelectorAll(".grupo").forEach(grupo => {
+        let tieneVisible = false;
+
         grupo.querySelectorAll(".marcador").forEach(marcador => {
           const texto = marcador.querySelector("p")?.textContent.toUpperCase() || "";
-          marcador.style.display = texto.includes(filtro) ? "" : "none";
+          const visible = texto.includes(filtro);
+          marcador.style.display = visible ? "" : "none";
+          if (visible) tieneVisible = true;
         });
+
+        grupo.style.display = tieneVisible ? "" : "none";
       });
     }
 
