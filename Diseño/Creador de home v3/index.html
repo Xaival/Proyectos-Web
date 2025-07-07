@@ -5,365 +5,361 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 88.5 86.18'%3E%3Cpath d='M87.7,41.11L46.2.75c-.54-.53-1.25-.78-1.95-.75-.7-.03-1.41.23-1.95.75L.81,41.11c-1.06,1.03-1.09,2.73-.05,3.79h0c1.03,1.06,2.73,1.09,3.79.05L44.25,6.34l39.7,38.61c1.06,1.03,2.75,1.01,3.79-.05s1.01-2.75-.05-3.79h.01Z' style='fill: %23fff;'/%3E%3Cpath d='M42.45,17.82l-31.64,30.75c-.5.49-.79,1.15-.79,1.85v33.18c0,1.42,1.16,2.59,2.59,2.59h18.94c1.42,0,2.59-1.16,2.59-2.59v-23.99c0-1.42,1.16-2.59,2.59-2.59h15.07c1.42,0,2.59,1.16,2.59,2.59v23.99c0,1.42,1.16,2.59,2.59,2.59h18.94c1.42,0,2.59-1.16,2.59-2.59v-33.18c0-.7-.28-1.37-.79-1.85l-31.64-30.75c-1.01-.97-2.6-.97-3.61,0Z' style='fill: %23fff;'/%3E%3C/svg%3E">
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  transition: all 0.2s ease;
-}
-body {
-	background: linear-gradient(to top, #29007f, #00001e);
-	background-size: cover;
-	background-attachment: fixed;
-	min-height: 100vh;
-	padding: 50px 0px;
-	color: white;
-	font-family: Arial;
-}
-.view, .edit {
-	width: 100%;
-	flex-direction: column;
-	align-items: center;
-	gap: 40px;
-}
-body .view {display: flex;}
-body .edit {display: none;}
-body.editor .view{display: none;}
-body.editor .edit{display: flex;}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      transition: all 0.2s ease;
+    }
+    body  {
+      background: linear-gradient(to top, #29007f, #00001e);
+      background-size: cover;
+      background-attachment: fixed;
+      min-height: 100vh;
+      padding: 50px 0px;
+      color: white;
+      font-family: Arial;
+    }
+    .view, .edit {
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+    }
+    body .view {display: flex;}
+    body .edit {display: none;}
+    body.editor .view{display: none;}
+    body.editor .edit{display: flex;}
 
-@media (max-width: 800px) {
-  body.editor .view {display: flex;}
-  body.editor .edit {display: none;}
-  body.editor footer {display: none;}
-}
-
-
-/* ------------------------------------------------------*/
-/* Vista */
-/* ------------------------------------------------------*/
-
-
-/* Buscador */
-/* ------------------------------------------------------*/
-.buscador {
-	background-color: #5a0fff80;
-	width: calc(100% - 40px);
-	max-width: 500px;
-	padding: 10px 20px;
-	padding-right: 10px;
-	border-radius: 15px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 10px;
-}
-.buscador button:hover {transform: scale(1.1);}
-.buscador button:active {transform: scale(0.9);}
-.buscador input {
-	background-color: transparent;
-	width: 100%;
-	height: 1.5em;
-	border: 0;
-	outline: 0;
-	flex: auto;
-	color: white;
-	font-size: 1.25em;
-}
-.buscador input::placeholder {color: #d7c8ff80;}
-.buscador button {
-	background: white;
-	height: 40px;
-	aspect-ratio: 1 / 1;
-	border: 0;
-	border-radius: 2em;
-	cursor: pointer;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	transition: all .25s ease-out;
-}
-.buscador button svg {width: 2em; height: 2em;}
-
-
-/* Destacado */
-/* ------------------------------------------------------*/
-#destacado {
-	width: 100%;
-	padding: 5px 20px;
-	overflow-x: auto;
-	overflow-y: hidden;
-	cursor: pointer;
-	display: flex;
-	justify-content: center;
-	gap: 20px;
-	user-select: none;
-	scrollbar-width: none;
-}
-@media (max-width: 850px) {
-  #destacado {justify-content: flex-start;}
-}
-#destacado a {
-	background-color: #7d7dd240;
-	width: 100px;
-	height: 100px;
-  aspect-ratio: 1 / 1;
-	padding: 20px;
-	border-radius: 20px;
-	display: block;
-}
-#destacado a:hover {transform: scale(1.05);}
-#destacado a:active {transform: scale(0.95);}
-#destacado a .img {
-	background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
-	width: 100%;
-	height: 100%;
-}
-#destacado a:hover img {background-color: #adadf540;}
-
-
-/* Marcadores */
-/* ------------------------------------------------------*/
-.marcadores {
-	background-color: #5a0fff80;
-	width: calc(100% - 40px);
-	max-width: 1400px;
-	padding: 20px;
-	border: 1px solid #5b0eff;
-	border-radius: 20px;
-}
-.marcadores h2 {margin-bottom: 15px; text-align: center;}
-.marcadores a:hover {transform: scale(1.01);}
-.marcadores a:active {transform: scale(0.99);}
-.marcadores #grupos {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	gap: 20px;
-}
-.marcadores .grupo {
-	background-color: #0003;
-	min-width: 30%;
-	padding: 20px;
-	border-radius: 20px;
-	flex: 1;
-}
-@media (max-width: 1200px) {
-  .marcadores .grupo {min-width: 45%;}
-}
-@media (max-width: 800px) {
-  .marcadores .grupo {min-width: 100%;}
-}
-.marcadores .grupo h3 {margin-bottom: 10px; text-align: center;}
-.marcadores .marcador {
-	width: 100%;
-	margin: 5px 0;
-	padding: 4px 8px;
-	border-radius: 8px;
-	display: flex;
-	align-items: center;
-	gap: .5em;
-	color: white;
-	text-decoration: none;
-}
-.marcadores .marcador:hover {background-color: #5a0fff80;}
-.marcador .img{width: 2em; height: 2em;}
-.marcador .img, .edit #loadIMG .img {
-	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23FFF' viewBox='0 0 512.001 512.001'%3E%3Cpath d='M257.297,0.004c-0.018,0-0.035,0-0.053-0.001C257.162,0.003,257.081,0,257,0c-0.012,0-0.024,0-0.036,0    c-0.032,0-0.065,0.001-0.097,0.001C115.786,0.073,0,114.252,0,255c0,34.416,6.855,67.932,20.376,99.618    c26.177,61.348,75.527,110.772,137.005,137.005c31.682,13.519,65.194,20.375,99.605,20.376c0.009,0,0.018,0.002,0.027,0.002    c0.023,0,0.047-0.002,0.07-0.003C398.634,511.953,512,395.326,512,255C512,114.274,398.242,0.163,257.297,0.004z M207.317,35.443    C181.736,59.695,160.835,88.099,145.096,120H75.515C107.426,77.96,153.837,47.325,207.317,35.443z M56.286,149.8h75.991    c-10.493,28.747-16.697,59.387-18.298,90.2H30.517C32.674,207.672,41.749,176.993,56.286,149.8z M56.851,362    c-14.89-27.74-24.173-58.913-26.342-92h83.368c1.432,31.496,7.682,62.631,18.402,92H56.851z M76.129,392h68.967    c15.709,31.842,36.581,60.236,62.154,84.494C154.137,464.571,108.007,433.983,76.129,392z M143.921,270h98.078v92h-77.373    C152.648,333.142,145.53,302.081,143.921,270z M242.001,467.115C216.497,445.88,195.351,420.38,179.27,392h62.73V467.115z     M242.001,240h-97.979c1.799-31.373,8.876-61.742,20.606-90h77.373V240z M242.001,120h-62.729    c16.08-28.38,37.226-53.88,62.729-75.116V120z M455.945,150c14.41,27.193,23.404,57.672,25.543,90H400.02    c-1.601-30.813-7.805-61.253-18.298-90H455.945z M436.887,120h-67.982c-15.697-31.817-36.546-60.189-62.088-84.433    C359.585,47.541,405.369,78.11,436.887,120z M272.001,44.89c25.503,21.236,46.657,46.73,62.737,75.11h-62.737V44.89z M272,150    h77.392c11.728,28.256,18.789,58.629,20.588,90H272V150z M370.088,269.8c-1.608,32.079-8.719,63.344-20.696,92.2h-77.392v-92.2    H370.088z M272.001,467.11V391.8h62.737C318.658,420.18,297.504,445.873,272.001,467.11z M306.885,476.368    c25.491-24.21,46.326-52.757,62.019-84.568h67.373C404.796,433.63,359.29,464.353,306.885,476.368z M381.723,362    c10.72-29.369,16.97-60.704,18.402-92.2h81.372c-2.15,33.087-11.351,64.46-26.11,92.2H381.723z'/%3E%3C/svg%3E");
-	background-position: center;
-	background-size: contain;
-    background-repeat: no-repeat;
-    transition: none;
-}
+    @media (max-width: 800px) {
+      body.editor .view {display: flex;}
+      body.editor .edit {display: none;}
+      body.editor footer {display: none;}
+    }
 
 
 
-/* Footer */
-/* ------------------------------------------------------*/
-footer button {
-	background: transparent;
-	border: 0px;
-	cursor: pointer;
-	color: #ffffff40;
-	font-size: 1.1em;
-}
-footer button:hover {color: #ffffff;}
+    /* ------------------------------------------------------*/
+    /* Vista */
+    /* ------------------------------------------------------*/
+
+    /* Buscador */
+    /* ------------------------------------------------------*/
+    .buscador {
+      background-color: #5a0fff80;
+      width: calc(100% - 40px);
+      max-width: 500px;
+      padding: 10px 20px;
+      padding-right: 10px;
+      border-radius: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+    .buscador button:hover {transform: scale(1.1);}
+    .buscador button:active {transform: scale(0.9);}
+    .buscador input {
+      background-color: transparent;
+      width: 100%;
+      height: 1.5em;
+      border: 0;
+      outline: 0;
+      flex: auto;
+      color: white;
+      font-size: 1.25em;
+    }
+    .buscador input::placeholder {color: #d7c8ff80;}
+    .buscador button {
+      background-color: white;
+      height: 40px;
+      aspect-ratio: 1 / 1;
+      border: 0;
+      border-radius: 2em;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all .25s ease-out;
+    }
+    .buscador button svg {width: 2em; height: 2em;}
+
+
+    /* Destacado */
+    /* ------------------------------------------------------*/
+    #destacado {
+      width: 100%;
+      padding: 5px 20px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      user-select: none;
+      scrollbar-width: none;
+    }
+    @media (max-width: 850px) {
+      #destacado {justify-content: flex-start;}
+    }
+    #destacado a {
+      background-color: #7d7dd240;
+      width: 100px;
+      height: 100px;
+      aspect-ratio: 1 / 1;
+      padding: 20px;
+      border-radius: 20px;
+      display: block;
+    }
+    #destacado a:hover {transform: scale(1.05);}
+    #destacado a:active {transform: scale(0.95);}
+    #destacado a .img {
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      width: 100%;
+      height: 100%;
+    }
+    #destacado a:hover img {background-color: #adadf540;}
+
+
+    /* Marcadores */
+    /* ------------------------------------------------------*/
+    .marcadores {
+      background-color: #5a0fff80;
+      width: calc(100% - 40px);
+      max-width: 1400px;
+      padding: 20px;
+      border: 1px solid #5b0eff;
+      border-radius: 20px;
+    }
+    .marcadores h2 {margin-bottom: 15px; text-align: center;}
+    .marcadores a:hover {transform: scale(1.01);}
+    .marcadores a:active {transform: scale(0.99);}
+    .marcadores #grupos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .marcadores .grupo  {
+      background-color: #0003;
+      min-width: 32%;
+      max-width: 32%;
+      padding: 20px;
+      border-radius: 20px;
+      flex: 1;
+    }
+    @media (max-width: 1200px) {
+      .marcadores .grupo {min-width: 48%; max-width: 48%;}
+    }
+    @media (max-width: 800px) {
+      .marcadores .grupo {min-width: 100%; max-width: 100%;}
+    }
+    .marcadores .grupo h3 {margin-bottom: 10px; text-align: center;}
+    .marcadores .marcador {
+      width: 100%;
+      margin: 5px 0;
+      padding: 4px 8px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: .5em;
+      color: white;
+      text-decoration: none;
+    }
+    .marcadores .marcador:hover {background-color: #5a0fff80;}
+    .marcador .img{width: 2em; height: 2em;}
+    .marcador .img, .edit #loadIMG .img {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23FFF' viewBox='0 0 512.001 512.001'%3E%3Cpath d='M257.297,0.004c-0.018,0-0.035,0-0.053-0.001C257.162,0.003,257.081,0,257,0c-0.012,0-0.024,0-0.036,0    c-0.032,0-0.065,0.001-0.097,0.001C115.786,0.073,0,114.252,0,255c0,34.416,6.855,67.932,20.376,99.618    c26.177,61.348,75.527,110.772,137.005,137.005c31.682,13.519,65.194,20.375,99.605,20.376c0.009,0,0.018,0.002,0.027,0.002    c0.023,0,0.047-0.002,0.07-0.003C398.634,511.953,512,395.326,512,255C512,114.274,398.242,0.163,257.297,0.004z M207.317,35.443    C181.736,59.695,160.835,88.099,145.096,120H75.515C107.426,77.96,153.837,47.325,207.317,35.443z M56.286,149.8h75.991    c-10.493,28.747-16.697,59.387-18.298,90.2H30.517C32.674,207.672,41.749,176.993,56.286,149.8z M56.851,362    c-14.89-27.74-24.173-58.913-26.342-92h83.368c1.432,31.496,7.682,62.631,18.402,92H56.851z M76.129,392h68.967    c15.709,31.842,36.581,60.236,62.154,84.494C154.137,464.571,108.007,433.983,76.129,392z M143.921,270h98.078v92h-77.373    C152.648,333.142,145.53,302.081,143.921,270z M242.001,467.115C216.497,445.88,195.351,420.38,179.27,392h62.73V467.115z     M242.001,240h-97.979c1.799-31.373,8.876-61.742,20.606-90h77.373V240z M242.001,120h-62.729    c16.08-28.38,37.226-53.88,62.729-75.116V120z M455.945,150c14.41,27.193,23.404,57.672,25.543,90H400.02    c-1.601-30.813-7.805-61.253-18.298-90H455.945z M436.887,120h-67.982c-15.697-31.817-36.546-60.189-62.088-84.433    C359.585,47.541,405.369,78.11,436.887,120z M272.001,44.89c25.503,21.236,46.657,46.73,62.737,75.11h-62.737V44.89z M272,150    h77.392c11.728,28.256,18.789,58.629,20.588,90H272V150z M370.088,269.8c-1.608,32.079-8.719,63.344-20.696,92.2h-77.392v-92.2    H370.088z M272.001,467.11V391.8h62.737C318.658,420.18,297.504,445.873,272.001,467.11z M306.885,476.368    c25.491-24.21,46.326-52.757,62.019-84.568h67.373C404.796,433.63,359.29,464.353,306.885,476.368z M381.723,362    c10.72-29.369,16.97-60.704,18.402-92.2h81.372c-2.15,33.087-11.351,64.46-26.11,92.2H381.723z'/%3E%3C/svg%3E");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      transition: none;
+    }
+
+
+    /* Footer */
+    /* ------------------------------------------------------*/
+    footer button {
+      background: transparent;
+      border: 0px;
+      cursor: pointer;
+      color: #ffffff40;
+      font-size: 1.1em;
+    }
+    footer button:hover {color: #ffffff;}
 
 
 
-/* ------------------------------------------------------*/
-/* Vista edicion */
-/* ------------------------------------------------------*/
-.edit :is(button, input) {
-	background-color: #14142380;
-	height: 35px;
-	padding: 5px 10px;
-	border: 0px;
-	border-radius: 15px;
-	outline: 0px;
-	color: white;
-}
-.edit button {cursor: pointer;}
-.edit button:hover {transform: scale(1.1);}
-.edit button:active {transform: scale(0.9);}
+    /* ------------------------------------------------------*/
+    /* Vista edicion */
+    /* ------------------------------------------------------*/
+    .edit :is(button, input) {
+      background-color: #14142380;
+      height: 35px;
+      padding: 5px 10px;
+      border: 0px;
+      border-radius: 15px;
+      outline: 0px;
+      color: white;
+    }
+    .edit button {cursor: pointer;}
+    .edit button:hover {transform: scale(1.1);}
+    .edit button:active {transform: scale(0.9);}
+
+    .edit header {display: flex; gap: 20px;}
+    .edit header button {
+      background-color: #7d7dd240;
+      width: 100px;
+      height: 100px;
+      padding: 20px;
+      border-radius: 20px;
+    }
+    .edit header button:hover {
+      background-color: #adadf540;
+      transform: scale(1.05);
+    }
+    .edit header button:active {transform: scale(0.95);}
+    body:not(.php) .edit header button[onclick="updatePHP()"] {display: none}
+    .edit header svg {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 5px;
+    }
+
+    #destacadoEdit, #marcadoresEdit {
+      background-color: #4b19c880;
+      width: calc(100% - 40px);
+      max-width: 800px;
+      padding: 20px;
+      border: 1px solid #3f0ea7;
+      border-radius: 20px;
+    }
+    .edit h2 {text-align: center;}
+
+    .edit .grupo {
+      background-color: #1e195080;
+      margin-top: 10px;
+      padding: 20px;
+      border-radius: 20px;
+      position: relative;
+      text-align: center;
+    }
+    .edit .grupo::before {
+      content: "";
+      width: 100%;
+      height: 10px;
+      position: absolute;
+      bottom: 100%;
+      left: 0;
+    }
+    .edit .grupo::after {
+      content: "";
+      width: 100%;
+      height: 2px;
+      position: absolute;
+      top: -6px;
+      left: 0;
+      z-index: 1;
+    }
+    .edit .grupo.moveUP::after {background-color: #03A9F4;}
+    .edit .grupo.moveDOWN::after {background-color: #03A9F4;	top: initial;	bottom: -6px;}
+
+    .edit .gru {
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+    .edit .gru input  {width: 50%;	margin: auto 0;}
+
+    .edit .list {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+    }
+    .edit .list .marcador  {
+      padding: 5px 0;
+      position: relative;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+    .edit .list .marcador::after  {
+      content: "";
+      width: 100%;
+      height: 2px;
+      position: absolute;
+      top: -1px;
+      left: 0;
+      z-index: 1;
+    }
+    .edit .list .marcador.moveUP::after {background-color: #03A9F4;}
+    .edit .list .marcador.moveDOWN::after {background-color: #03A9F4; top: initial;	bottom: -1px;}
+    .edit .list .marcador .img:hover {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 320 512'%3E%3Cpath d='M40 352l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40zm192 0l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40zM40 320c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0zM232 192l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40zM40 160c-22.1 0-40-17.9-40-40L0 72C0 49.9 17.9 32 40 32l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0zM232 32l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40z'/%3E%3C/svg%3E")!important;
+      background-size: 45%;
+      cursor: pointer;
+    }
+    .edit .list .marcador input {flex: 1;}
 
 
-.edit header {display: flex; gap: 20px;}
-.edit header button {
-	background-color: #7d7dd240;
-	width: 100px;
-	height: 100px;
-	padding: 20px;
-	border-radius: 20px;
-}
-.edit header button:hover {
-	background-color: #adadf540;
-	transform: scale(1.05);
-}
-.edit header button:active {transform: scale(0.95);}
-body:not(.php) .edit header button[onclick="updatePHP()"] {display: none}
-.edit header svg {
-	width: 50px;
-	height: 50px;
-	margin-bottom: 5px;
-}
+    /* Botones de añadir y eliminar */
+    /* ------------------------------------------------------*/
+    .edit button.DelAdd i {width: 21px; height: 21px;}
+    .edit button.DelAdd i {content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 125 153' fill='%23e52421'%3E%3Cpath d='M12.5,28v125h100V28H12.5ZM40,140.5h-15V40.5h15v100ZM70,140.5h-15V40.5h15v100ZM100,140.5h-15V40.5h15v100Z'/%3E%3Crect width='125' height='18'/%3E%3C/svg%3E");}
+    .edit .marcador:last-of-type button.DelAdd i,
+    .edit .grupo:last-of-type .gru button.DelAdd i {content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 153 153' fill='%23fff'%3E%3Crect x='66.5' width='20' height='153'/%3E%3Crect x='66.5' y='0' width='20' height='153' transform='translate(153 0) rotate(90)'/%3E%3C/svg%3E");}
 
-#destacadoEdit, #marcadoresEdit {
-	background-color: #4b19c880;
-	width: calc(100% - 40px);
-	max-width: 800px;
-	padding: 20px;
-	border: 1px solid #3f0ea7;
-	border-radius: 20px;
-}
-.edit h2 {text-align: center;}
-
-.edit .grupo {
-	background: #1e195080;
-	margin-top: 10px;
-	padding: 20px;
-	border-radius: 20px;
-	text-align: center;
-	position: relative;
-}
-.edit .grupo::before {
-	content: "";
-	width: 100%;
-	height: 10px;
-	left: 0;
-	bottom: 100%;
-	position: absolute;
-}
-.edit .grupo::after {
-	content: "";
-	width: 100%;
-	position: absolute;
-	left: 0;
-	height: 2px;
-	z-index: 1;
-	top: -6px;
-}
-.edit .grupo.moveUP::after {background: #03A9F4;}
-.edit .grupo.moveDOWN::after {top: initial; bottom: -6px; background: #03A9F4;}
-
-.edit .gru {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	gap: 10px;
-    cursor: pointer;
-}
-.edit .gru input {
-	width: 50%;
-	margin: auto 0;
-}
-
-.edit .list {
-	margin-top: 10px;
-	display: flex;
-	flex-direction: column;
-}
-.edit .list .marcador {
-	display: flex;
-	align-items: center;
-	gap: 10px;
-    padding: 5px 0;
-    position: relative;
-    justify-content: space-between;
-}
-.edit .list .marcador::after {
-	content: "";
-	width: 100%;
-	position: absolute;
-	left: 0;
-	height: 2px;
-	z-index: 1;
-	top: -1px;
-}
-.edit .list .marcador.moveUP::after {background: #03A9F4;}
-.edit .list .marcador.moveDOWN::after {top: initial; bottom: -1px; background: #03A9F4;}
-.edit .list .marcador .img:hover {
-	cursor: pointer;
-	background-size: 45%;
-	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%23fff' viewBox='0 0 320 512'%3E%3Cpath d='M40 352l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40zm192 0l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40zM40 320c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0zM232 192l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40zM40 160c-22.1 0-40-17.9-40-40L0 72C0 49.9 17.9 32 40 32l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0zM232 32l48 0c22.1 0 40 17.9 40 40l0 48c0 22.1-17.9 40-40 40l-48 0c-22.1 0-40-17.9-40-40l0-48c0-22.1 17.9-40 40-40z'/%3E%3C/svg%3E")!important;
-}
-.edit .list .marcador input {flex: 1;}
-
-/* Botones de añadir y eliminar */
-/* ------------------------------------------------------*/
-.edit button.DelAdd i {width: 21px; height: 21px;}
-.edit button.DelAdd i {content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 125 153' fill='%23e52421'%3E%3Cpath d='M12.5,28v125h100V28H12.5ZM40,140.5h-15V40.5h15v100ZM70,140.5h-15V40.5h15v100ZM100,140.5h-15V40.5h15v100Z'/%3E%3Crect width='125' height='18'/%3E%3C/svg%3E");}
-.edit .marcador:last-of-type button.DelAdd i,
-.edit .grupo:last-of-type .gru button.DelAdd i {content: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 153 153' fill='%23fff'%3E%3Crect x='66.5' width='20' height='153'/%3E%3Crect x='66.5' y='0' width='20' height='153' transform='translate(153 0) rotate(90)'/%3E%3C/svg%3E");}
-
-
-.edit #loadIMG {
-	position: fixed;
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	display: none;
-    background-color: #19191940;
-    align-items: center;
-    justify-content: center;
-}
-.edit #loadIMG.active {display: flex;}
-.edit #loadIMG .back {
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
-    backdrop-filter: blur(2px);
-}
-.edit #loadIMG .windows {
-	width: 500px;
-    background-color: #4b19c880;
-    backdrop-filter: blur(5px);
-    padding: 20px;
-    border: 1px solid #3f0ea7;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-.edit #loadIMG .img {
-	width: 250px;
-	height: 250px;
-	aspect-ratio: 1/1;
-	margin: 15px 0;
-	background-size: 90% 90%;
-	background-color: #000000bf;
-	backdrop-filter: blur(10px);
-	border-radius: 15px;
-}
-.edit #loadIMG .option {width: 100%; display: flex; gap: 10px}
-.edit #loadIMG .option input[type="text"] {flex: 1;}
-.edit #loadIMG .option input[type="button"] {width: 75px; cursor: pointer;}
-</style>
+    .edit #loadIMG {
+      background-color: #19191940;
+      width: 100%;
+      height: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+    .edit #loadIMG.active {display: flex;}
+    .edit #loadIMG .back {
+      width: 100%;
+      height: 100%;
+      backdrop-filter: blur(2px);
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .edit #loadIMG .windows {
+      background-color: #4b19c880;
+      width: 500px;
+      padding: 20px;
+      border: 1px solid #3f0ea7;
+      border-radius: 20px;
+      backdrop-filter: blur(5px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .edit #loadIMG .img {
+      background-color: #000000bf;
+      background-size: 90% 90%;
+      width: 250px;
+      height: 250px;
+      aspect-ratio: 1/1;
+      margin: 15px 0;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+    }
+    .edit #loadIMG .option {width: 100%; display: flex; gap: 10px}
+    .edit #loadIMG .option input[type="text"] {flex: 1;}
+    .edit #loadIMG .option input[type="button"] {width: 75px; cursor: pointer;}
+  </style>
 </head>
 <body class="php">
   <div class="view">  
