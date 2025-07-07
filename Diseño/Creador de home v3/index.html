@@ -107,6 +107,7 @@ body.editor .edit{display: flex;}
 	background-color: #7d7dd240;
 	width: 100px;
 	height: 100px;
+  aspect-ratio: 1 / 1;
 	padding: 20px;
 	border-radius: 20px;
 	display: block;
@@ -128,7 +129,7 @@ body.editor .edit{display: flex;}
 .marcadores {
 	background-color: #5a0fff80;
 	width: calc(100% - 40px);
-	max-width: 1200px;
+	max-width: 1400px;
 	padding: 20px;
 	border: 1px solid #5b0eff;
 	border-radius: 20px;
@@ -144,12 +145,18 @@ body.editor .edit{display: flex;}
 }
 .marcadores .grupo {
 	background-color: #0003;
-	min-width: min(40%, 500px);
+	min-width: 30%;
 	padding: 20px;
 	border-radius: 20px;
 	flex: 1;
 }
-.marcadores .grupo h3 {margin-bottom: 10px;}
+@media (max-width: 1200px) {
+  .marcadores .grupo {min-width: 45%;}
+}
+@media (max-width: 800px) {
+  .marcadores .grupo {min-width: 100%;}
+}
+.marcadores .grupo h3 {margin-bottom: 10px; text-align: center;}
 .marcadores .marcador {
 	width: 100%;
 	margin: 5px 0;
