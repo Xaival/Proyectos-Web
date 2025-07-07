@@ -646,7 +646,7 @@ body:not(.php) .edit header button[onclick="updatePHP()"] {display: none}
       return `
         <div class="grupo" draggable="true" ondragstart="onDragStartGrupo(event)" ondragover="onDragOverGrupo(event)" ondragleave="onDragLeaveGrupo(event)" ondrop="onDropGrupo(event)">
           <div class="gru">
-            <input type="text" value="${grupo.grupo || ''}" placeholder="Grupo">
+            <input onfocus="toggleDraggable(this, false)" onblur="toggleDraggable(this, true)" type="text" value="${grupo.grupo || ''}" placeholder="Grupo">
             <button class="DelAdd" onclick="grupoHandleDelAdd(this)"><i></i></button>
           </div>
           <div class="list">
@@ -841,8 +841,10 @@ body:not(.php) .edit header button[onclick="updatePHP()"] {display: none}
     // Prevenir arrastrar mientras se selecciona el input
     // -------------------------------------------------------------------
     function toggleDraggable(input, activar) {
-      input.closest('.marcador').draggable = activar;
-      input.closest('.grupo').draggable = activar;
+      const grupo = input.closest('.grupo');
+      if (grupo) {grupo.draggable = activar;}
+      const marcador = input.closest('.marcador');
+      if (marcador) {marcador.draggable = activar;}
     }
 
 
