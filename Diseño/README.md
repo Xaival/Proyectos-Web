@@ -1,15 +1,15 @@
 # Diseño
 
 ## [Creador de página de inicio v3](https://xaival.github.io/Proyectos-Web/Dise%C3%B1o/Creador%20de%20home%20v3/)
-Pagina de inicio modificable todo desde un HTML, la página te permite editar, descargar como html, exportar, importar y actualizar en el servidor con PHP.
-En caso de no tener la pagina con el php quitar la clase php del body para que se oculte la funcion que usa PHP. En GitHub es visible pero no funcional.
+Página de inicio modificable todo desde un HTML, la página te permite editar, descargar como HTML, exportar, importar y actualizar en el servidor con PHP.
+En caso de no tener la página con el PHP quitar la clase PHP del body para que se oculte la función que usa PHP. En GitHub es visible pero no funcional.
 
-El resultado final quedaría ![image](https://github.com/user-attachments/assets/9120dc67-1f4a-4419-b87a-0b4c8b94936c)
+El resultado final quedaría así ![image](https://github.com/user-attachments/assets/9120dc67-1f4a-4419-b87a-0b4c8b94936c)
 Para editar hay que dar en el texto del footer ![image](https://github.com/user-attachments/assets/2a41af81-489c-45b3-8859-521053b88cfd)
 
-Puedes usar la extensión [New Tab Changer](https://chrome.google.com/webstore/detail/new-tab-changer/occbjkhimchkolibngmcefpjlbknggfh) para poner el archivo como página por defecto.
-
 Esta es la vista del editor ![image](https://github.com/user-attachments/assets/892e2188-5bd9-4de3-872e-a31b5f00b245)
+
+Puedes usar la extensión [New Tab Changer](https://chrome.google.com/webstore/detail/new-tab-changer/occbjkhimchkolibngmcefpjlbknggfh) para poner el archivo como página por defecto.
 
 <br>
 
