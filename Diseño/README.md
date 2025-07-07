@@ -5,9 +5,8 @@ Página de inicio modificable todo desde un HTML, la página te permite editar, 
 En caso de no tener la página con el PHP quitar la clase PHP del body para que se oculte la función que usa PHP. En GitHub es visible pero no funcional.
 
 El resultado final quedaría [así](https://xaival.github.io/Proyectos-Web/Dise%C3%B1o/Creador%20de%20home%20v3/) ![image](https://github.com/user-attachments/assets/22f75bc1-e411-4b40-b614-55178b5be1ac)
-Para editar hay que dar en el texto del footer.
 
-Esta es la vista del editor ![image](https://github.com/user-attachments/assets/892e2188-5bd9-4de3-872e-a31b5f00b245)
+Esta es la vista del editor ![image](https://github.com/user-attachments/assets/a6300c57-5444-45a7-b8ef-e34634950f1d)
 
 Puedes usar la extensión [New Tab Changer](https://chrome.google.com/webstore/detail/new-tab-changer/occbjkhimchkolibngmcefpjlbknggfh) para poner el archivo como página por defecto.
 
