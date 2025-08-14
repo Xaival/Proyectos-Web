@@ -442,7 +442,7 @@
       contDest.innerHTML = marcadoresJSON.destacado
         .map(m => `
           <a class="marcador" href="${m.url}" title="${m.name}" draggable="false">
-            <div class="img"${ m.img ? ` style="background-image: url('${m.img}');"` : '' }></div>
+            <div class="img"${ m.img ? ` style="background-image: url(&quot;${m.img}&quot;);"` : '' }></div>
           </a>
         `).join('');
 
@@ -454,7 +454,7 @@
             <h3>${g.grupo}</h3>
             ${ g.marcadores.map(m => `
               <a class="marcador" href="${m.url}">
-                <div class="img"${ m.img ? ` style="background-image: url('${m.img}');"` : '' }></div>
+                <div class="img"${ m.img ? ` style="background-image: url(&quot;${m.img}&quot;);"` : '' }></div>
                 <p>${m.name}</p>
               </a>
             `).join('') }
